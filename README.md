@@ -43,6 +43,7 @@ de `src/data/script.json`; la URL se escribe fonéticamente como **"cars punto a
 Para regenerar una escena: genera el audio en ElevenLabs con ese texto, guárdalo como
 `public/audio/vo/<id>.wav` y ejecuta:
 ```bash
+bash scripts/normalize-vo.sh                       # nivela las voces a -16 LUFS (¡imprescindible!)
 node scripts/generate-voiceover.mjs --probe        # mide duraciones → src/data/durations.json
 .venv/bin/python scripts/generate-music.py         # música y SFX ajustados a las nuevas duraciones
 npm run render
