@@ -22,6 +22,10 @@ Cómo reutilizarla:
 3. Pasar el audio por el pipeline: `scripts/compress-pauses.py` → `scripts/normalize-vo.sh` (−16 LUFS).
 4. Revisar siempre con Whisper: el clon a veces añade un ruido o sílaba suelta al final (recortar).
 
+Usos: VSL y teaser en español de cars.apvmotorusa.com; video «primera vez» de 45 s (`video-primera-vez/`,
+tomas en `video-primera-vez/assets/vo-raw/`). En tomas cortas el clon puede añadir sílabas sueltas al final
+(p. ej. «¿Cuánto?» tras «pujar»): transcribir cada toma sin `initial_prompt` y regenerar la que falle.
+
 Descartadas: Marisol (preset Seed Audio, acento inglés) y «Anita – Rapid-Fire» (latina pero aguda y
 acelerada, sonaba rústica).
 

@@ -1,0 +1,9 @@
+node_modules/
+.agents/
+.claude/
+scenes/hyperframes/*/renders/
+scenes/hyperframes/*/.thumbnails/
+scenes/hyperframes/*/snapshots/
+assembly/node_modules/
+assembly/out/
+assembly/public/

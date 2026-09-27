@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Escena 02 · Subastas (9:16)</title>
+    <script src="assets/gsap.min.js"></script>
+    <!-- apv:brand -->
+    <style>
+      @font-face{font-family:"Inter";font-weight:500;font-style:normal;src:url("assets/fonts/inter-latin-500-normal.woff2") format("woff2")}
+      @font-face{font-family:"Inter";font-weight:600;font-style:normal;src:url("assets/fonts/inter-latin-600-normal.woff2") format("woff2")}
+      @font-face{font-family:"Inter";font-weight:700;font-style:normal;src:url("assets/fonts/inter-latin-700-normal.woff2") format("woff2")}
+      @font-face{font-family:"Inter";font-weight:800;font-style:normal;src:url("assets/fonts/inter-latin-800-normal.woff2") format("woff2")}
+      @font-face{font-family:"Inter";font-weight:900;font-style:normal;src:url("assets/fonts/inter-latin-900-normal.woff2") format("woff2")}
+      :root{--accent:#dc2626;--accent-dark:#b91c1c;--ink:#0f172a;--ink2:#1e293b;--muted:#64748b;--line:#dbe4ee;--soft:#f1f5f9;--bg:#f8fafc;--white:#ffffff;
+        --font:"Inter",sans-serif;--hl-weight:900;--hl-track:-0.045em;
+        --W:1080px;--H:1920px;--side:80px;--content-top:290px;--content-bottom:1230px;
+        --content-h:940px;--cta-top:1060px;--cta-bottom:1220px}
+      html,body{margin:0;padding:0;background:var(--bg);font-family:var(--font);color:var(--ink);-webkit-font-smoothing:antialiased}
+      #root{position:relative;width:100%;height:100%;overflow:hidden;background:var(--bg)}
+      .stage{position:absolute;left:var(--side);right:var(--side);top:var(--content-top);height:var(--content-h);display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box}
+      .hl{font-weight:var(--hl-weight);letter-spacing:var(--hl-track);line-height:1.02;margin:0;text-align:center;color:var(--ink)}
+      .red{color:var(--accent)}
+      .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em}
+      .wi{display:inline-block}
+      .step-badge{display:flex;align-items:center;justify-content:center;border-radius:999px;background:var(--accent);color:var(--white);font-weight:900}
+    </style>
+    <!-- /apv:brand -->
+    <style>
+      .title { font-size: 100px; max-width: 920px; }
+      .sub { margin: 26px 0 0; font-size: 54px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; color: var(--muted); text-align: center; }
+      .grid-mask { position: relative; width: 920px; height: 300px; margin-top: 60px; }
+      .grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(3, 1fr); place-items: center; transform-origin: 50% 50%; }
+      .cell { display: block; width: 160px; height: 55px; }
+      .cell .car { display: block; }
+      .tags { display: flex; justify-content: center; gap: 16px; margin-top: 60px; }
+      .tag { display: flex; align-items: center; gap: 12px; padding: 14px 26px 14px 20px; border: 2px solid var(--line); border-radius: 999px; background: var(--white); font-size: 38px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); white-space: nowrap; }
+      .tag .icon { display: block; flex: none; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="6.299967" data-width="1080" data-height="1920">
+      <div class="stage">
+        <h1 class="hl title" id="title"></h1>
+        <p class="sub" id="sub"></p>
+        <div class="grid-mask">
+          <div class="grid" id="grid"></div>
+        </div>
+        <div class="tags" id="tags"></div>
+      </div>
+    </div>
+    <!-- apv:data -->
+    <script>
+      window.APV = {"fps":30,"layout":"9x16","base":"","brand":{"colors":{"accent":"#dc2626","accentDark":"#b91c1c","ink":"#0f172a","ink2":"#1e293b","muted":"#64748b","line":"#dbe4ee","soft":"#f1f5f9","background":"#f8fafc","white":"#ffffff","success":"#15803d"},"layout":{"width":1080,"height":1920,"safeTop":250,"safeBottom":420,"sideMargin":80,"content":{"top":290,"bottom":1230},"captionBand":{"top":1270,"bottom":1490},"captionFontSize":58,"ctaBand":{"top":1060,"bottom":1220}}},"copy":{"_nota":"Única fuente de textos. `locucion` es el guion literal (subtítulos); `tts` solo cambia la ortografía para que la voz pronuncie bien siglas y números. `pantalla` son los textos de escena que anima HyperFrames.","scenes":[{"id":"escena-01","nominal":4,"locucion":"¿Sabes dónde compran sus autos los concesionarios?","tts":"¿Sabes dónde compran sus autos los concesionarios?","pantalla":{"pregunta":"¿Dónde compran sus autos los concesionarios?"}},{"id":"escena-02","nominal":6,"locucion":"En subastas como Copart. Cada semana se venden miles de autos de aseguradoras, bancos y flotas.","tts":"En subastas como Copart. Cada semana se venden miles de autos de aseguradoras, bancos y flotas.","pantalla":{"titulo":"En subastas como Copart","subtitulo":"Miles de autos cada semana","etiquetas":["Aseguradoras","Bancos","Flotas"]}},{"id":"escena-03","nominal":6,"legal":true,"locucion":"Muchos lotes solo admiten compradores con licencia de dealer. APV Motors la tiene y puja por ti.","tts":"Muchos lotes solo admiten compradores con licencia de díler. A, pe, be, Motors la tiene, y puja por ti.","pantalla":{"linea1":"Muchos lotes exigen licencia de dealer","linea2":"APV Motors la tiene","tarjeta":{"titulo":"Lote de subasta","estado":"Solo con licencia de dealer","abierto":"Acceso con APV Motors"}}},{"id":"escena-04","nominal":4,"locucion":"Así funciona.","tts":"Así funciona.","pantalla":{"titulo":"Así funciona"}},{"id":"escena-05","nominal":4,"locucion":"Uno: eliges el auto en nuestra página.","tts":"Uno: eliges el auto en nuestra página.","pantalla":{"paso":"1","titulo":"Eliges el auto","tarjetas":[{"anio":"2019","modelo":"Sedán compacto"},{"anio":"2020","modelo":"SUV mediana"},{"anio":"2018","modelo":"Pickup"}],"boton":"Elegir"}},{"id":"escena-06","nominal":4,"locucion":"Dos: ves el costo total antes de pujar.","tts":"Dos: ves el costo total antes de pujar.","pantalla":{"paso":"2","titulo":"Ves el costo total","desglose":["Puja","Tarifas de subasta","Honorarios APV","Transporte"],"total":"Total","monto":"$—"}},{"id":"escena-07","nominal":4,"locucion":"Tres: dejas un depósito reembolsable.","tts":"Tres: dejas un depósito reembolsable.","pantalla":{"paso":"3","titulo":"Depósito","resaltado":"reembolsable"}},{"id":"escena-08","nominal":4,"locucion":"Cuatro: pujamos por ti, hasta el tope que tú apruebas.","tts":"Cuatro: pujamos por ti, hasta el tope que tú apruebas.","pantalla":{"paso":"4","titulo":"Pujamos por ti","tope":"Tu tope"}},{"id":"escena-09","nominal":4,"locucion":"Muchos autos tienen daño o título de salvamento. Por eso revisamos cada uno contigo antes de pujar.","tts":"Muchos autos tienen daño o título de salvamento. Por eso revisamos cada uno contigo antes de pujar.","pantalla":{"linea1":"Daño o título de salvamento","linea2":"lo revisamos contigo","lista":["Zona del daño","Tipo de título","Fotos del lote"]}},{"id":"escena-10","nominal":3,"locucion":"Honorarios fijos desde 350 dólares, solo si ganas.","tts":"Honorarios fijos desde trescientos cincuenta dólares, solo si ganas.","pantalla":{"prefijo":"Honorarios desde","moneda":"US$","cifra":350,"sufijo":"Solo si ganas"}},{"id":"escena-11","nominal":2,"locucion":"APV Motors. Tú eliges el auto; nosotros gestionamos la puja.","tts":"A, pe, be, Motors. Tú eliges el auto; nosotros gestionamos la puja.","pantalla":{"lema1":"Tú eliges el auto.","lema2":"Nosotros gestionamos la puja."}}],"cta":{"web":"Elige tu auto abajo ↓","social":"Comenta PRIMERA y te enviamos el enlace"},"legal":[{"escena":"escena-03","texto":"Muchos lotes solo admiten compradores con licencia de dealer. APV Motors la tiene y puja por ti. / En pantalla: «Muchos lotes exigen licencia de dealer · APV Motors la tiene»"}]},"timing":{"_nota":"Generado por scripts/build-timing.py a partir de la locución real. No editar a mano.","fps":30,"totalFrames":1350,"clipTailFrames":12,"transitionFrames":10,"scenes":[{"id":"escena-01","startFrame":0,"durationFrames":98,"voStartFrames":9,"voFrames":76,"wordsAligned":true,"words":[{"w":"¿Sabes","t":0.3},{"w":"dónde","t":0.62},{"w":"compran","t":0.74},{"w":"sus","t":1.22},{"w":"autos","t":1.36},{"w":"los","t":1.82},{"w":"concesionarios?","t":1.92}]},{"id":"escena-02","startFrame":98,"durationFrames":177,"voStartFrames":5,"voFrames":165,"wordsAligned":true,"words":[{"w":"en","t":0.167},{"w":"subastas","t":0.267},{"w":"como","t":0.787},{"w":"Copart.","t":0.927},{"w":"Cada","t":1.687},{"w":"semana","t":1.827},{"w":"se","t":2.187},{"w":"venden","t":2.427},{"w":"miles","t":2.647},{"w":"de","t":2.907},{"w":"autos","t":3.127},{"w":"y","t":3.447},{"w":"aseguradoras,","t":3.527},{"w":"bancos","t":4.447},{"w":"y","t":4.987},{"w":"flotas.","t":5.207}]},{"id":"escena-03","startFrame":275,"durationFrames":188,"voStartFrames":5,"voFrames":178,"wordsAligned":false,"words":[{"w":"Muchos","t":0.167},{"w":"lotes","t":0.427},{"w":"solo","t":0.747},{"w":"admiten","t":0.927},{"w":"compradores","t":1.267},{"w":"con","t":1.787},{"w":"licencia","t":1.987},{"w":"de","t":2.387},{"w":"dealer.","t":2.527},{"w":"A,","t":3.007},{"w":"B,","t":3.487},{"w":"B,","t":4.187},{"w":"MOTORS","t":4.467},{"w":"la","t":4.807},{"w":"tiene","t":4.887},{"w":"y","t":5.167},{"w":"puja","t":5.427},{"w":"por","t":5.687},{"w":"ti.","t":5.847}]},{"id":"escena-04","startFrame":463,"durationFrames":59,"voStartFrames":5,"voFrames":23,"wordsAligned":true,"words":[{"w":"así","t":0.167},{"w":"funciona.","t":0.347}]},{"id":"escena-05","startFrame":522,"durationFrames":89,"voStartFrames":5,"voFrames":68,"wordsAligned":true,"words":[{"w":"1.","t":0.167},{"w":"Elíges","t":0.847},{"w":"el","t":1.107},{"w":"auto","t":1.247},{"w":"en","t":1.507},{"w":"nuestra","t":1.707},{"w":"página.","t":1.807}]},{"id":"escena-06","startFrame":611,"durationFrames":102,"voStartFrames":5,"voFrames":85,"wordsAligned":true,"words":[{"w":"2.","t":0.167},{"w":"Ves","t":0.767},{"w":"el","t":1.067},{"w":"costo","t":1.187},{"w":"total","t":1.547},{"w":"antes","t":1.827},{"w":"de","t":2.367},{"w":"pujar.","t":2.547}]},{"id":"escena-07","startFrame":713,"durationFrames":89,"voStartFrames":5,"voFrames":69,"wordsAligned":true,"words":[{"w":"3.","t":0.167},{"w":"Dejas","t":0.947},{"w":"un","t":1.107},{"w":"depósito","t":1.267},{"w":"reembolsable.","t":1.727}]},{"id":"escena-08","startFrame":802,"durationFrames":110,"voStartFrames":5,"voFrames":96,"wordsAligned":true,"words":[{"w":"4.","t":0.167},{"w":"Pujamos","t":0.747},{"w":"por","t":1.187},{"w":"ti","t":1.407},{"w":"hasta","t":1.607},{"w":"el","t":2.147},{"w":"tope","t":2.287},{"w":"que","t":2.567},{"w":"tú","t":2.687},{"w":"apruebas.","t":2.787}]},{"id":"escena-09","startFrame":912,"durationFrames":172,"voStartFrames":5,"voFrames":162,"wordsAligned":true,"words":[{"w":"Muchos","t":0.167},{"w":"autos","t":0.467},{"w":"tienen","t":0.867},{"w":"daño","t":1.067},{"w":"o","t":1.527},{"w":"título","t":1.667},{"w":"de","t":1.947},{"w":"salvamento.","t":2.147},{"w":"Por","t":2.927},{"w":"eso,","t":3.147},{"w":"revisamos","t":3.407},{"w":"cada","t":3.867},{"w":"uno","t":4.087},{"w":"contigo","t":4.347},{"w":"antes","t":4.807},{"w":"de","t":5.027},{"w":"pujar.","t":5.207}]},{"id":"escena-10","startFrame":1084,"durationFrames":119,"voStartFrames":5,"voFrames":109,"wordsAligned":true,"words":[{"w":"honorarios","t":0.167},{"w":"fijos","t":0.567},{"w":"desde","t":1.007},{"w":"350","t":1.227},{"w":"dólares,","t":1.987},{"w":"solos","t":2.947},{"w":"y","t":3.307},{"w":"ganas.","t":3.387}]},{"id":"escena-11","startFrame":1203,"durationFrames":147,"voStartFrames":5,"voFrames":112,"wordsAligned":false,"words":[{"w":"A","t":0.167},{"w":"-P","t":0.327},{"w":"-B","t":0.447},{"w":"-Motors.","t":0.567},{"w":"Tú","t":1.207},{"w":"eliges","t":1.367},{"w":"el","t":1.687},{"w":"auto.","t":1.887},{"w":"Nosotros","t":2.467},{"w":"gestionamos","t":2.887},{"w":"la","t":3.427},{"w":"puja.","t":3.567}]}],"captions":[{"scene":"escena-01","text":"¿Sabes dónde compran sus autos los concesionarios?","lines":["¿Sabes dónde compran sus","autos los concesionarios?"],"startFrame":9,"endFrame":88},{"scene":"escena-02","text":"En subastas como Copart.","lines":["En subastas como Copart."],"startFrame":103,"endFrame":147},{"scene":"escena-02","text":"Cada semana se venden miles de autos","lines":["Cada semana se","venden miles de autos"],"startFrame":149,"endFrame":201},{"scene":"escena-02","text":"de aseguradoras, bancos y flotas.","lines":["de aseguradoras,","bancos y flotas."],"startFrame":201,"endFrame":272},{"scene":"escena-03","text":"Muchos lotes solo admiten","lines":["Muchos lotes solo admiten"],"startFrame":280,"endFrame":328},{"scene":"escena-03","text":"compradores con licencia de dealer.","lines":["compradores con","licencia de dealer."],"startFrame":328,"endFrame":394},{"scene":"escena-03","text":"APV Motors la tiene y puja por ti.","lines":["APV Motors la tiene","y puja por ti."],"startFrame":394,"endFrame":464},{"scene":"escena-04","text":"Así funciona.","lines":["Así funciona."],"startFrame":468,"endFrame":512},{"scene":"escena-05","text":"Uno: eliges el auto en nuestra página.","lines":["Uno: eliges el auto","en nuestra página."],"startFrame":527,"endFrame":601},{"scene":"escena-06","text":"Dos: ves el costo total antes de pujar.","lines":["Dos: ves el costo","total antes de pujar."],"startFrame":616,"endFrame":703},{"scene":"escena-07","text":"Tres: dejas un depósito reembolsable.","lines":["Tres: dejas un","depósito reembolsable."],"startFrame":718,"endFrame":792},{"scene":"escena-08","text":"Cuatro: pujamos por ti, hasta el tope que tú apruebas.","lines":["Cuatro: pujamos por ti,","hasta el tope que tú apruebas."],"startFrame":807,"endFrame":904},{"scene":"escena-09","text":"Muchos autos tienen daño o título de salvamento.","lines":["Muchos autos tienen daño","o título de salvamento."],"startFrame":917,"endFrame":999},{"scene":"escena-09","text":"Por eso revisamos cada uno contigo antes de pujar.","lines":["Por eso revisamos cada uno","contigo antes de pujar."],"startFrame":1000,"endFrame":1084},{"scene":"escena-10","text":"Honorarios fijos desde 350 dólares, solo si ganas.","lines":["Honorarios fijos desde 350","dólares, solo si ganas."],"startFrame":1089,"endFrame":1202},{"scene":"escena-11","text":"APV Motors. Tú eliges el auto; nosotros gestionamos la puja.","lines":["APV Motors. Tú eliges el auto;","nosotros gestionamos la puja."],"startFrame":1208,"endFrame":1326}]}};
+    </script>
+    <script>
+/* Utilidades compartidas por las 11 escenas (se copian a cada proyecto con scripts/sync-scenes.mjs).
+ * Todo es determinista: sin relojes, sin azar, sin red. */
+(function () {
+  const APV = window.APV;
+
+  /** Datos de una escena: textos de copy.json, duración y tiempos de palabras de timing.json. */
+  APV.scene = function (id) {
+    const copy = APV.copy.scenes.find((s) => s.id === id);
+    const t = APV.timing.scenes.find((s) => s.id === id);
+    const words = t.words || [];
+    return {
+      copy,
+      pantalla: copy.pantalla,
+      dur: t.durationFrames / APV.fps, // duración de la escena (sin colchón)
+      voStart: t.voStartFrames / APV.fps,
+      words,
+      /** Segundo (relativo a la escena) en que la locución dice `word` (n-ésima aparición). Sin timing, usa `fallback`. */
+      at(word, fallback = 0, nth = 0) {
+        const norm = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9$]/g, "");
+        const hits = words.filter((w) => norm(w.w) === norm(word));
+        return hits[nth] ? hits[nth].t : fallback;
+      },
+    };
+  };
+
+  /** Envuelve cada palabra de `el` en <span class="w"><span class="wi">…</span></span> para entradas por palabra. */
+  APV.splitWords = function (el) {
+    const text = el.textContent.trim();
+    el.textContent = "";
+    text.split(/\s+/).forEach((word, i, all) => {
+      const outer = document.createElement("span");
+      outer.className = "w";
+      const inner = document.createElement("span");
+      inner.className = "wi";
+      inner.textContent = word;
+      outer.appendChild(inner);
+      el.appendChild(outer);
+      if (i < all.length - 1) el.appendChild(document.createTextNode(" "));
+    });
+    return el.querySelectorAll(".wi");
+  };
+
+  /** Prepara trazos SVG para dibujarse (stroke-dasharray = longitud). Devuelve los nodos. */
+  APV.prepStroke = function (selector, root = document) {
+    const nodes = Array.from(root.querySelectorAll(selector));
+    nodes.forEach((p) => {
+      const len = Math.ceil(p.getTotalLength ? p.getTotalLength() : 1000) + 2;
+      p.style.strokeDasharray = `${len}`;
+      p.style.strokeDashoffset = `${len}`;
+      p.dataset.len = String(len);
+    });
+    return nodes;
+  };
+
+  /** Tween que dibuja trazos preparados con prepStroke. */
+  APV.draw = function (tl, nodes, at, duration = 0.8, stagger = 0.06) {
+    tl.to(nodes, { strokeDashoffset: 0, duration, ease: "power2.inOut", stagger }, at);
+  };
+
+  /** Contador determinista: escribe el valor entero en `el` mientras avanza. */
+  APV.counter = function (tl, el, from, to, at, duration, format = (v) => String(v)) {
+    const state = { v: from };
+    el.textContent = format(from);
+    tl.to(state, { v: to, duration, ease: "power1.out", onUpdate: () => (el.textContent = format(Math.round(state.v))) }, at);
+  };
+
+  /** Silueta lineal de auto (vista lateral), SVG de trazo. kind: sedan | suv | pickup. */
+  APV.carSVG = function ({ kind = "sedan", width = 520, stroke = APV.brand.colors.ink, accent = APV.brand.colors.accent, cls = "" } = {}) {
+    const bodies = {
+      sedan: "M20 118 L20 96 Q20 84 34 82 L92 76 L140 44 Q150 38 164 38 L286 38 Q302 38 314 48 L352 78 L400 84 Q420 88 422 104 L422 118",
+      suv: "M20 118 L20 80 Q20 70 32 68 L70 64 L104 30 Q110 24 122 24 L316 24 Q330 24 338 34 L372 68 L404 72 Q420 76 422 92 L422 118",
+      pickup: "M20 118 L20 88 Q20 78 32 76 L118 72 L146 38 Q152 32 164 32 L240 32 Q252 32 256 42 L262 72 L408 72 Q422 72 422 86 L422 118",
+    };
+    const windows = {
+      sedan: "M150 50 L286 50 Q298 50 306 58 L330 78 L118 78 Z",
+      suv: "M118 36 L316 36 Q326 36 332 44 L356 68 L92 68 Z",
+      pickup: "M160 44 L238 44 Q246 44 248 52 L250 72 L136 72 Z",
+    };
+    const h = (width * 150) / 440;
+    return `<svg class="car ${cls}" width="${width}" height="${h}" viewBox="0 0 440 150" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path class="stroke car-body" d="${bodies[kind]}" stroke="${stroke}" stroke-width="6"/>
+      <path class="stroke car-base" d="M20 118 L70 118 M150 118 L292 118 M372 118 L422 118" stroke="${stroke}" stroke-width="6"/>
+      <path class="stroke car-window" d="${windows[kind]}" stroke="${stroke}" stroke-width="4"/>
+      <circle class="stroke car-wheel" cx="110" cy="118" r="30" stroke="${stroke}" stroke-width="6"/>
+      <circle class="stroke car-wheel" cx="332" cy="118" r="30" stroke="${stroke}" stroke-width="6"/>
+      <circle class="car-hub" cx="110" cy="118" r="8" fill="${accent}"/>
+      <circle class="car-hub" cx="332" cy="118" r="8" fill="${accent}"/>
+    </svg>`;
+  };
+
+  /** Iconos de trazo (24×24). */
+  APV.icon = function (name, { size = 96, stroke = APV.brand.colors.ink, width = 1.8, cls = "" } = {}) {
+    const paths = {
+      lock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+      unlock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/>',
+      shield: '<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/>',
+      check: '<path d="M8 12.5l2.8 2.8L16.5 9.5"/>',
+      gavel: '<path d="M14.5 3.5l6 6M12 6l6 6M13.2 4.8l-5 5 6 6 5-5M9.5 11.5L3 18l3 3 6.5-6.5M4 21h9"/>',
+      search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/>',
+      phone: '<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 18.5h4"/>',
+      doc: '<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/>',
+      building: '<path d="M4 21V8l8-5 8 5v13M9 21v-6h6v6M3 21h18"/>',
+      bank: '<path d="M3 10l9-6 9 6M5 10v8M10 10v8M14 10v8M19 10v8M3 21h18"/>',
+      truck: '<path d="M2 7h11v9H2zM13 10h4l3 3v3h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+      tap: '<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/>',
+    };
+    return `<svg class="icon ${cls}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="${width}" stroke-linecap="round" stroke-linejoin="round">${paths[name]}</svg>`;
+  };
+})();
+
+    </script>
+    <!-- /apv:data -->
+    <script>
+      const S = APV.scene("escena-02");
+      const P = S.pantalla;
+      const END = S.dur - 0.2; // todo termina antes de esto
+      const at = (t, d) => Math.max(0, Math.min(t, END - d));
+
+      // Textos (copy.json)
+      const title = document.getElementById("title");
+      title.textContent = P.titulo;
+      const tWords = APV.splitWords(title);
+      tWords[tWords.length - 1].classList.add("red");
+      const sub = document.getElementById("sub");
+      sub.textContent = P.subtitulo;
+      const sWords = APV.splitWords(sub);
+
+      // Rejilla determinista de autos: 5 columnas × 3 filas, el central primero
+      const COLS = 5, ROWS = 3, CENTER = 7, CAR_W = 160;
+      const kinds = ["sedan", "suv", "pickup"];
+      const grid = document.getElementById("grid");
+      let html = "";
+      for (let i = 0; i < COLS * ROWS; i++) {
+        const kind = i === CENTER ? "sedan" : kinds[(i * 2 + Math.floor(i / COLS)) % 3];
+        html += `<div class="cell">${APV.carSVG({ kind, width: CAR_W })}</div>`;
+      }
+      grid.innerHTML = html;
+      const cells = Array.from(grid.querySelectorAll(".cell"));
+      const cr = Math.floor(CENTER / COLS), cc = CENTER % COLS;
+      const dist = (i) => Math.hypot(Math.floor(i / COLS) - cr, (i % COLS) - cc);
+      const wave2 = [CENTER - 1, CENTER + 1];
+      const wave3 = cells.map((_, i) => i).filter((i) => i !== CENTER && !wave2.includes(i)).sort((a, b) => dist(a) - dist(b) || a - b);
+
+      // Etiquetas con icono de trazo
+      const icons = ["building", "bank", "truck"];
+      const tags = document.getElementById("tags");
+      tags.innerHTML = P.etiquetas.map((t, i) => `<div class="tag">${APV.icon(icons[i], { size: 42, stroke: APV.brand.colors.accent, width: 2 })}<span></span></div>`).join("");
+      const tagEls = Array.from(tags.querySelectorAll(".tag"));
+      tagEls.forEach((el, i) => (el.querySelector("span").textContent = P.etiquetas[i]));
+
+      // Trazos
+      const firstStrokes = APV.prepStroke(".stroke", cells[CENTER]);
+      const firstHubs = cells[CENTER].querySelectorAll(".car-hub");
+      const tagStrokes = tagEls.map((el) => APV.prepStroke("path, rect, circle", el));
+
+      // Tiempos (sincronizados con la voz; fallbacks proporcionales a S.dur)
+      const tCar1 = at(S.at("subastas", S.dur * 0.07), 1.0);
+      const tWave2 = at(S.at("cada", S.dur * 0.3), 0.8);
+      const tWave3 = at(S.at("miles", S.dur * 0.46), 1.4);
+      const tTags = [
+        at(S.at("aseguradoras", S.dur * 0.64), 0.6),
+        at(S.at("bancos", S.dur * 0.77), 0.6),
+        at(S.at("flotas", S.dur * 0.86), 0.6),
+      ];
+
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(tWords, { yPercent: 110 }, { yPercent: 0, duration: 0.55, ease: "power3.out", stagger: 0.09 }, 0.05);
+
+      // Ola 1: un auto que se dibuja (la rejilla empieza ampliada)
+      tl.fromTo(grid, { scale: 2.4 }, { scale: 1.6, duration: 0.55, ease: "power3.out" }, tWave2);
+      tl.fromTo(grid, { scale: 1.6 }, { scale: 1, duration: 0.9, ease: "power3.out", immediateRender: false }, tWave3);
+      APV.draw(tl, firstStrokes, tCar1, 0.9, 0.05);
+      tl.fromTo(firstHubs, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, tCar1 + 0.6);
+
+      // Ola 2: subtítulo + 3 autos
+      tl.fromTo(sWords, { yPercent: 110 }, { yPercent: 0, duration: 0.5, ease: "power3.out", stagger: 0.06 }, tWave2);
+      tl.fromTo(wave2.map((i) => cells[i]), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.08 }, tWave2 + 0.25);
+
+      // Ola 3: el resto de la rejilla, del centro hacia fuera
+      wave3.forEach((i) => {
+        tl.fromTo(cells[i], { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, tWave3 + 0.2 + (dist(i) - 1) * 0.2);
+      });
+
+      // Etiquetas: Aseguradoras · Bancos · Flotas
+      tagEls.forEach((el, i) => {
+        tl.fromTo(el, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, tTags[i]);
+        APV.draw(tl, tagStrokes[i], tTags[i] + 0.1, 0.5, 0.05);
+      });
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+{
+  "_nota": "Única fuente de textos. `locucion` es el guion literal (subtítulos); `tts` solo cambia la ortografía para que la voz pronuncie bien siglas y números. `pantalla` son los textos de escena que anima HyperFrames.",
+  "scenes": [
+    {
+      "id": "escena-01",
+      "nominal": 4,
+      "locucion": "¿Sabes dónde compran sus autos los concesionarios?",
+      "tts": "¿Sabes dónde compran sus autos los concesionarios?",
+      "pantalla": { "pregunta": "¿Dónde compran sus autos los concesionarios?" }
+    },
+    {
+      "id": "escena-02",
+      "nominal": 6,
+      "locucion": "En subastas como Copart. Cada semana se venden miles de autos de aseguradoras, bancos y flotas.",
+      "tts": "En subastas como Copart. Cada semana se venden miles de autos de aseguradoras, bancos y flotas.",
+      "pantalla": {
+        "titulo": "En subastas como Copart",
+        "subtitulo": "Miles de autos cada semana",
+        "etiquetas": ["Aseguradoras", "Bancos", "Flotas"]
+      }
+    },
+    {
+      "id": "escena-03",
+      "nominal": 6,
+      "legal": true,
+      "locucion": "Muchos lotes solo admiten compradores con licencia de dealer. APV Motors la tiene y puja por ti.",
+      "tts": "Muchos lotes solo admiten compradores con licencia de díler. A, pe, be, Motors la tiene, y puja por ti.",
+      "pantalla": {
+        "linea1": "Muchos lotes exigen licencia de dealer",
+        "linea2": "APV Motors la tiene",
+        "tarjeta": { "titulo": "Lote de subasta", "estado": "Solo con licencia de dealer", "abierto": "Acceso con APV Motors" }
+      }
+    },
+    {
+      "id": "escena-04",
+      "nominal": 4,
+      "locucion": "Así funciona.",
+      "tts": "Así funciona.",
+      "pantalla": { "titulo": "Así funciona" }
+    },
+    {
+      "id": "escena-05",
+      "nominal": 4,
+      "locucion": "Uno: eliges el auto en nuestra página.",
+      "tts": "Uno: eliges el auto en nuestra página.",
+      "pantalla": {
+        "paso": "1",
+        "titulo": "Eliges el auto",
+        "tarjetas": [
+          { "anio": "2019", "modelo": "Sedán compacto" },
+          { "anio": "2020", "modelo": "SUV mediana" },
+          { "anio": "2018", "modelo": "Pickup" }
+        ],
+        "boton": "Elegir"
+      }
+    },
+    {
+      "id": "escena-06",
+      "nominal": 4,
+      "locucion": "Dos: ves el costo total antes de pujar.",
+      "tts": "Dos: ves el costo total antes de pujar.",
+      "pantalla": {
+        "paso": "2",
+        "titulo": "Ves el costo total",
+        "desglose": ["Puja", "Tarifas de subasta", "Honorarios APV", "Transporte"],
+        "total": "Total",
+        "monto": "$—"
+      }
+    },
+    {
+      "id": "escena-07",
+      "nominal": 4,
+      "locucion": "Tres: dejas un depósito reembolsable.",
+      "tts": "Tres: dejas un depósito reembolsable.",
+      "pantalla": { "paso": "3", "titulo": "Depósito", "resaltado": "reembolsable" }
+    },
+    {
+      "id": "escena-08",
+      "nominal": 4,
+      "locucion": "Cuatro: pujamos por ti, hasta el tope que tú apruebas.",
+      "tts": "Cuatro: pujamos por ti, hasta el tope que tú apruebas.",
+      "pantalla": { "paso": "4", "titulo": "Pujamos por ti", "tope": "Tu tope" }
+    },
+    {
+      "id": "escena-09",
+      "nominal": 4,
+      "locucion": "Muchos autos tienen daño o título de salvamento. Por eso revisamos cada uno contigo antes de pujar.",
+      "tts": "Muchos autos tienen daño o título de salvamento. Por eso revisamos cada uno contigo antes de pujar.",
+      "pantalla": {
+        "linea1": "Daño o título de salvamento",
+        "linea2": "lo revisamos contigo",
+        "lista": ["Zona del daño", "Tipo de título", "Fotos del lote"]
+      }
+    },
+    {
+      "id": "escena-10",
+      "nominal": 3,
+      "locucion": "Honorarios fijos desde 350 dólares, solo si ganas.",
+      "tts": "Honorarios fijos desde trescientos cincuenta dólares, solo si ganas.",
+      "pantalla": { "prefijo": "Honorarios desde", "moneda": "US$", "cifra": 350, "sufijo": "Solo si ganas" }
+    },
+    {
+      "id": "escena-11",
+      "nominal": 2,
+      "locucion": "APV Motors. Tú eliges el auto; nosotros gestionamos la puja.",
+      "tts": "A, pe, be, Motors. Tú eliges el auto; nosotros gestionamos la puja.",
+      "pantalla": { "lema1": "Tú eliges el auto.", "lema2": "Nosotros gestionamos la puja." }
+    }
+  ],
+  "cta": {
+    "web": "Elige tu auto abajo ↓",
+    "social": "Comenta PRIMERA y te enviamos el enlace"
+  },
+  "legal": [
+    { "escena": "escena-03", "texto": "Muchos lotes solo admiten compradores con licencia de dealer. APV Motors la tiene y puja por ti. / En pantalla: «Muchos lotes exigen licencia de dealer · APV Motors la tiene»" }
+  ]
+}

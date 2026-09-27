@@ -1,0 +1,29 @@
+{
+  "name": "apv-primera-vez-assembly",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ensamblaje en Remotion del video «primera vez»: clips de HyperFrames + voz + música + subtítulos + CTA",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render:916web": "remotion render src/index.ts PrimeraVez916Web out/raw-9x16-web.mp4",
+    "render:916social": "remotion render src/index.ts PrimeraVez916Social out/raw-9x16-social.mp4",
+    "render:169web": "remotion render src/index.ts PrimeraVez169Web out/raw-16x9-web.mp4",
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.529",
+    "@remotion/media": "4.0.529",
+    "@remotion/transitions": "4.0.529",
+    "@remotion/fonts": "4.0.529",
+    "@remotion/renderer": "4.0.529",
+    "@remotion/bundler": "4.0.529",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "4.0.529"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "typescript": "^5.9.0"
+  }
+}

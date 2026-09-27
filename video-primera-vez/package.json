@@ -1,0 +1,18 @@
+{
+  "name": "apv-video-primera-vez",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Video de 45 s «primera vez» para APV Motors: escenas en HyperFrames, ensamblaje en Remotion",
+  "scripts": {
+    "sync": "node scripts/sync-scenes.mjs",
+    "timing": "python3 scripts/build-timing.py",
+    "scenes:lint": "node scripts/scenes.mjs lint",
+    "scenes:render": "node scripts/scenes.mjs render",
+    "music": "python3 scripts/make-music.py",
+    "build": "npm run sync && npm run scenes:render && npm --prefix assembly run build"
+  },
+  "devDependencies": {
+    "gsap": "3.15.0",
+    "hyperframes": "0.8.81"
+  }
+}

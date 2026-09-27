@@ -1,0 +1,722 @@
+{
+  "_nota": "Generado por scripts/build-timing.py a partir de la locución real. No editar a mano.",
+  "fps": 30,
+  "totalFrames": 1350,
+  "clipTailFrames": 12,
+  "transitionFrames": 10,
+  "scenes": [
+    {
+      "id": "escena-01",
+      "startFrame": 0,
+      "durationFrames": 98,
+      "voStartFrames": 9,
+      "voFrames": 76,
+      "wordsAligned": true,
+      "words": [
+        {
+          "w": "¿Sabes",
+          "t": 0.3
+        },
+        {
+          "w": "dónde",
+          "t": 0.62
+        },
+        {
+          "w": "compran",
+          "t": 0.74
+        },
+        {
+          "w": "sus",
+          "t": 1.22
+        },
+        {
+          "w": "autos",
+          "t": 1.36
+        },
+        {
+          "w": "los",
+          "t": 1.82
+        },
+        {
+          "w": "concesionarios?",
+          "t": 1.92
+        }
+      ]
+    },
+    {
+      "id": "escena-02",
+      "startFrame": 98,
+      "durationFrames": 177,
+      "voStartFrames": 5,
+      "voFrames": 165,
+      "wordsAligned": true,
+      "words": [
+        {
+          "w": "en",
+          "t": 0.167
+        },
+        {
+          "w": "subastas",
+          "t": 0.267
+        },
+        {
+          "w": "como",
+          "t": 0.787
+        },
+        {
+          "w": "Copart.",
+          "t": 0.927
+        },
+        {
+          "w": "Cada",
+          "t": 1.687
+        },
+        {
+          "w": "semana",
+          "t": 1.827
+        },
+        {
+          "w": "se",
+          "t": 2.187
+        },
+        {
+          "w": "venden",
+          "t": 2.427
+        },
+        {
+          "w": "miles",
+          "t": 2.647
+        },
+        {
+          "w": "de",
+          "t": 2.907
+        },
+        {
+          "w": "autos",
+          "t": 3.127
+        },
+        {
+          "w": "y",
+          "t": 3.447
+        },
+        {
+          "w": "aseguradoras,",
+          "t": 3.527
+        },
+        {
+          "w": "bancos",
+          "t": 4.447
+        },
+        {
+          "w": "y",
+          "t": 4.987
+        },
+        {
+          "w": "flotas.",
+          "t": 5.207
+        }
+      ]
+    },
+    {
+      "id": "escena-03",
+      "startFrame": 275,
+      "durationFrames": 188,
+      "voStartFrames": 5,
+      "voFrames": 178,
+      "wordsAligned": false,
+      "words": [
+        {
+          "w": "Muchos",
+          "t": 0.167
+        },
+        {
+          "w": "lotes",
+          "t": 0.427
+        },
+        {
+          "w": "solo",
+          "t": 0.747
+        },
+        {
+          "w": "admiten",
+          "t": 0.927
+        },
+        {
+          "w": "compradores",
+          "t": 1.267
+        },
+        {
+          "w": "con",
+          "t": 1.787
+        },
+        {
+          "w": "licencia",
+          "t": 1.987
+        },
+        {
+          "w": "de",
+          "t": 2.387
+        },
+        {
+          "w": "dealer.",
+          "t": 2.527
+        },
+        {
+          "w": "A,",
+          "t": 3.007
+        },
+        {
+          "w": "B,",
+          "t": 3.487
+        },
+        {
+          "w": "B,",
+          "t": 4.187
+        },
+        {
+          "w": "MOTORS",
+          "t": 4.467
+        },
+        {
+          "w": "la",
+          "t": 4.807
+        },
+        {
+          "w": "tiene",
+          "t": 4.887
+        },
+        {
+          "w": "y",
+          "t": 5.167
+        },
+        {
+          "w": "puja",
+          "t": 5.427
+        },
+        {
+          "w": "por",
+          "t": 5.687
+        },
+        {
+          "w": "ti.",
+          "t": 5.847
+        }
+      ]
+    },
+    {
+      "id": "escena-04",
+      "startFrame": 463,
+      "durationFrames": 59,
+      "voStartFrames": 5,
+      "voFrames": 23,
+      "wordsAligned": true,
+      "words": [
+        {
+          "w": "así",
+          "t": 0.167
+        },
+        {
+          "w": "funciona.",
+          "t": 0.347
+        }
+      ]
+    },
+    {
+      "id": "escena-05",
+      "startFrame": 522,
+      "durationFrames": 89,
+      "voStartFrames": 5,
+      "voFrames": 68,
+      "wordsAligned": true,
+      "words": [
+        {
+          "w": "1.",
+          "t": 0.167
+        },
+        {
+          "w": "Elíges",
+          "t": 0.847
+        },
+        {
+          "w": "el",
+          "t": 1.107
+        },
+        {
+          "w": "auto",
+          "t": 1.247
+        },
+        {
+          "w": "en",
+          "t": 1.507
+        },
+        {
+          "w": "nuestra",
+          "t": 1.707
+        },
+        {
+          "w": "página.",
+          "t": 1.807
+        }
+      ]
+    },
+    {
+      "id": "escena-06",
+      "startFrame": 611,
+      "durationFrames": 102,
+      "voStartFrames": 5,
+      "voFrames": 85,
+      "wordsAligned": true,
+      "words": [
+        {
+          "w": "2.",
+          "t": 0.167
+        },
+        {
+          "w": "Ves",
+          "t": 0.767
+        },
+        {
+          "w": "el",
+          "t": 1.067
+        },
+        {
+          "w": "costo",
+          "t": 1.187
+        },
+        {
+          "w": "total",
+          "t": 1.547
+        },
+        {
+          "w": "antes",
+          "t": 1.827
+        },
+        {
+          "w": "de",
+          "t": 2.367
+        },
+        {
+          "w": "pujar.",
+          "t": 2.547
+        }
+      ]
+    },
+    {
+      "id": "escena-07",
+      "startFrame": 713,
+      "durationFrames": 89,
+      "voStartFrames": 5,
+      "voFrames": 69,
+      "wordsAligned": true,
+      "words": [
+        {
+          "w": "3.",
+          "t": 0.167
+        },
+        {
+          "w": "Dejas",
+          "t": 0.947
+        },
+        {
+          "w": "un",
+          "t": 1.107
+        },
+        {
+          "w": "depósito",
+          "t": 1.267
+        },
+        {
+          "w": "reembolsable.",
+          "t": 1.727
+        }
+      ]
+    },
+    {
+      "id": "escena-08",
+      "startFrame": 802,
+      "durationFrames": 110,
+      "voStartFrames": 5,
+      "voFrames": 96,
+      "wordsAligned": true,
+      "words": [
+        {
+          "w": "4.",
+          "t": 0.167
+        },
+        {
+          "w": "Pujamos",
+          "t": 0.747
+        },
+        {
+          "w": "por",
+          "t": 1.187
+        },
+        {
+          "w": "ti",
+          "t": 1.407
+        },
+        {
+          "w": "hasta",
+          "t": 1.607
+        },
+        {
+          "w": "el",
+          "t": 2.147
+        },
+        {
+          "w": "tope",
+          "t": 2.287
+        },
+        {
+          "w": "que",
+          "t": 2.567
+        },
+        {
+          "w": "tú",
+          "t": 2.687
+        },
+        {
+          "w": "apruebas.",
+          "t": 2.787
+        }
+      ]
+    },
+    {
+      "id": "escena-09",
+      "startFrame": 912,
+      "durationFrames": 172,
+      "voStartFrames": 5,
+      "voFrames": 162,
+      "wordsAligned": true,
+      "words": [
+        {
+          "w": "Muchos",
+          "t": 0.167
+        },
+        {
+          "w": "autos",
+          "t": 0.467
+        },
+        {
+          "w": "tienen",
+          "t": 0.867
+        },
+        {
+          "w": "daño",
+          "t": 1.067
+        },
+        {
+          "w": "o",
+          "t": 1.527
+        },
+        {
+          "w": "título",
+          "t": 1.667
+        },
+        {
+          "w": "de",
+          "t": 1.947
+        },
+        {
+          "w": "salvamento.",
+          "t": 2.147
+        },
+        {
+          "w": "Por",
+          "t": 2.927
+        },
+        {
+          "w": "eso,",
+          "t": 3.147
+        },
+        {
+          "w": "revisamos",
+          "t": 3.407
+        },
+        {
+          "w": "cada",
+          "t": 3.867
+        },
+        {
+          "w": "uno",
+          "t": 4.087
+        },
+        {
+          "w": "contigo",
+          "t": 4.347
+        },
+        {
+          "w": "antes",
+          "t": 4.807
+        },
+        {
+          "w": "de",
+          "t": 5.027
+        },
+        {
+          "w": "pujar.",
+          "t": 5.207
+        }
+      ]
+    },
+    {
+      "id": "escena-10",
+      "startFrame": 1084,
+      "durationFrames": 119,
+      "voStartFrames": 5,
+      "voFrames": 109,
+      "wordsAligned": true,
+      "words": [
+        {
+          "w": "honorarios",
+          "t": 0.167
+        },
+        {
+          "w": "fijos",
+          "t": 0.567
+        },
+        {
+          "w": "desde",
+          "t": 1.007
+        },
+        {
+          "w": "350",
+          "t": 1.227
+        },
+        {
+          "w": "dólares,",
+          "t": 1.987
+        },
+        {
+          "w": "solos",
+          "t": 2.947
+        },
+        {
+          "w": "y",
+          "t": 3.307
+        },
+        {
+          "w": "ganas.",
+          "t": 3.387
+        }
+      ]
+    },
+    {
+      "id": "escena-11",
+      "startFrame": 1203,
+      "durationFrames": 147,
+      "voStartFrames": 5,
+      "voFrames": 112,
+      "wordsAligned": false,
+      "words": [
+        {
+          "w": "A",
+          "t": 0.167
+        },
+        {
+          "w": "-P",
+          "t": 0.327
+        },
+        {
+          "w": "-B",
+          "t": 0.447
+        },
+        {
+          "w": "-Motors.",
+          "t": 0.567
+        },
+        {
+          "w": "Tú",
+          "t": 1.207
+        },
+        {
+          "w": "eliges",
+          "t": 1.367
+        },
+        {
+          "w": "el",
+          "t": 1.687
+        },
+        {
+          "w": "auto.",
+          "t": 1.887
+        },
+        {
+          "w": "Nosotros",
+          "t": 2.467
+        },
+        {
+          "w": "gestionamos",
+          "t": 2.887
+        },
+        {
+          "w": "la",
+          "t": 3.427
+        },
+        {
+          "w": "puja.",
+          "t": 3.567
+        }
+      ]
+    }
+  ],
+  "captions": [
+    {
+      "scene": "escena-01",
+      "text": "¿Sabes dónde compran sus autos los concesionarios?",
+      "lines": [
+        "¿Sabes dónde compran sus",
+        "autos los concesionarios?"
+      ],
+      "startFrame": 9,
+      "endFrame": 88
+    },
+    {
+      "scene": "escena-02",
+      "text": "En subastas como Copart.",
+      "lines": [
+        "En subastas como Copart."
+      ],
+      "startFrame": 103,
+      "endFrame": 147
+    },
+    {
+      "scene": "escena-02",
+      "text": "Cada semana se venden miles de autos",
+      "lines": [
+        "Cada semana se",
+        "venden miles de autos"
+      ],
+      "startFrame": 149,
+      "endFrame": 201
+    },
+    {
+      "scene": "escena-02",
+      "text": "de aseguradoras, bancos y flotas.",
+      "lines": [
+        "de aseguradoras,",
+        "bancos y flotas."
+      ],
+      "startFrame": 201,
+      "endFrame": 272
+    },
+    {
+      "scene": "escena-03",
+      "text": "Muchos lotes solo admiten",
+      "lines": [
+        "Muchos lotes solo admiten"
+      ],
+      "startFrame": 280,
+      "endFrame": 328
+    },
+    {
+      "scene": "escena-03",
+      "text": "compradores con licencia de dealer.",
+      "lines": [
+        "compradores con",
+        "licencia de dealer."
+      ],
+      "startFrame": 328,
+      "endFrame": 394
+    },
+    {
+      "scene": "escena-03",
+      "text": "APV Motors la tiene y puja por ti.",
+      "lines": [
+        "APV Motors la tiene",
+        "y puja por ti."
+      ],
+      "startFrame": 394,
+      "endFrame": 464
+    },
+    {
+      "scene": "escena-04",
+      "text": "Así funciona.",
+      "lines": [
+        "Así funciona."
+      ],
+      "startFrame": 468,
+      "endFrame": 512
+    },
+    {
+      "scene": "escena-05",
+      "text": "Uno: eliges el auto en nuestra página.",
+      "lines": [
+        "Uno: eliges el auto",
+        "en nuestra página."
+      ],
+      "startFrame": 527,
+      "endFrame": 601
+    },
+    {
+      "scene": "escena-06",
+      "text": "Dos: ves el costo total antes de pujar.",
+      "lines": [
+        "Dos: ves el costo",
+        "total antes de pujar."
+      ],
+      "startFrame": 616,
+      "endFrame": 703
+    },
+    {
+      "scene": "escena-07",
+      "text": "Tres: dejas un depósito reembolsable.",
+      "lines": [
+        "Tres: dejas un",
+        "depósito reembolsable."
+      ],
+      "startFrame": 718,
+      "endFrame": 792
+    },
+    {
+      "scene": "escena-08",
+      "text": "Cuatro: pujamos por ti, hasta el tope que tú apruebas.",
+      "lines": [
+        "Cuatro: pujamos por ti,",
+        "hasta el tope que tú apruebas."
+      ],
+      "startFrame": 807,
+      "endFrame": 904
+    },
+    {
+      "scene": "escena-09",
+      "text": "Muchos autos tienen daño o título de salvamento.",
+      "lines": [
+        "Muchos autos tienen daño",
+        "o título de salvamento."
+      ],
+      "startFrame": 917,
+      "endFrame": 999
+    },
+    {
+      "scene": "escena-09",
+      "text": "Por eso revisamos cada uno contigo antes de pujar.",
+      "lines": [
+        "Por eso revisamos cada uno",
+        "contigo antes de pujar."
+      ],
+      "startFrame": 1000,
+      "endFrame": 1084
+    },
+    {
+      "scene": "escena-10",
+      "text": "Honorarios fijos desde 350 dólares, solo si ganas.",
+      "lines": [
+        "Honorarios fijos desde 350",
+        "dólares, solo si ganas."
+      ],
+      "startFrame": 1089,
+      "endFrame": 1202
+    },
+    {
+      "scene": "escena-11",
+      "text": "APV Motors. Tú eliges el auto; nosotros gestionamos la puja.",
+      "lines": [
+        "APV Motors. Tú eliges el auto;",
+        "nosotros gestionamos la puja."
+      ],
+      "startFrame": 1208,
+      "endFrame": 1326
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "_source": "aharongp/landing-apv @ dec15c1 · public/styles.css (:root) y public/assets/apv-logo-red.png",
+  "colors": {
+    "accent": "#dc2626",
+    "accentDark": "#b91c1c",
+    "ink": "#0f172a",
+    "ink2": "#1e293b",
+    "muted": "#64748b",
+    "line": "#dbe4ee",
+    "soft": "#f1f5f9",
+    "background": "#f8fafc",
+    "white": "#ffffff",
+    "success": "#15803d"
+  },
+  "font": {
+    "family": "Inter",
+    "files": {
+      "500": "assets/fonts/inter-latin-500-normal.woff2",
+      "600": "assets/fonts/inter-latin-600-normal.woff2",
+      "700": "assets/fonts/inter-latin-700-normal.woff2",
+      "800": "assets/fonts/inter-latin-800-normal.woff2",
+      "900": "assets/fonts/inter-latin-900-normal.woff2"
+    },
+    "headlineWeight": 900,
+    "headlineTracking": "-0.045em",
+    "bodyWeight": 600
+  },
+  "logo": {
+    "file": "assets/brand/apv-logo-red.png",
+    "width": 495,
+    "height": 219,
+    "note": "El repo del sitio solo tiene el logo en PNG (no hay SVG)."
+  },
+  "video": {
+    "fps": 30,
+    "durationFrames": 1350,
+    "clipTailFrames": 12,
+    "transitionFrames": 10
+  },
+  "layouts": {
+    "9x16": {
+      "width": 1080,
+      "height": 1920,
+      "safeTop": 250,
+      "safeBottom": 420,
+      "sideMargin": 80,
+      "content": { "top": 290, "bottom": 1230 },
+      "captionBand": { "top": 1270, "bottom": 1490 },
+      "captionFontSize": 58,
+      "ctaBand": { "top": 1060, "bottom": 1220 }
+    },
+    "16x9": {
+      "width": 1920,
+      "height": 1080,
+      "safeTop": 60,
+      "safeBottom": 60,
+      "sideMargin": 120,
+      "content": { "top": 70, "bottom": 850 },
+      "captionBand": { "top": 880, "bottom": 1020 },
+      "captionFontSize": 50,
+      "ctaBand": { "top": 700, "bottom": 830 }
+    }
+  }
+}
