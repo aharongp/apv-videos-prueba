@@ -1,32 +1,11 @@
 import React from "react";
-import { interpolate, useCurrentFrame, Easing } from "remotion";
+import { Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { brand, theme } from "../theme";
 import { clamp } from "./motion";
 
-export const Logo: React.FC<{ size?: number }> = ({ size = 40 }) => (
-  <div style={{ display: "flex", alignItems: "center", gap: size * 0.3 }}>
-    <div
-      style={{
-        width: size * 1.1,
-        height: size * 1.1,
-        borderRadius: size * 0.28,
-        background: `linear-gradient(135deg, ${theme.accent}, #B3121F)`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontFamily: theme.display,
-        fontWeight: 900,
-        fontSize: size * 0.5,
-        color: "white",
-        boxShadow: `0 ${size * 0.15}px ${size * 0.5}px ${theme.accent}55`,
-      }}
-    >
-      APV
-    </div>
-    <div style={{ fontFamily: theme.display, fontWeight: 900, fontSize: size * 0.62, color: theme.text, letterSpacing: size * 0.02 }}>
-      APV<span style={{ color: theme.accent }}> MOTORS</span>
-    </div>
-  </div>
+/** Logo oficial (PNG de cars.apvmotorusa.com, 495×219). `height` en px. */
+export const Logo: React.FC<{ height?: number; style?: React.CSSProperties }> = ({ height = 44, style }) => (
+  <Img src={staticFile(brand.logo)} style={{ height, width: (height * 495) / 219, display: "block", ...style }} />
 );
 
 export const BrowserFrame: React.FC<{
@@ -43,39 +22,40 @@ export const BrowserFrame: React.FC<{
       style={{
         width,
         height,
-        borderRadius: 22,
-        background: "#0A1120",
-        border: `1px solid rgba(255,255,255,0.14)`,
-        boxShadow: "0 40px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03) inset",
+        borderRadius: 20,
+        background: "#FFFFFF",
+        border: `1px solid ${theme.line}`,
+        boxShadow: "0 40px 100px rgba(15,23,42,0.18), 0 8px 24px rgba(15,23,42,0.08)",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
         ...style,
       }}
     >
-      <div style={{ height: 64, display: "flex", alignItems: "center", gap: 18, padding: "0 22px", background: "#0E1729", borderBottom: `1px solid ${theme.line}` }}>
+      <div style={{ height: 58, display: "flex", alignItems: "center", gap: 18, padding: "0 20px", background: theme.soft, borderBottom: `1px solid ${theme.line}` }}>
         <div style={{ display: "flex", gap: 9 }}>
           {["#FF5F57", "#FEBC2E", "#28C840"].map((c) => (
-            <div key={c} style={{ width: 14, height: 14, borderRadius: 7, background: c }} />
+            <div key={c} style={{ width: 13, height: 13, borderRadius: 7, background: c }} />
           ))}
         </div>
         <div
           style={{
             flex: 1,
-            height: 40,
-            borderRadius: 20,
-            background: "#060B16",
+            height: 36,
+            borderRadius: 18,
+            background: "#FFFFFF",
             border: `1px solid ${theme.line}`,
             display: "flex",
             alignItems: "center",
-            padding: "0 18px",
+            padding: "0 16px",
             gap: 10,
             fontFamily: theme.ui,
-            fontSize: 21,
+            fontWeight: 500,
+            fontSize: 19,
             color: theme.text,
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={theme.success} strokeWidth="2.5">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={theme.success} strokeWidth="2.5">
             <rect x="5" y="11" width="14" height="10" rx="2" />
             <path d="M8 11V7a4 4 0 018 0v4" />
           </svg>
@@ -83,53 +63,58 @@ export const BrowserFrame: React.FC<{
             <span style={{ color: theme.muted }}>{url.length > 0 ? "https://" : ""}</span>
             {url}
           </span>
-          {showCaret && <span style={{ width: 2, height: 24, background: theme.text, opacity: Math.floor(frame / 12) % 2 ? 0 : 1 }} />}
+          {showCaret && <span style={{ width: 2, height: 22, background: theme.text, opacity: Math.floor(frame / 12) % 2 ? 0 : 1 }} />}
         </div>
       </div>
-      <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>{children}</div>
+      <div style={{ flex: 1, position: "relative", overflow: "hidden", background: "#FFFFFF" }}>{children}</div>
     </div>
   );
 };
 
-export const SiteHeader: React.FC = () => (
+/** Barra superior real del sitio: logo, navegación, ES|EN, Iniciar sesión, Ver vehículos. */
+export const SiteHeader: React.FC<{ loggedIn?: boolean }> = ({ loggedIn = false }) => (
   <div
     style={{
-      height: 76,
+      height: 68,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
-      padding: "0 36px",
-      borderBottom: `1px solid ${theme.line}`,
-      background: "rgba(255,255,255,0.02)",
+      gap: 24,
+      padding: "0 34px",
+      borderBottom: "1px solid rgba(219,228,238,.85)",
+      background: "rgba(255,255,255,.95)",
+      fontFamily: theme.ui,
     }}
   >
-    <Logo size={34} />
-    <div style={{ display: "flex", gap: 34, fontFamily: theme.ui, fontWeight: 500, fontSize: 20, color: theme.muted }}>
-      <span style={{ color: theme.text }}>Inventario</span>
-      <span>Cómo funciona</span>
-      <span>Contacto</span>
+    <Logo height={36} />
+    <div style={{ display: "flex", gap: 24, marginLeft: "auto", fontWeight: 700, fontSize: 16, color: theme.slate }}>
+      <span>Catálogo</span>
+      <span>Cómo comprar</span>
+      <span>Ayuda</span>
+      <span>Planes</span>
     </div>
-    <div
-      style={{
-        padding: "10px 20px",
-        borderRadius: 10,
-        background: theme.accent,
-        color: "white",
-        fontFamily: theme.ui,
-        fontWeight: 700,
-        fontSize: 18,
-      }}
-    >
-      Hablar con un asesor
+    <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", borderRadius: 999, border: `1px solid ${theme.line}`, background: theme.soft, fontSize: 13, fontWeight: 800 }}>
+      <span style={{ background: theme.accent, color: "#fff", borderRadius: 999, padding: "2px 8px" }}>ES</span>
+      <span style={{ color: theme.muted }}>EN</span>
     </div>
+    {loggedIn ? (
+      <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 14px 6px 6px", borderRadius: 999, border: `1px solid ${theme.line}`, fontWeight: 700, fontSize: 15, color: theme.text }}>
+        <span style={{ width: 30, height: 30, borderRadius: 15, background: theme.accent, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 900 }}>MG</span>
+        Mi cuenta
+      </div>
+    ) : (
+      <div style={{ padding: "9px 16px", borderRadius: 11, border: `1px solid ${theme.line}`, fontWeight: 800, fontSize: 15, color: theme.text }}>Iniciar sesión</div>
+    )}
+    <div style={{ padding: "10px 16px", borderRadius: 11, background: theme.text, color: "#fff", fontWeight: 800, fontSize: 15 }}>Ver vehículos</div>
   </div>
 );
 
 export type CursorPoint = { f: number; x: number; y: number; click?: boolean };
 
 /** Puntero animado que recorre puntos clave y muestra un "ripple" en cada clic. */
-export const Cursor: React.FC<{ points: CursorPoint[] }> = ({ points }) => {
+export const Cursor: React.FC<{ points: CursorPoint[] }> = ({ points: raw }) => {
   const frame = useCurrentFrame();
+  // Garantiza tiempos estrictamente crecientes aunque dos frases de la locución queden muy juntas.
+  const points = raw.reduce<CursorPoint[]>((acc, p) => [...acc, { ...p, f: acc.length ? Math.max(p.f, acc[acc.length - 1].f + 3) : p.f }], []);
   const fs = points.map((p) => p.f);
   const opts = { ...clamp, easing: Easing.bezier(0.65, 0, 0.35, 1) };
   const x = points.length > 1 ? interpolate(frame, fs, points.map((p) => p.x), opts) : points[0].x;
@@ -151,14 +136,14 @@ export const Cursor: React.FC<{ points: CursorPoint[] }> = ({ points }) => {
             width: 80,
             height: 80,
             borderRadius: 40,
-            border: `4px solid ${theme.accent2}`,
+            border: `4px solid ${theme.accent}`,
             transform: `scale(${0.3 + since / 14})`,
             opacity: 1 - since / 18,
           }}
         />
       )}
-      <svg width="46" height="46" viewBox="0 0 24 24" style={{ transform: `scale(${press})`, transformOrigin: "0 0", filter: "drop-shadow(0 6px 10px rgba(0,0,0,0.5))" }}>
-        <path d="M4 2l15 11-7 1.2L8.5 21z" fill="white" stroke="#111" strokeWidth="1.3" strokeLinejoin="round" />
+      <svg width="44" height="44" viewBox="0 0 24 24" style={{ transform: `scale(${press})`, transformOrigin: "0 0", filter: "drop-shadow(0 6px 10px rgba(15,23,42,0.35))" }}>
+        <path d="M4 2l15 11-7 1.2L8.5 21z" fill={theme.text} stroke="#fff" strokeWidth="1.4" strokeLinejoin="round" />
       </svg>
     </div>
   );

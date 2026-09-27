@@ -1,20 +1,30 @@
 import { loadFont } from "@remotion/fonts";
 import { staticFile } from "remotion";
 
-// Paleta y marca. Cambia estos valores para ajustar el look del VSL.
+// Branding de cars.apvmotorusa.com (tomado de su hoja de estilos: variables :root).
 export const theme = {
-  bg: "#060A13",
-  bg2: "#0D1526",
-  panel: "#111B30",
-  panel2: "#16223B",
-  line: "rgba(255,255,255,0.09)",
-  text: "#F5F7FB",
-  muted: "#8C97AD",
-  accent: "#FF3B30", // rojo APV / urgencia
-  accent2: "#FFB800", // ámbar / resaltado
-  success: "#22C55E",
-  link: "#3B82F6",
-  display: "Montserrat, sans-serif",
+  bg: "#F0F7FF", // degradado del hero (#f0f7ff → #fff)
+  bg2: "#FFFFFF",
+  panel: "#FFFFFF",
+  panel2: "#F8FAFC", // --soft-2
+  soft: "#F1F5F9", // --soft
+  line: "#DBE4EE", // --line
+  field: "#CBD5E1", // borde de inputs
+  text: "#0F172A", // --ink
+  ink2: "#1E293B", // --ink-2
+  slate: "#475569",
+  muted: "#64748B", // --muted
+  accent: "#DC2626", // --primary
+  accent2: "#1D4ED8", // azul del botón «Quiero ofertar» en la ficha
+  accentDark: "#B91C1C", // --primary-2
+  redSoft: "#FEF2F2",
+  success: "#15803D", // --green
+  successSoft: "#ECFDF3", // --green-soft
+  link: "#2563EB",
+  shadow: "0 18px 50px rgba(15,23,42,.09)", // --shadow
+  radius: 22,
+  radiusSm: 14,
+  display: "Inter, sans-serif",
   ui: "Inter, sans-serif",
 };
 
@@ -22,32 +32,18 @@ export const brand = {
   name: "APV MOTORS",
   url: "cars.apvmotorusa.com",
   location: "Houston, TX",
-  // Etiquetas del sitio que se muestran en la demo. Ajustar si el sitio usa otros textos.
-  ctaButton: "Me interesa",
-  heroTitle: "Encuentra tu próximo vehículo en subasta",
+  logo: "brand/apv-logo-red.png",
+  heroTitle: "Compra tu vehículo en subastas de EE. UU. sin complicarte.",
+  heroSub: "Encuentra vehículos de Copart, define cuánto quieres ofertar y APV Motors te acompaña desde la puja hasta la documentación y el traslado.",
+  ctaButton: "Quiero ofertar",
 };
 
 export const FPS = 30;
 export const WIDTH = 1920;
 export const HEIGHT = 1080;
 
-const fonts: [string, number][] = [
-  ["montserrat", 500],
-  ["montserrat", 700],
-  ["montserrat", 800],
-  ["montserrat", 900],
-  ["inter", 400],
-  ["inter", 500],
-  ["inter", 600],
-  ["inter", 700],
-];
-
 export const fontsReady = Promise.all(
-  fonts.map(([family, weight]) =>
-    loadFont({
-      family: family === "montserrat" ? "Montserrat" : "Inter",
-      url: staticFile(`fonts/${family}-latin-${weight}-normal.woff2`),
-      weight: String(weight),
-    }),
+  [400, 500, 600, 700, 800, 900].map((weight) =>
+    loadFont({ family: "Inter", url: staticFile(`fonts/inter-latin-${weight}-normal.woff2`), weight: String(weight) }),
   ),
 );

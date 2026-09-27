@@ -5,78 +5,87 @@
     <meta name="viewport" content="width=1080, height=1920" />
     <script src="assets/gsap.min.js"></script>
     <style>
-      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
-      @font-face { font-family: "Montserrat"; font-weight: 900; src: url("assets/montserrat-latin-900-normal.woff2") format("woff2"); }
       @font-face { font-family: "Inter"; font-weight: 500; src: url("assets/inter-latin-500-normal.woff2") format("woff2"); }
       @font-face { font-family: "Inter"; font-weight: 700; src: url("assets/inter-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 800; src: url("assets/inter-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 900; src: url("assets/inter-latin-900-normal.woff2") format("woff2"); }
+      /* Branding de cars.apvmotorusa.com */
       :root {
-        --bg: #060a13;
-        --panel: #16223b;
-        --line: rgba(255, 255, 255, 0.1);
-        --text: #f5f7fb;
-        --muted: #8c97ad;
-        --red: #ff3b30;
-        --amber: #ffb800;
-        --green: #22c55e;
+        --ink: #0f172a;
+        --ink-2: #1e293b;
+        --slate: #475569;
+        --muted: #64748b;
+        --line: #dbe4ee;
+        --soft: #f1f5f9;
+        --primary: #dc2626;
+        --primary-2: #b91c1c;
+        --blue: #1d4ed8;
+        --green: #15803d;
+        --green-soft: #ecfdf3;
+        --shadow: 0 18px 50px rgba(15, 23, 42, 0.09);
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg); }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #fff; }
       #root {
         position: relative;
         width: 100%;
         height: 100%;
         overflow: hidden;
-        font-family: "Montserrat", sans-serif;
-        color: var(--text);
-        background: radial-gradient(900px 900px at 70% 10%, rgba(255, 59, 48, 0.22), transparent 60%),
-          radial-gradient(900px 900px at 10% 90%, rgba(59, 130, 246, 0.16), transparent 60%), var(--bg);
+        font-family: "Inter", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(900px 900px at 85% 5%, rgba(37, 99, 235, 0.16), transparent 60%),
+          radial-gradient(800px 800px at 5% 95%, rgba(220, 38, 38, 0.1), transparent 60%),
+          linear-gradient(180deg, #f0f7ff 0%, #ffffff 70%);
       }
       .grid {
         position: absolute; left: -540px; right: -540px; bottom: -120px; height: 900px;
-        transform: perspective(700px) rotateX(62deg); transform-origin: 50% 100%;
-        background-image: linear-gradient(var(--line) 2px, transparent 2px), linear-gradient(90deg, var(--line) 2px, transparent 2px);
+        transform: perspective(700px) rotateX(64deg); transform-origin: 50% 100%;
+        background-image: linear-gradient(rgba(15, 23, 42, 0.06) 2px, transparent 2px), linear-gradient(90deg, rgba(15, 23, 42, 0.06) 2px, transparent 2px);
         background-size: 120px 120px;
-        -webkit-mask-image: linear-gradient(to top, black 10%, transparent 85%);
-        mask-image: linear-gradient(to top, black 10%, transparent 85%);
+        -webkit-mask-image: linear-gradient(to top, black 5%, transparent 85%);
+        mask-image: linear-gradient(to top, black 5%, transparent 85%);
       }
-      .clip { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 70px; text-align: center; }
-      .logo { position: absolute; top: 90px; left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 18px; font-weight: 900; font-size: 42px; letter-spacing: 1px; z-index: 5; }
-      .logo .mark { width: 70px; height: 70px; border-radius: 20px; background: linear-gradient(135deg, var(--red), #b3121f); display: flex; align-items: center; justify-content: center; font-size: 26px; color: #fff; }
-      .logo b { color: var(--red); }
-      .kicker { display: inline-block; padding: 12px 28px; border-radius: 999px; font-weight: 800; font-size: 30px; letter-spacing: 4px; text-transform: uppercase; border: 2px solid; }
-      .h1 { font-weight: 900; font-size: 118px; line-height: 1.02; letter-spacing: -2px; }
-      .h2 { font-weight: 900; font-size: 92px; line-height: 1.05; letter-spacing: -1.5px; }
-      .red { color: var(--red); } .amber { color: var(--amber); } .green { color: var(--green); }
+      .clip { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 70px 0; text-align: center; }
+      .logo { position: absolute; top: 80px; left: 0; right: 0; display: flex; justify-content: center; z-index: 5; }
+      .logo img { height: 110px; }
+      .kicker { display: inline-flex; align-items: center; gap: 12px; padding: 12px 26px; border-radius: 999px; background: #fff; font-weight: 800; font-size: 28px; letter-spacing: 0.11em; text-transform: uppercase; border: 2px solid; box-shadow: var(--shadow); }
+      .kicker::before { content: ""; width: 12px; height: 12px; border-radius: 6px; background: currentColor; }
+      .h1 { font-weight: 900; font-size: 116px; line-height: 1.02; letter-spacing: -0.04em; }
+      .h2 { font-weight: 900; font-size: 90px; line-height: 1.04; letter-spacing: -0.04em; }
+      .red { color: var(--primary); } .green { color: var(--green); } .blue { color: var(--blue); }
       .word { display: inline-block; }
-      .tag { margin-top: 70px; padding: 30px 50px; border-radius: 30px; background: linear-gradient(135deg, #2b3752, #1b2439); font-weight: 900; font-size: 78px; white-space: nowrap; position: relative; }
-      .tag .strike { position: absolute; left: 20px; right: 20px; top: 50%; height: 14px; border-radius: 7px; background: var(--red); transform-origin: left center; }
-      .car { width: 900px; margin-top: 60px; }
-      .steps { margin-top: 60px; display: flex; flex-direction: column; gap: 30px; width: 900px; }
-      .step { display: flex; align-items: center; gap: 30px; padding: 30px 36px; border-radius: 30px; background: var(--panel); border: 2px solid var(--line); font-family: "Inter", sans-serif; font-weight: 700; font-size: 50px; text-align: left; }
-      .step .n { width: 96px; height: 96px; flex-shrink: 0; border-radius: 48px; border: 5px solid var(--red); display: flex; align-items: center; justify-content: center; font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 50px; }
-      .advisor { margin-top: 60px; width: 900px; padding: 40px; border-radius: 34px; background: var(--panel); border: 2px solid rgba(34, 197, 94, 0.6); box-shadow: 0 0 80px rgba(34, 197, 94, 0.25); text-align: left; font-family: "Inter", sans-serif; }
-      .advisor .head { display: flex; align-items: center; gap: 24px; padding-bottom: 26px; border-bottom: 1px solid var(--line); }
-      .advisor .avatar { width: 110px; height: 110px; border-radius: 55px; background: linear-gradient(135deg, var(--green), #15803d); display: flex; align-items: center; justify-content: center; }
-      .advisor .name { font-weight: 700; font-size: 46px; }
-      .advisor .online { color: var(--green); font-size: 32px; margin-top: 6px; }
-      .bubble { margin-top: 24px; display: inline-block; padding: 24px 32px; border-radius: 10px 34px 34px 34px; background: #111b30; border: 1px solid var(--line); font-weight: 500; font-size: 40px; }
-      .url { margin-top: 60px; padding: 34px 50px; border-radius: 999px; background: linear-gradient(135deg, var(--red), #c8141f); box-shadow: 0 0 90px rgba(255, 59, 48, 0.6); font-weight: 900; font-size: 64px; color: #fff; white-space: nowrap; }
-      .sub { margin-top: 50px; font-family: "Inter", sans-serif; font-weight: 500; font-size: 40px; color: var(--muted); line-height: 1.3; }
-      .note { position: absolute; bottom: 70px; left: 0; right: 0; text-align: center; font-family: "Inter", sans-serif; font-size: 24px; color: var(--muted); }
+      .tag { margin-top: 70px; padding: 30px 50px; border-radius: 26px; background: #fff; border: 2px solid var(--line); box-shadow: var(--shadow); font-weight: 900; font-size: 78px; white-space: nowrap; position: relative; color: var(--slate); letter-spacing: -0.03em; }
+      .tag .strike { position: absolute; left: 20px; right: 20px; top: 50%; height: 14px; border-radius: 7px; background: var(--primary); transform-origin: left center; }
+      .badges { margin-top: 60px; display: flex; gap: 22px; }
+      .badge { padding: 18px 28px; border-radius: 20px; background: #fff; border: 2px solid var(--line); box-shadow: var(--shadow); font-weight: 800; font-size: 38px; }
+      .badge.copart { color: var(--blue); background: #eff6ff; border-color: #bfdbfe; }
+      .car { width: 880px; margin-top: 60px; }
+      .steps { margin-top: 56px; display: flex; flex-direction: column; gap: 24px; width: 900px; }
+      .step { display: flex; align-items: center; gap: 28px; padding: 26px 32px; border-radius: 26px; background: #fff; border: 2px solid var(--line); box-shadow: var(--shadow); font-weight: 800; font-size: 46px; text-align: left; letter-spacing: -0.02em; }
+      .step .n { width: 84px; height: 84px; flex-shrink: 0; border-radius: 42px; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 44px; box-shadow: 0 10px 24px rgba(220, 38, 38, 0.3); }
+      .step.bid { border-color: var(--primary); }
+      .advisor { margin-top: 56px; width: 900px; border-radius: 34px; background: #fff; box-shadow: 0 30px 80px rgba(15, 23, 42, 0.18); text-align: left; overflow: hidden; }
+      .advisor .head { display: flex; align-items: center; gap: 24px; padding: 30px 36px; background: var(--ink); color: #fff; }
+      .advisor .eyebrow { font-size: 22px; font-weight: 900; letter-spacing: 0.11em; color: #fca5a5; }
+      .advisor .avatar { width: 96px; height: 96px; border-radius: 48px; background: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+      .advisor .name { font-weight: 900; font-size: 44px; margin-top: 4px; }
+      .advisor .online { color: #86efac; font-size: 28px; font-weight: 700; margin-top: 4px; }
+      .advisor .body { padding: 30px 36px 36px; }
+      .bubble { display: inline-block; padding: 22px 30px; border-radius: 10px 30px 30px 30px; background: var(--soft); border: 1px solid var(--line); font-weight: 700; font-size: 38px; line-height: 1.3; }
+      .url { margin-top: 60px; padding: 34px 50px; border-radius: 999px; background: linear-gradient(135deg, var(--primary), var(--primary-2)); box-shadow: 0 20px 60px rgba(220, 38, 38, 0.4); font-weight: 900; font-size: 62px; color: #fff; white-space: nowrap; letter-spacing: -0.02em; }
+      .sub { margin-top: 50px; font-weight: 700; font-size: 40px; color: var(--slate); line-height: 1.3; }
+      .note { position: absolute; bottom: 70px; left: 0; right: 0; text-align: center; font-weight: 500; font-size: 24px; color: var(--muted); }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="19" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="21" data-width="1080" data-height="1920">
       <div class="grid"></div>
 
-      <div class="logo" id="logo">
-        <div class="mark">APV</div>
-        <div>APV <b>MOTORS</b></div>
-      </div>
+      <div class="logo" id="logo"><img src="assets/apv-logo-red.png" alt="APV Motors" /></div>
 
       <!-- 1. Gancho -->
       <section id="s1" class="clip" data-start="0" data-duration="3.1" data-track-index="1">
-        <div class="kicker red" id="s1k" style="border-color: rgba(255, 59, 48, 0.5)">¿Te suena?</div>
+        <div class="kicker red" id="s1k" style="border-color: rgba(220, 38, 38, 0.3)">¿Te suena?</div>
         <div class="h1" style="margin-top: 40px">
           <span class="word s1w">¿Sigues</span> <span class="word s1w">pagando</span> <span class="word s1w">precio</span>
           <span class="word s1w">de</span> <span class="word s1w red">dealer?</span>
@@ -85,61 +94,70 @@
       </section>
 
       <!-- 2. Solución -->
-      <section id="s2" class="clip" data-start="3.1" data-duration="3.7" data-track-index="1">
+      <section id="s2" class="clip" data-start="3.1" data-duration="3.9" data-track-index="1">
         <div class="h2">
-          <span class="word s2w">Compra</span> <span class="word s2w">directo</span> <span class="word s2w">en</span>
-          <span class="word s2w amber">subastas</span> <span class="word s2w">de</span> <span class="word s2w">todo</span>
-          <span class="word s2w amber">EE.UU.</span>
+          <span class="word s2w">Compra</span> <span class="word s2w">en</span> <span class="word s2w red">subastas</span>
+          <span class="word s2w">de</span> <span class="word s2w">EE.</span> <span class="word s2w">UU.</span>
+        </div>
+        <div class="badges">
+          <div class="badge copart" id="b1">COPART</div>
+          <div class="badge" id="b2">100% online</div>
+          <div class="badge" id="b3" style="color: var(--green)">Sin licencia</div>
         </div>
         <svg class="car" id="s2car" viewBox="0 0 400 170">
-          <ellipse cx="200" cy="150" rx="185" ry="10" fill="rgba(0,0,0,0.45)" />
-          <path d="M16 118 L18 70 Q20 50 40 48 L250 46 Q270 48 296 74 L352 82 Q380 88 386 102 L388 118 Z" fill="#ff3b30" />
-          <path d="M30 100 L380 100" stroke="rgba(255,255,255,0.35)" stroke-width="2" />
-          <path d="M34 74 L36 60 Q38 55 46 55 L120 55 L120 76 Z" fill="#131c30" />
-          <path d="M128 55 L200 55 L200 76 L128 76 Z" fill="#131c30" />
-          <path d="M208 55 L246 54 Q262 56 282 76 L208 76 Z" fill="#131c30" />
-          <rect x="372" y="92" width="14" height="7" rx="3" fill="#fff3b0" />
-          <g><circle cx="90" cy="120" r="30" fill="#060a13" /><circle cx="90" cy="120" r="14" fill="#9aa4b8" /></g>
-          <g><circle cx="312" cy="120" r="30" fill="#060a13" /><circle cx="312" cy="120" r="14" fill="#9aa4b8" /></g>
+          <ellipse cx="200" cy="150" rx="185" ry="10" fill="rgba(15,23,42,0.18)" />
+          <path d="M16 118 L18 70 Q20 50 40 48 L250 46 Q270 48 296 74 L352 82 Q380 88 386 102 L388 118 Z" fill="#dc2626" />
+          <path d="M30 100 L380 100" stroke="rgba(255,255,255,0.4)" stroke-width="2" />
+          <path d="M34 74 L36 60 Q38 55 46 55 L120 55 L120 76 Z" fill="#1e293b" />
+          <path d="M128 55 L200 55 L200 76 L128 76 Z" fill="#1e293b" />
+          <path d="M208 55 L246 54 Q262 56 282 76 L208 76 Z" fill="#1e293b" />
+          <rect x="372" y="92" width="14" height="7" rx="3" fill="#fde68a" />
+          <g><circle cx="90" cy="120" r="30" fill="#0f172a" /><circle cx="90" cy="120" r="14" fill="#cbd5e1" /></g>
+          <g><circle cx="312" cy="120" r="30" fill="#0f172a" /><circle cx="312" cy="120" r="14" fill="#cbd5e1" /></g>
         </svg>
       </section>
 
-      <!-- 3. Cómo se usa -->
-      <section id="s3" class="clip" data-start="6.8" data-duration="3.4" data-track-index="1">
+      <!-- 3. Cómo se usa (pasos reales del sitio) -->
+      <section id="s3" class="clip" data-start="7" data-duration="4.5" data-track-index="1">
         <div class="h2">Así de <span class="red">fácil</span></div>
         <div class="steps">
-          <div class="step" id="st1"><div class="n">1</div>Busca tu vehículo</div>
-          <div class="step" id="st2"><div class="n">2</div>Revisa la ficha</div>
-          <div class="step" id="st3"><div class="n">3</div>Toca «Me interesa»</div>
+          <div class="step" id="st1"><div class="n">1</div>Crea tu cuenta gratis</div>
+          <div class="step" id="st2"><div class="n">2</div>Elige tu vehículo</div>
+          <div class="step" id="st3"><div class="n">3</div>Calcula el total</div>
+          <div class="step bid" id="st4"><div class="n">4</div>Toca «Quiero ofertar»</div>
         </div>
       </section>
 
       <!-- 4. Asesor -->
-      <section id="s4" class="clip" data-start="10.2" data-duration="2.9" data-track-index="1">
+      <section id="s4" class="clip" data-start="11.5" data-duration="2.9" data-track-index="1">
         <div class="h2">Un <span class="green">asesor</span> te guía en toda tu compra</div>
         <div class="advisor" id="s4card">
           <div class="head">
             <div class="avatar">
-              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 14v-2a8 8 0 0116 0v2" /><rect x="2" y="13" width="5" height="7" rx="2" /><rect x="17" y="13" width="5" height="7" rx="2" /><path d="M20 20c0 1.5-2 2-5 2h-2" />
               </svg>
             </div>
-            <div><div class="name">Tu asesor APV</div><div class="online">● En línea</div></div>
+            <div>
+              <div class="eyebrow">ASISTENCIA DE PUJA</div>
+              <div class="name">Continúa con un asesor</div>
+              <div class="online">● Sesión protegida</div>
+            </div>
           </div>
-          <div class="bubble" id="s4b">Te acompaño paso a paso.</div>
+          <div class="body"><div class="bubble" id="s4b">¡Hola! Te acompaño paso a paso en tu compra.</div></div>
         </div>
       </section>
 
       <!-- 5. CTA -->
-      <section id="s5" class="clip" data-start="13.1" data-duration="5.9" data-track-index="1">
+      <section id="s5" class="clip" data-start="14.4" data-duration="6.6" data-track-index="1">
         <div class="h1">Entra <span class="red">ya</span></div>
         <div class="url" id="s5url">cars.apvmotorusa.com</div>
-        <div class="sub" id="s5sub">Elige tu vehículo, deja tus datos<br />y un asesor te atenderá.</div>
-        <div class="note">Vehículos e interfaz ilustrativos · Houston, TX</div>
+        <div class="sub" id="s5sub">Crea tu cuenta gratis<br />y un asesor te atenderá.</div>
+        <div class="note">Recreación ilustrativa · Houston, TX</div>
       </section>
 
-      <audio id="vo" src="assets/vo.wav" data-start="0.3" data-duration="16" data-track-index="2"></audio>
-      <audio id="bgm" src="assets/music.mp3" data-start="0" data-duration="19" data-volume="0.22" data-fade-out="1.5" data-track-index="3"></audio>
+      <audio id="vo" src="assets/vo.wav" data-start="0.3" data-duration="17.2" data-track-index="2"></audio>
+      <audio id="bgm" src="assets/music.mp3" data-start="0" data-duration="21" data-volume="0.22" data-fade-out="1.5" data-track-index="3"></audio>
     </div>
 
     <script>
@@ -147,7 +165,7 @@
       const tl = gsap.timeline({ paused: true });
 
       // Fondo y logo
-      tl.fromTo(".grid", { y: 0 }, { y: 240, duration: 19, ease: "none" }, 0);
+      tl.fromTo(".grid", { y: 0 }, { y: 240, duration: 21, ease: "none" }, 0);
       tl.fromTo("#logo", { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1);
 
       // 1. Gancho
@@ -159,26 +177,30 @@
 
       // 2. Solución
       tl.fromTo(".s2w", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: "back.out(1.8)" }, 3.15);
+      tl.fromTo("#b1", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 4.3);
+      tl.fromTo("#b2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 5.4);
+      tl.fromTo("#b3", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 5.9);
       tl.fromTo("#s2car", { x: -1200 }, { x: 0, duration: 0.9, ease: "power3.out" }, 4.0);
-      tl.to("#s2car", { x: 1300, duration: 0.6, ease: "power2.in" }, 6.2);
+      tl.to("#s2car", { x: 1300, duration: 0.6, ease: "power2.in" }, 6.4);
 
       // 3. Pasos (sincronizados con la locución)
-      tl.fromTo("#s3 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 6.8);
-      tl.fromTo("#st1", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 6.9);
-      tl.fromTo("#st2", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 7.9);
-      tl.fromTo("#st3", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 8.9);
-      tl.to("#st3", { scale: 1.05, duration: 0.25, yoyo: true, repeat: 1 }, 9.4);
+      tl.fromTo("#s3 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 7.0);
+      tl.fromTo("#st1", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 7.15);
+      tl.fromTo("#st2", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 8.3);
+      tl.fromTo("#st3", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 9.2);
+      tl.fromTo("#st4", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 10.1);
+      tl.to("#st4", { scale: 1.05, duration: 0.25, yoyo: true, repeat: 1 }, 10.6);
 
       // 4. Asesor
-      tl.fromTo("#s4 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 10.2);
-      tl.fromTo("#s4card", { opacity: 0, y: 120, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 10.5);
-      tl.fromTo("#s4b", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 11.3);
+      tl.fromTo("#s4 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 11.5);
+      tl.fromTo("#s4card", { opacity: 0, y: 120, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 11.8);
+      tl.fromTo("#s4b", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 12.6);
 
       // 5. CTA
-      tl.fromTo("#s5 .h1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, 13.1);
-      tl.fromTo("#s5url", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.8)" }, 13.5);
-      tl.to("#s5url", { scale: 1.06, duration: 0.5, yoyo: true, repeat: 7, ease: "sine.inOut" }, 14.1);
-      tl.fromTo("#s5sub", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 14.4);
+      tl.fromTo("#s5 .h1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, 14.4);
+      tl.fromTo("#s5url", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.8)" }, 14.8);
+      tl.to("#s5url", { scale: 1.05, duration: 0.5, yoyo: true, repeat: 9, ease: "sine.inOut" }, 15.4);
+      tl.fromTo("#s5sub", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 15.6);
 
       window.__timelines["main"] = tl;
       tl.seek(0);

@@ -47,7 +47,9 @@ export const spokenWeight = (text: string) =>
     .replace(/WhatsApp/g, "guatsap")
     .replace(/\b30\b/g, "treinta")
     .replace(/\b60\b/g, "sesenta")
-    .replace(/\b[1-4]\b/g, (d) => ["uno", "dos", "tres", "cuatro"][Number(d) - 1])
+    .replace(/100%/g, "cien por ciento")
+    .replace(/\bVIN\b/g, "V I N")
+    .replace(/\b[1-5]\b/g, (d) => ["uno", "dos", "tres", "cuatro", "cinco"][Number(d) - 1])
     .replace(/[,;]/g, ",,,,")
     .replace(/[.:?!]/g, "........").length;
 

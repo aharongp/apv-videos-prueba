@@ -9,7 +9,7 @@ import { SceneShell, SfxAt } from "./components/Shell";
 import { Logo } from "./components/Browser";
 import { clamp } from "./components/motion";
 import { Hook, Problem, Solution } from "./scenes/Intro";
-import { Step1, Step2, Step3, Step4 } from "./scenes/Demo";
+import { Step1, Step2, Step3, Step4, Step5 } from "./scenes/Demo";
 import { Advisor, Cta, Objection, Qualify, Value } from "./scenes/Close";
 
 const components: Record<SceneId, React.FC<{ scene: TimedScene }>> = {
@@ -20,6 +20,7 @@ const components: Record<SceneId, React.FC<{ scene: TimedScene }>> = {
   step2: Step2,
   step3: Step3,
   step4: Step4,
+  step5: Step5,
   value: Value,
   qualify: Qualify,
   objection: Objection,
@@ -35,7 +36,7 @@ const tints: Partial<Record<SceneId, string>> = {
 };
 
 // Escenas donde no se muestra la marca de agua (ya aparece el logo grande).
-const noWatermark: SceneId[] = ["solution", "step1", "step2", "step3", "step4", "advisor"];
+const noWatermark: SceneId[] = ["solution", "step1", "step2", "step3", "step4", "step5", "advisor"];
 
 export const CarsVSL: React.FC = () => {
   const [handle] = useState(() => delayRender("Cargando fuentes"));
@@ -82,7 +83,7 @@ export const CarsVSL: React.FC = () => {
           transformOrigin: "0 0",
         }}
       >
-        <Logo size={34} />
+        <Logo height={52} />
       </div>
 
       <Audio
@@ -106,7 +107,7 @@ const LightSweep: React.FC = () => {
           left: `${x}%`,
           width: 260,
           transform: "skewX(-18deg)",
-          background: `linear-gradient(90deg, transparent, ${theme.accent}55, rgba(255,255,255,0.35), ${theme.accent}55, transparent)`,
+          background: `linear-gradient(90deg, transparent, ${theme.accent}33, rgba(255,255,255,0.8), ${theme.accent}33, transparent)`,
           filter: "blur(6px)",
         }}
       />

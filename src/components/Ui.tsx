@@ -4,7 +4,7 @@ import { theme } from "../theme";
 import { Icon, IconName } from "./Icons";
 import { pop } from "./motion";
 
-/** Etiqueta de sección (arriba a la izquierda). */
+/** Etiqueta tipo "eyebrow" del sitio (mayúsculas, tracking amplio). */
 export const Kicker: React.FC<{ children: React.ReactNode; color?: string; style?: React.CSSProperties }> = ({
   children,
   color = theme.accent,
@@ -17,13 +17,14 @@ export const Kicker: React.FC<{ children: React.ReactNode; color?: string; style
       gap: 12,
       padding: "10px 22px",
       borderRadius: 999,
-      background: `${color}1f`,
-      border: `1.5px solid ${color}66`,
+      background: "#FFFFFF",
+      border: `1.5px solid ${color}40`,
+      boxShadow: `0 10px 24px ${color}1f`,
       color,
-      fontFamily: theme.display,
+      fontFamily: theme.ui,
       fontWeight: 800,
-      fontSize: 24,
-      letterSpacing: 3,
+      fontSize: 22,
+      letterSpacing: "0.11em",
       textTransform: "uppercase",
       ...style,
     }}
@@ -55,13 +56,13 @@ export const Kinetic: React.FC<{
         fontWeight: weight,
         fontSize: size,
         lineHeight: 1.08,
-        letterSpacing: -size * 0.02,
+        letterSpacing: "-0.04em",
         color,
         textAlign: align,
         display: "flex",
         flexWrap: "wrap",
         justifyContent: align === "center" ? "center" : "flex-start",
-        columnGap: size * 0.26,
+        columnGap: size * 0.24,
         ...style,
       }}
     >
@@ -87,34 +88,75 @@ export const Kinetic: React.FC<{
   );
 };
 
-export const IconBadge: React.FC<{ name: IconName; color?: string; size?: number }> = ({ name, color = theme.accent, size = 88 }) => (
+/** Icono en caja blanca con halo suave, como los iconos de "Cómo comprar desde esta página". */
+export const IconBadge: React.FC<{ name: IconName; color?: string; size?: number; solid?: boolean }> = ({
+  name,
+  color = theme.accent,
+  size = 88,
+  solid = false,
+}) => (
   <div
     style={{
       width: size,
       height: size,
-      borderRadius: size * 0.28,
-      background: `${color}1c`,
-      border: `1.5px solid ${color}55`,
+      borderRadius: size * 0.26,
+      background: solid ? color : "#FFFFFF",
+      border: `1.5px solid ${color}33`,
+      boxShadow: `0 10px 30px ${color}2e`,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       flexShrink: 0,
     }}
   >
-    <Icon name={name} size={size * 0.52} color={color} />
+    <Icon name={name} size={size * 0.52} color={solid ? "#FFFFFF" : color} stroke={1.9} />
   </div>
 );
 
 export const Card: React.FC<{ children: React.ReactNode; style?: React.CSSProperties; glow?: string }> = ({ children, style, glow }) => (
   <div
     style={{
-      background: `linear-gradient(180deg, ${theme.panel2}, ${theme.panel})`,
-      border: `1px solid ${glow ? glow + "88" : theme.line}`,
-      borderRadius: 26,
-      boxShadow: glow ? `0 0 60px ${glow}33, 0 30px 60px rgba(0,0,0,0.4)` : "0 30px 60px rgba(0,0,0,0.4)",
+      background: "#FFFFFF",
+      border: `1.5px solid ${glow ? glow + "55" : theme.line}`,
+      borderRadius: theme.radius,
+      boxShadow: glow ? `0 24px 60px ${glow}26` : theme.shadow,
       ...style,
     }}
   >
     {children}
   </div>
 );
+
+/** Botones con el estilo del sitio. */
+export const Btn: React.FC<{
+  children: React.ReactNode;
+  kind?: "primary" | "dark" | "ghost" | "blue";
+  style?: React.CSSProperties;
+}> = ({ children, kind = "primary", style }) => {
+  const kinds: Record<string, React.CSSProperties> = {
+    primary: { background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentDark})`, color: "#fff", boxShadow: "0 10px 24px rgba(220,38,38,.25)" },
+    dark: { background: theme.text, color: "#fff" },
+    ghost: { background: "#fff", color: theme.text, border: `1px solid ${theme.line}` },
+    blue: { background: "linear-gradient(135deg, #2563EB, #1D4ED8)", color: "#fff", boxShadow: "0 10px 24px rgba(29,78,216,.3)" },
+  };
+  return (
+    <div
+      style={{
+        borderRadius: 13,
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 8,
+        minHeight: 48,
+        padding: "0 20px",
+        fontFamily: theme.ui,
+        fontWeight: 800,
+        whiteSpace: "nowrap",
+        ...kinds[kind],
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+};

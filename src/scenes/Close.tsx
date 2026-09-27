@@ -8,7 +8,7 @@ import { Cursor, Logo } from "../components/Browser";
 import { Beat, SfxAt } from "../components/Shell";
 import { Card, IconBadge, Kicker, Kinetic } from "../components/Ui";
 import { clamp, ease, fadeUp, pop, popIn } from "../components/motion";
-import { filtered } from "../components/Site";
+import { CarPhoto, listings } from "../components/Site";
 
 const center: React.CSSProperties = {
   position: "absolute",
@@ -20,63 +20,100 @@ const center: React.CSSProperties = {
   justifyContent: "center",
 };
 
-// ---------------------------------------------------------------- ACOMPAÑAMIENTO
+// ---------------------------------------------------------------- ACOMPAÑAMIENTO + PLANES
 export const Value: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const plansAt = phraseAt(scene, "Empiezas gratis");
   const stops: { at: number; icon: IconName; label: string }[] = [
-    { at: phraseAt(scene, "revisamos el historial"), icon: "history", label: "Historial del vehículo" },
-    { at: phraseAt(scene, "calculamos el costo total"), icon: "calculator", label: "Costo total antes de pujar" },
-    { at: phraseAt(scene, "manejamos pago"), icon: "doc", label: "Pago y documentos" },
-    { at: phraseAt(scene, "coordinamos la entrega"), icon: "truck", label: "Entrega coordinada" },
+    { at: phraseAt(scene, "la puja"), icon: "gavel", label: "La puja" },
+    { at: phraseAt(scene, "el pago"), icon: "dollar", label: "El pago" },
+    { at: phraseAt(scene, "la documentación"), icon: "doc", label: "La documentación" },
+    { at: phraseAt(scene, "el traslado"), icon: "truck", label: "El traslado" },
   ];
   const xs = [330, 750, 1170, 1590];
   const ROAD_Y = 610;
-  const carX = interpolate(
-    frame,
-    [0, ...stops.map((s) => s.at + 10), scene.duration],
-    [60, ...xs.map((x) => x - 170), 1720],
-    { ...clamp },
-  );
+  const carX = interpolate(frame, [0, ...stops.map((s) => s.at + 10), plansAt + 6], [60, ...xs.map((x) => x - 170), 1720], clamp);
+  const plans = [
+    { at: plansAt, eyebrow: "EMPIEZA AQUÍ", name: "Gratis", price: "US$0", sub: "Explora y prepara tu compra.", perks: ["Inventario de vehículos", "Favoritos en tu cuenta", "Atención personalizada"], hl: false },
+    { at: phraseAt(scene, "APV Plus"), eyebrow: "PARA TU PRÓXIMA COMPRA", name: "APV Plus", price: "US$97/año", sub: "Ahorro y orientación para tu compra.", perks: ["US$100 menos en tarifas de APV por vehículo", "Reporte del historial elaborado por APV", "Asesoría de 20 min incluida"], hl: true },
+    { at: phraseAt(scene, "Premium"), eyebrow: "MÁS ACOMPAÑAMIENTO", name: "APV Premium", price: "US$297/año", sub: "Mayor descuento y una asesoría completa.", perks: ["Mayor descuento en tarifas APV", "Reporte del historial elaborado por APV", "Asesoría completa incluida"], hl: false },
+  ];
 
   return (
     <AbsoluteFill>
-      <div style={{ position: "absolute", top: 110, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <Kicker color={theme.success}>Acompañamiento total</Kicker>
-        <div style={{ height: 24 }} />
-        <Kinetic text="Desde ahí, *no* *estás* *solo*" size={92} highlight={theme.success} />
-      </div>
-      <div style={{ position: "absolute", left: 120, right: 120, top: ROAD_Y + 60, height: 14, borderRadius: 7, background: "#1E293B" }} />
-      <div
-        style={{
-          position: "absolute",
-          left: 120,
-          top: ROAD_Y + 60,
-          height: 14,
-          borderRadius: 7,
-          width: Math.max(0, carX + 200 - 120),
-          background: `linear-gradient(90deg, ${theme.success}00, ${theme.success})`,
-        }}
-      />
-      {stops.map((s, i) => {
-        const p = pop(frame, fps, s.at);
-        const done = frame >= s.at;
-        return (
-          <div key={i} style={{ position: "absolute", left: xs[i] - 160, width: 320, top: ROAD_Y - 190, display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <div style={{ ...popIn(Math.max(0.35, p)), filter: done ? undefined : "grayscale(1)", opacity: done ? 1 : 0.35 }}>
-              <IconBadge name={s.icon} color={done ? theme.success : theme.muted} size={120} />
+      <Beat from={0} to={plansAt + 2}>
+        <div style={{ position: "absolute", top: 110, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <Kicker color={theme.success}>Te acompañamos</Kicker>
+          <div style={{ height: 24 }} />
+          <Kinetic text="Desde ahí, *no* *estás* *solo*" size={92} highlight={theme.success} />
+        </div>
+        <div style={{ position: "absolute", left: 120, right: 120, top: ROAD_Y + 60, height: 14, borderRadius: 7, background: theme.line }} />
+        <div
+          style={{
+            position: "absolute",
+            left: 120,
+            top: ROAD_Y + 60,
+            height: 14,
+            borderRadius: 7,
+            width: Math.max(0, Math.min(1680, carX + 200 - 120)),
+            background: `linear-gradient(90deg, ${theme.success}00, ${theme.success})`,
+          }}
+        />
+        {stops.map((s, i) => {
+          const p = pop(frame, fps, s.at);
+          const done = frame >= s.at;
+          return (
+            <div key={i} style={{ position: "absolute", left: xs[i] - 160, width: 320, top: ROAD_Y - 190, display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <div style={{ ...popIn(Math.max(0.35, p)), opacity: done ? 1 : 0.35 }}>
+                <IconBadge name={s.icon} color={done ? theme.success : theme.muted} size={120} />
+              </div>
+              <div style={{ height: 150 }} />
+              <div style={{ ...fadeUp(p, 20), fontFamily: theme.display, fontWeight: 800, fontSize: 34, letterSpacing: "-0.02em", color: theme.text, textAlign: "center" }}>{s.label}</div>
             </div>
-            <div style={{ height: 150 }} />
-            <div style={{ ...fadeUp(p, 20), fontFamily: theme.display, fontWeight: 800, fontSize: 32, color: theme.text, textAlign: "center", lineHeight: 1.15 }}>{s.label}</div>
-          </div>
-        );
-      })}
-      <div style={{ position: "absolute", left: carX, top: ROAD_Y - 30 }}>
-        <Car kind="suv" color={theme.accent} width={230} wheelSpin={frame * 12} />
-      </div>
-      {stops.map((s, i) => (
-        <SfxAt key={i} at={s.at} name="pop" volume={0.4} />
-      ))}
+          );
+        })}
+        <div style={{ position: "absolute", left: carX, top: ROAD_Y - 30 }}>
+          <Car kind="suv" color={theme.accent} width={230} wheelSpin={frame * 12} />
+        </div>
+        {stops.map((s, i) => (
+          <SfxAt key={i} at={s.at} name="pop" volume={0.4} />
+        ))}
+      </Beat>
+
+      <Beat from={plansAt}>
+        <div style={{ position: "absolute", top: 100, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <Kicker>Membresías APV Motors</Kicker>
+          <div style={{ height: 20 }} />
+          <Kinetic text="Empieza *gratis*" size={84} />
+        </div>
+        <div style={{ position: "absolute", top: 330, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 34, alignItems: "flex-start" }}>
+          {plans.map((pl) => {
+            const p = pop(frame, fps, pl.at);
+            return (
+              <div key={pl.name} style={{ ...fadeUp(p, 60), opacity: Math.min(1, p * 1.4) }}>
+                <Card glow={pl.hl ? theme.accent : undefined} style={{ width: 500, padding: "28px 30px", fontFamily: theme.ui, border: pl.hl ? `2px solid ${theme.accent}` : undefined }}>
+                  <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: "0.11em", color: pl.hl ? theme.accent : theme.muted }}>{pl.eyebrow}</div>
+                  <div style={{ fontSize: 40, fontWeight: 900, letterSpacing: "-0.04em", color: theme.text, marginTop: 6 }}>{pl.name}</div>
+                  <div style={{ fontSize: 20, color: theme.slate, marginTop: 4 }}>{pl.sub}</div>
+                  <div style={{ fontSize: 44, fontWeight: 900, letterSpacing: "-0.04em", color: pl.hl ? theme.accent : theme.text, marginTop: 14 }}>{pl.price}</div>
+                  <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 10 }}>
+                    {pl.perks.map((k) => (
+                      <div key={k} style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: 19, fontWeight: 600, color: theme.ink2 }}>
+                        <Icon name="check" size={24} color={theme.success} stroke={3} />
+                        {k}
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </div>
+            );
+          })}
+        </div>
+        {plans.map((pl) => (
+          <SfxAt key={pl.name} at={pl.at - plansAt} name="pop" volume={0.4} />
+        ))}
+      </Beat>
     </AbsoluteFill>
   );
 };
@@ -116,7 +153,7 @@ export const Qualify: React.FC<{ scene: TimedScene }> = ({ scene }) => {
                 return (
                   <div key={i} style={{ ...fadeUp(p, 24), display: "flex", alignItems: "center", gap: 22, padding: "14px 0", fontFamily: theme.ui, fontWeight: 700, fontSize: 36, color: theme.text }}>
                     <span style={{ ...popIn(p), width: 58, height: 58, borderRadius: 29, background: theme.success, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                      <Icon name="check" size={36} color="#04130A" stroke={3.2} />
+                      <Icon name="check" size={36} color="#FFFFFF" stroke={3.2} />
                     </span>
                     {y.text}
                   </div>
@@ -180,8 +217,8 @@ export const Cta: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const goAt = phraseAt(scene, "Entra ahora");
   const chips = [
     { at: goAt, label: "Entra", icon: "globe" as IconName },
-    { at: phraseAt(scene, "elige tu vehículo"), label: "Elige tu vehículo", icon: "car" as IconName },
-    { at: phraseAt(scene, "deja tus datos"), label: "Deja tus datos", icon: "chat" as IconName },
+    { at: phraseAt(scene, "crea tu cuenta gratis"), label: "Crea tu cuenta gratis", icon: "user" as IconName },
+    { at: phraseAt(scene, "crea tu cuenta gratis") + 20, label: "Te atiende un asesor", icon: "headset" as IconName },
   ];
   const days = ["LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB", "DOM"];
   const auctionDays = [0, 1, 2, 3, 4];
@@ -230,8 +267,8 @@ export const Cta: React.FC<{ scene: TimedScene }> = ({ scene }) => {
           </div>
           <div style={{ position: "relative", ...popIn(pop(frame, fps, soldAt - 16)) }}>
             <Card style={{ width: 560, overflow: "hidden" }}>
-              <div style={{ height: 250, background: `radial-gradient(circle at 50% 70%, ${filtered[0].color}33, #0B1324 70%)`, display: "flex", alignItems: "center", justifyContent: "center", filter: `grayscale(${stamp})` }}>
-                <Car kind="suv" color={filtered[0].color} width={430} />
+              <div style={{ filter: `grayscale(${stamp})` }}>
+                <CarPhoto l={listings[0]} width={560} height={250} radius={0} />
               </div>
               <div style={{ padding: "18px 26px", fontFamily: theme.ui }}>
                 <div style={{ fontWeight: 800, fontSize: 30, color: theme.text }}>El carro que te gusta hoy…</div>
@@ -251,7 +288,7 @@ export const Cta: React.FC<{ scene: TimedScene }> = ({ scene }) => {
                 fontWeight: 900,
                 fontSize: 68,
                 letterSpacing: 4,
-                background: "rgba(6,10,19,0.75)",
+                background: "rgba(255,255,255,0.94)",
                 transform: `rotate(-14deg) scale(${2.4 - 1.4 * stamp})`,
                 opacity: stamp,
               }}
@@ -415,7 +452,7 @@ const EndCard: React.FC<{ start: number }> = ({ start }) => {
   return (
     <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
       <div style={popIn(pop(frame, fps, start))}>
-        <Logo size={100} />
+        <Logo height={200} />
       </div>
       <div
         style={{
@@ -437,7 +474,7 @@ const EndCard: React.FC<{ start: number }> = ({ start }) => {
         Un asesor te atenderá y te guiará en tu compra
       </div>
       <div style={{ ...fadeUp(pop(frame, fps, start + 22), 30), marginTop: 22, display: "flex", alignItems: "center", gap: 14, fontFamily: theme.ui, fontSize: 30, color: theme.muted }}>
-        <Icon name="pin" size={32} color={theme.muted} /> {brand.location} · Compras en subastas de todo EE.UU.
+        <Icon name="pin" size={32} color={theme.muted} /> {brand.location} · Subastas de Copart en todo EE. UU.
       </div>
       <div style={{ position: "absolute", bottom: 40, fontFamily: theme.ui, fontSize: 18, color: theme.muted, opacity: interpolate(frame, [start + 20, start + 40], [0, 0.8], clamp) }}>
         Vehículos, precios e interfaz mostrados con fines ilustrativos.

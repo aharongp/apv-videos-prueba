@@ -28,7 +28,7 @@ export const Hook: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const b3 = phraseAt(scene, "Hoy vas a ver");
 
   const cars: { kind: "sedan" | "suv" | "pickup"; color: string }[] = [
-    { kind: "suv", color: "#E5E7EB" },
+    { kind: "suv", color: "#334155" },
     { kind: "sedan", color: "#EF4444" },
     { kind: "pickup", color: "#60A5FA" },
   ];
@@ -88,7 +88,7 @@ export const Hook: React.FC<{ scene: TimedScene }> = ({ scene }) => {
                       display: "flex",
                       alignItems: "center",
                       gap: 10,
-                      background: "rgba(6,10,19,0.7)",
+                      background: "rgba(255,255,255,0.94)",
                     }}
                   >
                     <Icon name="gavel" size={32} color={theme.accent2} stroke={2.5} /> DE SUBASTA
@@ -110,9 +110,12 @@ export const Hook: React.FC<{ scene: TimedScene }> = ({ scene }) => {
       <Beat from={b3}>
         <div style={center}>
           <div style={{ ...popIn(pop(frame, fps, b3)), marginBottom: 40 }}>
-            <IconBadge name="gavel" color={theme.accent2} size={140} />
+            <IconBadge name="gavel" color={theme.accent} size={140} />
           </div>
-          <Kinetic text="¿Y si compras *donde* *compra* *el* *dealer?*" size={104} delay={6} highlight={theme.accent2} />
+          <Kinetic text="¿Y si compras *donde* *compra* *el* *dealer?*" size={104} delay={6} highlight={theme.accent} />
+          <div style={{ ...popIn(pop(frame, fps, phraseAt(scene, "sin licencia"))), marginTop: 40 }}>
+            <Kicker color={theme.success}>Sin licencia de dealer</Kicker>
+          </div>
         </div>
         <SfxAt at={0} name="whoosh" volume={0.3} />
       </Beat>
@@ -154,7 +157,8 @@ const PriceStack: React.FC = () => {
           <div
             style={{
               height: H * 0.6 * base,
-              background: `linear-gradient(180deg, #3B4A68, #26324B)`,
+              background: `linear-gradient(180deg, #94A3B8, #64748B)`,
+              color: "#FFFFFF",
               borderRadius: margin > 0.02 ? 0 : "16px 16px 0 0",
               display: "flex",
               alignItems: "center",
@@ -162,7 +166,6 @@ const PriceStack: React.FC = () => {
               fontFamily: theme.display,
               fontWeight: 800,
               fontSize: 26,
-              color: theme.text,
               overflow: "hidden",
             }}
           >
@@ -284,7 +287,7 @@ export const Solution: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const b1 = phraseAt(scene, "vehículos de subastas");
-  const b2 = phraseAt(scene, "y un equipo experto");
+  const b2 = phraseAt(scene, "y un equipo");
   const logoP = pop(frame, fps, 4);
   const urlStart = 18;
   const moveUp = ease(frame, b1 - 6, b1 + 12);
@@ -304,14 +307,14 @@ export const Solution: React.FC<{ scene: TimedScene }> = ({ scene }) => {
         }}
       >
         <div style={popIn(logoP)}>
-          <Logo size={110} />
+          <Logo height={190} />
         </div>
         <div
           style={{
             marginTop: 40,
             padding: "22px 44px",
             borderRadius: 999,
-            background: "#060B16",
+            background: "#FFFFFF",
             border: `2px solid ${theme.accent}`,
             boxShadow: `0 0 50px ${theme.accent}44`,
             fontFamily: theme.ui,
@@ -335,8 +338,8 @@ export const Solution: React.FC<{ scene: TimedScene }> = ({ scene }) => {
             <Card style={{ width: 620, padding: 36, display: "flex", gap: 28, alignItems: "center" }}>
               <IconBadge name="globe" color={theme.link} size={110} />
               <div>
-                <div style={{ fontFamily: theme.display, fontWeight: 800, fontSize: 40, color: theme.text }}>Subastas de todo EE.UU.</div>
-                <div style={{ fontFamily: theme.ui, fontSize: 26, color: theme.muted, marginTop: 8 }}>Autos, SUVs y pickups en un solo lugar</div>
+                <div style={{ fontFamily: theme.display, fontWeight: 800, fontSize: 40, color: theme.text }}>Subastas de Copart</div>
+                <div style={{ fontFamily: theme.ui, fontSize: 26, color: theme.muted, marginTop: 8 }}>En todo EE. UU. · 100% online</div>
               </div>
             </Card>
           </div>
@@ -345,8 +348,8 @@ export const Solution: React.FC<{ scene: TimedScene }> = ({ scene }) => {
             <Card glow={theme.success} style={{ width: 620, padding: 36, display: "flex", gap: 28, alignItems: "center" }}>
               <IconBadge name="shield" color={theme.success} size={110} />
               <div>
-                <div style={{ fontFamily: theme.display, fontWeight: 800, fontSize: 40, color: theme.text }}>Equipo experto</div>
-                <div style={{ fontFamily: theme.ui, fontSize: 26, color: theme.muted, marginTop: 8 }}>Hace el trabajo difícil por ti</div>
+                <div style={{ fontFamily: theme.display, fontWeight: 800, fontSize: 40, color: theme.text }}>Te acompañamos</div>
+                <div style={{ fontFamily: theme.ui, fontSize: 26, color: theme.muted, marginTop: 8 }}>De la puja a la documentación y el traslado</div>
               </div>
             </Card>
           </div>

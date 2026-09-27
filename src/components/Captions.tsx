@@ -66,13 +66,14 @@ export const Captions: React.FC<{ text: string; voFrames: number }> = ({ text, v
           maxWidth: 1500,
           padding: "14px 30px",
           borderRadius: 18,
-          background: "rgba(4,7,14,0.72)",
-          border: `1px solid ${theme.line}`,
+          background: "rgba(15,23,42,0.92)",
+          boxShadow: "0 18px 40px rgba(15,23,42,0.25)",
           fontFamily: theme.display,
           fontWeight: 800,
-          fontSize: 46,
+          fontSize: 44,
+          letterSpacing: -0.5,
           lineHeight: 1.2,
-          color: theme.text,
+          color: "#FFFFFF",
           textAlign: "center",
           opacity: appear,
           transform: `translateY(${(1 - appear) * 12}px)`,
@@ -83,7 +84,7 @@ export const Captions: React.FC<{ text: string; voFrames: number }> = ({ text, v
           wAcc += wordLens[i];
           const active = local >= wStart;
           return (
-            <span key={i} style={{ color: active ? theme.text : "rgba(245,247,251,0.45)" }}>
+            <span key={i} style={{ color: active ? "#FFFFFF" : "rgba(255,255,255,0.42)" }}>
               {w}
               {i < current.words.length - 1 ? " " : ""}
             </span>

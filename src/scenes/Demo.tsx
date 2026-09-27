@@ -2,55 +2,82 @@ import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { brand, theme } from "../theme";
 import { phraseAt, TimedScene } from "../timeline";
-import { BrowserFrame, Cursor, Logo, SiteHeader, typed } from "../components/Browser";
-import { Icon } from "../components/Icons";
+import { BrowserFrame, Cursor, SiteHeader, typed } from "../components/Browser";
+import { Icon, IconName } from "../components/Icons";
 import { Beat, SfxAt, Typing } from "../components/Shell";
 import { IconBadge, Kinetic } from "../components/Ui";
 import { clamp, ease, fadeUp, pop, popIn } from "../components/motion";
-import { DetailPage, Field, filtered, inventory, ListingCard, SiteHome, CarThumb } from "../components/Site";
+import {
+  AdvisorChat,
+  BidModal,
+  Calculator,
+  DetailFocus,
+  DetailModal,
+  DetailTop,
+  feeRows,
+  FilterCard,
+  HeroRegister,
+  listings,
+  ListingRow,
+  VerifyCode,
+} from "../components/Site";
 
 // Posición del navegador en pantalla (coordenadas absolutas del frame 1920x1080).
 const BX = 600;
-const BY = 110;
+const BY = 96;
 const BW = 1250;
-const BH = 730;
-const CY = BY + 64; // inicio del contenido bajo la barra del navegador
+const BH = 744;
+const CY = BY + 58; // inicio del contenido bajo la barra del navegador
 
-const StepPanel: React.FC<{ n: number; title: string; items: string[]; itemTimes: number[] }> = ({ n, title, items, itemTimes }) => {
+const STEPS: { title: string; icon: IconName }[] = [
+  { title: "Crea tu cuenta gratis", icon: "user" },
+  { title: "Selecciona un vehículo", icon: "car" },
+  { title: "Calcula tu presupuesto", icon: "calculator" },
+  { title: "Coloca tu puja máxima", icon: "gavel" },
+  { title: "Confirma con un asesor", icon: "chat" },
+];
+
+const StepPanel: React.FC<{ n: number; items: string[]; itemTimes: number[]; extra?: React.ReactNode }> = ({ n, items, itemTimes, extra }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const p = pop(frame, fps, 0);
   return (
-    <div style={{ position: "absolute", left: 80, top: BY + 10, width: 470 }}>
-      <div style={{ ...fadeUp(p, 60), display: "flex", alignItems: "baseline", gap: 14 }}>
-        <span style={{ fontFamily: theme.display, fontWeight: 900, fontSize: 150, lineHeight: 1, color: theme.accent, letterSpacing: -6 }}>
-          {String(n).padStart(2, "0")}
-        </span>
-        <span style={{ fontFamily: theme.display, fontWeight: 800, fontSize: 28, color: theme.muted, letterSpacing: 4 }}>PASO</span>
+    <div style={{ position: "absolute", left: 80, top: BY + 6, width: 470, fontFamily: theme.ui }}>
+      <div style={{ ...fadeUp(p, 60), display: "flex", alignItems: "center", gap: 18 }}>
+        <IconBadge name={STEPS[n - 1].icon} size={96} />
+        <div>
+          <div style={{ fontWeight: 800, fontSize: 22, color: theme.muted, letterSpacing: "0.11em" }}>PASO {n} DE 5</div>
+          <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
+            {STEPS.map((_, i) => (
+              <div key={i} style={{ width: 34, height: 6, borderRadius: 3, background: i < n ? theme.accent : theme.line }} />
+            ))}
+          </div>
+        </div>
       </div>
-      <div style={{ ...fadeUp(pop(frame, fps, 5), 40), fontFamily: theme.display, fontWeight: 900, fontSize: 56, lineHeight: 1.05, color: theme.text, marginTop: 16 }}>
-        {title}
+      <div style={{ ...fadeUp(pop(frame, fps, 5), 40), fontWeight: 900, fontSize: 58, lineHeight: 1.04, letterSpacing: "-0.04em", color: theme.text, marginTop: 26 }}>
+        {STEPS[n - 1].title}
       </div>
-      <div style={{ marginTop: 34, display: "flex", flexDirection: "column", gap: 16 }}>
+      <div style={{ marginTop: 30, display: "flex", flexDirection: "column", gap: 14 }}>
         {items.map((it, i) => {
           const ip = pop(frame, fps, itemTimes[i] ?? 10 + i * 5);
           return (
-            <div key={it} style={{ ...fadeUp(ip, 20), display: "flex", alignItems: "center", gap: 14, fontFamily: theme.ui, fontWeight: 600, fontSize: 28, color: theme.text }}>
-              <span style={{ width: 34, height: 34, borderRadius: 17, background: `${theme.success}22`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <Icon name="check" size={22} color={theme.success} stroke={3} />
+            <div key={it} style={{ ...fadeUp(ip, 20), display: "flex", alignItems: "center", gap: 14, fontWeight: 700, fontSize: 27, color: theme.ink2 }}>
+              <span style={{ width: 34, height: 34, borderRadius: 17, background: theme.successSoft, border: "1px solid #BBF7D0", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <Icon name="check" size={20} color={theme.success} stroke={3} />
               </span>
               {it}
             </div>
           );
         })}
       </div>
+      {extra}
     </div>
   );
 };
 
 const Illustrative: React.FC = () => (
-  <div style={{ position: "absolute", left: BX, top: BY + BH + 14, fontFamily: theme.ui, fontSize: 18, color: theme.muted, opacity: 0.8 }}>
-    Interfaz y vehículos ilustrativos
+  <div style={{ position: "absolute", left: BX, top: BY + BH + 12, fontFamily: theme.ui, fontSize: 17, fontWeight: 600, color: theme.muted }}>
+    Recreación de cars.apvmotorusa.com · vehículos y montos ilustrativos
   </div>
 );
 
@@ -59,417 +86,402 @@ const browserIn = (frame: number, start: number) => {
   return { opacity: p, transform: `translateY(${(1 - p) * 80}px) scale(${0.94 + 0.06 * p})` };
 };
 
-// ---------------------------------------------------------------- PASO 1
+const Browser: React.FC<{ url: string; start?: number; caret?: boolean; children: React.ReactNode }> = ({ url, start = 0, caret, children }) => {
+  const frame = useCurrentFrame();
+  return (
+    <div style={{ position: "absolute", left: BX, top: BY, ...browserIn(frame, start) }}>
+      <BrowserFrame url={url} showCaret={caret} width={BW} height={BH}>
+        {children}
+      </BrowserFrame>
+    </div>
+  );
+};
+
+const Callout: React.FC<{ at: number; icon: IconName; text: string; color?: string; x: number; y: number }> = ({ at, icon, text, color = theme.success, x, y }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const p = pop(frame, fps, at, 12);
+  return (
+    <div
+      style={{
+        position: "absolute",
+        left: x,
+        top: y,
+        ...popIn(p),
+        display: "flex",
+        alignItems: "center",
+        gap: 14,
+        padding: "16px 24px",
+        borderRadius: 20,
+        background: color,
+        boxShadow: `0 20px 50px ${color}55`,
+        fontFamily: theme.ui,
+        fontWeight: 800,
+        fontSize: 26,
+        color: "#fff",
+        zIndex: 40,
+      }}
+    >
+      <Icon name={icon} size={34} color="#fff" stroke={2.4} />
+      {text}
+    </div>
+  );
+};
+
+// ---------------------------------------------------------------- PASO 1 · Crea tu cuenta gratis
 export const Step1: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const b1 = phraseAt(scene, "Paso 1");
-  const typeStart = phraseAt(scene, "entra a") + 4;
-  const typeFrames = Math.ceil((brand.url.length / 20) * 30);
-  const loaded = typeStart + typeFrames + 6;
-  const phoneAt = phraseAt(scene, "desde tu celular");
-  const labels = ["Entra", "Filtra", "Revisa", brand.ctaButton];
+  const f = {
+    name: phraseAt(scene, "tu nombre"),
+    email: phraseAt(scene, "correo"),
+    phone: phraseAt(scene, "WhatsApp"),
+  };
+  const pass = f.phone + 16;
+  const codeAt = phraseAt(scene, "Te llega un código");
+  const clickAt = codeAt - 4;
+  const values = {
+    name: typed("María González", frame, f.name, 40),
+    email: typed("maria@correo.com", frame, f.email, 40),
+    phone: typed("832 555 0147", frame, f.phone, 40),
+    password: "•".repeat(Math.min(10, Math.max(0, Math.floor((frame - pass) / 1.2)))),
+  };
+  const active = frame >= clickAt ? -1 : frame >= pass ? 3 : frame >= f.phone ? 2 : frame >= f.email ? 1 : frame >= f.name ? 0 : -1;
+  const verify = ease(frame, clickAt + 4, clickAt + 16);
+  const code = typed("482910", frame, clickAt + 16, 30);
+  const done = frame >= clickAt + 16 + 14;
 
   return (
     <AbsoluteFill>
       <Beat from={0} to={b1 + 2}>
         <div style={{ position: "absolute", inset: 0, bottom: 190, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-          <Kinetic text="Así se usa en *4* *pasos*" size={120} delay={2} />
-          <div style={{ display: "flex", gap: 40, marginTop: 70 }}>
-            {labels.map((l, i) => {
-              const p = pop(frame, fps, 14 + i * 6);
+          <Kinetic text="Así se compra en *5* *pasos*" size={112} delay={2} />
+          <div style={{ display: "flex", gap: 34, marginTop: 64 }}>
+            {STEPS.map((s, i) => {
+              const p = pop(frame, fps, 12 + i * 5);
               return (
-                <div key={l} style={{ ...popIn(p), display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
+                <div key={s.title} style={{ ...popIn(p), width: 250, display: "flex", flexDirection: "column", alignItems: "center", gap: 14, textAlign: "center" }}>
+                  <IconBadge name={s.icon} size={104} />
                   <div
                     style={{
-                      width: 130,
-                      height: 130,
-                      borderRadius: 65,
-                      border: `4px solid ${theme.accent}`,
+                      width: 34,
+                      height: 34,
+                      borderRadius: 17,
+                      background: theme.accent,
+                      color: "#fff",
+                      fontWeight: 900,
+                      fontSize: 18,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontFamily: theme.display,
-                      fontWeight: 900,
-                      fontSize: 60,
-                      color: theme.text,
-                      background: `${theme.accent}18`,
+                      fontFamily: theme.ui,
                     }}
                   >
                     {i + 1}
                   </div>
-                  <div style={{ fontFamily: theme.display, fontWeight: 800, fontSize: 30, color: theme.muted }}>{l}</div>
+                  <div style={{ fontFamily: theme.ui, fontWeight: 800, fontSize: 26, lineHeight: 1.15, color: theme.text }}>{s.title}</div>
                 </div>
               );
             })}
           </div>
         </div>
-        {labels.map((_, i) => (
-          <SfxAt key={i} at={14 + i * 6} name="pop" volume={0.35} />
+        {STEPS.map((_, i) => (
+          <SfxAt key={i} at={12 + i * 5} name="pop" volume={0.3} />
         ))}
       </Beat>
 
       <Beat from={b1}>
-        <StepPanel n={1} title="Entra al sitio" items={["Desde tu celular", "O tu computadora"]} itemTimes={[phoneAt - b1, phoneAt - b1 + 12]} />
-        <div style={{ position: "absolute", left: BX, top: BY, ...browserIn(frame, b1) }}>
-          <BrowserFrame url={typed(brand.url, frame, typeStart, 20)} showCaret={frame < loaded} width={BW} height={BH}>
-            {frame >= loaded ? (
-              <SiteHome reveal={interpolate(frame, [loaded, loaded + 10], [0, 1], clamp)} />
-            ) : (
-              <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: theme.muted, fontFamily: theme.ui, fontSize: 26 }}>
-                Escribe la dirección…
-              </div>
-            )}
-            {frame >= loaded && frame < loaded + 10 && (
-              <div style={{ position: "absolute", left: 0, top: 0, height: 4, width: `${((frame - loaded) / 10) * 100}%`, background: theme.accent }} />
-            )}
-          </BrowserFrame>
-        </div>
-        <Phone at={phoneAt - b1} />
+        <StepPanel n={1} items={["Nombre y correo", "Teléfono / WhatsApp", "Código de 6 dígitos"]} itemTimes={[f.name - b1, f.phone - b1, codeAt - b1]} />
+      </Beat>
+      <Beat from={b1} fade={1}>
+        <Browser url={brand.url} start={0}>
+          <SiteHeader />
+          <HeroRegister values={values} active={active} pressed={frame >= clickAt && frame < clickAt + 5} />
+          <div style={{ position: "absolute", inset: 0, background: `rgba(15,23,42,${0.45 * verify})` }} />
+          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", opacity: verify, transform: `translateY(${(1 - verify) * 60}px)` }}>
+            <VerifyCode code={code} done={done} />
+          </div>
+        </Browser>
+      </Beat>
+      <Cursor
+        points={[
+          { f: b1 + 16, x: 1500, y: 900 },
+          { f: f.name - 4, x: BX + 460, y: CY + 330 },
+          { f: f.email - 4, x: BX + 790, y: CY + 330 },
+          { f: f.phone - 4, x: BX + 480, y: CY + 410 },
+          { f: pass - 2, x: BX + 790, y: CY + 410 },
+          { f: clickAt - 6, x: BX + 625, y: CY + 480 },
+          { f: clickAt, x: BX + 627, y: CY + 482, click: true },
+          { f: clickAt + 30, x: BX + 900, y: CY + 640 },
+        ]}
+      />
+      {[f.name, f.email, f.phone].map((t, i) => (
+        <Typing key={i} at={t} frames={18} volume={0.18} />
+      ))}
+      <SfxAt at={clickAt} name="click" volume={0.5} />
+      <Typing at={clickAt + 16} frames={12} volume={0.2} />
+      <SfxAt at={clickAt + 30} name="ding" volume={0.35} />
+      <Beat from={b1}>
         <Illustrative />
-        <Typing at={typeStart - b1} frames={typeFrames} />
-        <SfxAt at={loaded - b1} name="click" volume={0.5} />
       </Beat>
     </AbsoluteFill>
   );
 };
 
-const Phone: React.FC<{ at: number }> = ({ at }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const p = pop(frame, fps, at, 13);
-  return (
-    <div
-      style={{
-        position: "absolute",
-        left: 1560,
-        top: 300,
-        width: 290,
-        height: 580,
-        borderRadius: 44,
-        background: "#05080F",
-        border: "8px solid #1E293B",
-        boxShadow: "0 40px 90px rgba(0,0,0,0.7)",
-        overflow: "hidden",
-        opacity: Math.min(1, p * 1.5),
-        transform: `translateY(${(1 - p) * 300}px) rotate(${(1 - p) * 10 + 4}deg)`,
-      }}
-    >
-      <div style={{ height: 50, display: "flex", alignItems: "center", justifyContent: "center", borderBottom: `1px solid ${theme.line}` }}>
-        <Logo size={18} />
-      </div>
-      <div style={{ padding: 16 }}>
-        <div style={{ fontFamily: theme.display, fontWeight: 900, fontSize: 21, color: theme.text, lineHeight: 1.1 }}>{brand.heroTitle}</div>
-        <div style={{ marginTop: 12, height: 38, borderRadius: 10, background: "#0E1729", border: `1px solid ${theme.line}`, display: "flex", alignItems: "center", gap: 8, padding: "0 10px", color: theme.muted, fontFamily: theme.ui, fontSize: 13 }}>
-          <Icon name="search" size={16} color={theme.muted} /> Marca, modelo o año…
-        </div>
-        {inventory.slice(1, 3).map((l, i) => (
-          <div key={i} style={{ marginTop: 12, borderRadius: 12, overflow: "hidden", border: `1px solid ${theme.line}` }}>
-            <CarThumb l={l} height={100} carWidth={190} />
-            <div style={{ padding: "6px 10px", fontFamily: theme.ui, fontSize: 13, fontWeight: 700, color: theme.text, background: theme.panel }}>
-              {l.year} {l.make} {l.model}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// ---------------------------------------------------------------- PASO 2
-const FIELD_W = 235;
-const fieldX = (i: number) => BX + 30 + i * (FIELD_W + 16) + FIELD_W / 2;
-const FIELD_Y = CY + 150;
-
+// ---------------------------------------------------------------- PASO 2 · Selecciona un vehículo
+const ROWS_Y = 252; // inicio (contenido) de las filas del catálogo
 export const Step2: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const tSearch = phraseAt(scene, "busca tu vehículo");
   const tMake = phraseAt(scene, "marca");
   const tModel = phraseAt(scene, "modelo");
   const tYear = phraseAt(scene, "año");
-  const tBudget = phraseAt(scene, "tu presupuesto");
-  const tSearch = phraseAt(scene, "En segundos") - 4;
-  const fields: { label: string; value: string; at: number }[] = [
-    { label: "Marca", value: "Toyota", at: tMake },
-    { label: "Modelo", value: "RAV4", at: tModel },
-    { label: "Año", value: "2019 – 2023", at: tYear },
-    { label: "Presupuesto", value: "Hasta $18,000", at: tBudget },
+  const tGo = phraseAt(scene, "lote o VIN");
+  const tOpen = phraseAt(scene, "Abre la ficha");
+  const focusAt: [DetailFocus, number][] = [
+    ["photos", phraseAt(scene, "las fotos")],
+    ["damage", phraseAt(scene, "los daños")],
+    ["odometer", phraseAt(scene, "el odómetro")],
+    ["title", phraseAt(scene, "el título")],
   ];
-  const searched = frame >= tSearch + 4;
-  const list = searched ? filtered : inventory;
-  const listStart = searched ? tSearch + 6 : 0;
-  const active = fields.findIndex((f, i) => frame >= f.at && frame < (fields[i + 1]?.at ?? tSearch));
-
-  const count = searched ? Math.round(interpolate(frame, [tSearch + 4, tSearch + 20], [2431, 48], clamp)) : 2431;
+  const focus = focusAt.reduce<DetailFocus>((acc, [k, t]) => (frame >= t ? k : acc), "none");
+  const showResults = frame >= tGo + 6;
+  const detail = ease(frame, tOpen + 2, tOpen + 14);
+  const viewBtn = { x: BX + 30 + 1190 - 12 - 190 + 44, y: CY + ROWS_Y + 184 - 12 - 17 };
 
   return (
     <AbsoluteFill>
-      <StepPanel n={2} title="Filtra tu búsqueda" items={["Marca y modelo", "Año", "Tu presupuesto"]} itemTimes={[tMake, tYear, tBudget]} />
-      <div style={{ position: "absolute", left: BX, top: BY, ...browserIn(frame, 0) }}>
-        <BrowserFrame url={`${brand.url}/inventario`} width={BW} height={BH}>
-          <SiteHeader />
-          <div style={{ display: "flex", gap: 16, padding: "22px 30px", alignItems: "flex-end", borderBottom: `1px solid ${theme.line}` }}>
-            {fields.map((f, i) => (
-              <Field key={f.label} label={f.label} value={frame >= f.at + 6 ? f.value : ""} active={i === active} width={FIELD_W} />
-            ))}
-            <div
-              style={{
-                width: 170,
-                height: 52,
-                borderRadius: 12,
-                background: theme.accent,
-                color: "white",
-                fontFamily: theme.ui,
-                fontWeight: 800,
-                fontSize: 21,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 8,
-              }}
-            >
-              <Icon name="search" size={22} color="white" stroke={3} /> Buscar
-            </div>
+      <StepPanel n={2} items={["Marca, modelo o año", "Lote o VIN", "Fotos y daños", "Odómetro y título"]} itemTimes={[tMake, tGo, focusAt[0][1], focusAt[2][1]]} />
+      <Browser url={`${brand.url}/#catalogo`}>
+        <SiteHeader loggedIn />
+        <FilterCard
+          search={typed("Toyota RAV4", frame, tSearch, 22)}
+          searchActive={frame >= tSearch && frame < tMake}
+          make={frame >= tMake + 4 ? "Toyota" : ""}
+          model={frame >= tModel + 4 ? "RAV4" : ""}
+          yearMin={frame >= tYear + 4 ? "2019" : ""}
+          pressed={frame >= tGo && frame < tGo + 5}
+        />
+        <div style={{ position: "absolute", left: 30, right: 30, top: ROWS_Y, display: "flex", flexDirection: "column", gap: 12 }}>
+          {listings.slice(0, 2).map((l, i) => {
+            const p = pop(frame, fps, tGo + 6 + i * 4, 16);
+            return (
+              <div key={l.lot} style={{ opacity: showResults ? Math.min(1, p * 1.3) : 0, transform: `translateY(${showResults ? (1 - p) * 40 : 40}px)` }}>
+                <ListingRow l={l} highlight={i === 0 && frame > tOpen - 16} pressView={i === 0 && frame >= tOpen - 2 && frame < tOpen + 4} />
+              </div>
+            );
+          })}
+        </div>
+        {detail > 0 && (
+          <div style={{ position: "absolute", inset: 0, opacity: detail, transform: `scale(${0.96 + 0.04 * detail})` }}>
+            <DetailModal l={listings[0]}>
+              <DetailTop l={listings[0]} focus={focus} />
+              <div style={{ height: 16 }} />
+              <Calculator bid={8500} bidText="" rowsVisible={0} total={0} showTotal={0} inputActive={false} />
+            </DetailModal>
           </div>
-          <div style={{ padding: "16px 30px 0", fontFamily: theme.ui, fontSize: 20, color: theme.muted }}>
-            <span style={{ color: theme.text, fontWeight: 800 }}>{count.toLocaleString("en-US")}</span> vehículos encontrados
-            {searched && <span style={{ marginLeft: 16, color: theme.accent2, fontWeight: 700 }}>· Toyota RAV4 · 2019–2023 · ≤ $18,000</span>}
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, padding: "16px 30px" }}>
-            {list.map((l, i) => (
-              <ListingCard key={`${searched}-${i}`} l={l} appear={pop(frame, fps, listStart + i * 3, 16)} />
-            ))}
-          </div>
-        </BrowserFrame>
-      </div>
+        )}
+      </Browser>
       <Cursor
         points={[
-          { f: 6, x: 1200, y: 700 },
-          ...fields.flatMap((f, i) => [
-            { f: f.at - 8, x: fieldX(i), y: FIELD_Y },
-            { f: f.at, x: fieldX(i) + 2, y: FIELD_Y + 2, click: true },
-          ]),
-          { f: tSearch - 8, x: BX + 30 + 4 * (FIELD_W + 16) + 85, y: FIELD_Y },
-          { f: tSearch, x: BX + 30 + 4 * (FIELD_W + 16) + 87, y: FIELD_Y + 2, click: true },
-          { f: tSearch + 40, x: BX + 640, y: CY + 480 },
+          { f: 4, x: 1500, y: 950 },
+          { f: tSearch - 4, x: BX + 400, y: CY + 115 },
+          { f: tMake - 4, x: BX + 150, y: CY + 186, click: true },
+          { f: tModel - 2, x: BX + 350, y: CY + 186, click: true },
+          { f: tYear - 2, x: BX + 750, y: CY + 186, click: true },
+          { f: tGo - 4, x: BX + 1160, y: CY + 186 },
+          { f: tGo, x: BX + 1162, y: CY + 188, click: true },
+          { f: tOpen - 6, x: viewBtn.x, y: viewBtn.y },
+          { f: tOpen, x: viewBtn.x + 2, y: viewBtn.y + 2, click: true },
+          { f: tOpen + 40, x: BX + 1000, y: CY + 620 },
         ]}
       />
-      {fields.map((f) => (
-        <SfxAt key={f.label} at={f.at} name="click" volume={0.5} />
+      <Typing at={tSearch} frames={14} volume={0.2} />
+      {[tMake, tModel, tYear, tGo, tOpen].map((t, i) => (
+        <SfxAt key={i} at={t} name="click" volume={0.45} />
       ))}
-      <SfxAt at={tSearch} name="click" volume={0.5} />
-      <SfxAt at={tSearch + 6} name="whoosh" volume={0.2} />
+      <SfxAt at={tGo + 6} name="whoosh" volume={0.2} />
+      {focusAt.map(([k, t]) => (
+        <SfxAt key={k} at={t} name="pop" volume={0.3} />
+      ))}
       <Illustrative />
     </AbsoluteFill>
   );
 };
 
-// ---------------------------------------------------------------- PASO 3
+// ---------------------------------------------------------------- PASO 3 · Calcula tu presupuesto
 export const Step3: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const open = phraseAt(scene, "abre la ficha");
-  const rowsAt = [
-    phraseAt(scene, "millaje"),
-    phraseAt(scene, "tipo de título"),
-    phraseAt(scene, "daños reportados"),
-    phraseAt(scene, "fecha de subasta"),
-  ];
-  const photosAt = phraseAt(scene, "fotos");
-  const helpAt = phraseAt(scene, "¿Algo no está claro?");
-  const row = rowsAt.reduce((acc, t, i) => (frame >= t ? i : acc), -1);
-  const l = filtered[0];
-  const bubble = pop(frame, fps, helpAt, 13);
-  const photoFocus = frame >= photosAt && frame < rowsAt[0];
+  const tCalc = phraseAt(scene, "calcula tu presupuesto");
+  const tType = phraseAt(scene, "Escribe tu tope");
+  const tRows = phraseAt(scene, "y ve el total");
+  const tBefore = phraseAt(scene, "antes de ofertar");
+  const bid = 8500;
+  const rows = feeRows(bid);
+  const totalValue = rows.reduce((a, [, v]) => a + v, 0);
+  const rowsVisible = Math.max(0, Math.min(rows.length, Math.floor((frame - tRows) / 4) + 1));
+  const totalAt = tRows + rows.length * 4;
+  const total = interpolate(frame, [totalAt, totalAt + 20], [0, totalValue], clamp);
+  const scroll = ease(frame, tCalc - 6, tCalc + 16);
+  const bidText = typed("8,500", frame, tType + 6, 14);
 
   return (
     <AbsoluteFill>
-      <StepPanel n={3} title="Revisa la ficha" items={["Fotos", "Millaje y título", "Daños reportados", "Fecha de subasta"]} itemTimes={[photosAt, rowsAt[0], rowsAt[2], rowsAt[3]]} />
-      <div style={{ position: "absolute", left: BX, top: BY, ...browserIn(frame, 0) }}>
-        <BrowserFrame url={`${brand.url}/vehiculo/48213`} width={BW} height={BH}>
-          {frame < open + 6 ? (
-            <>
-              <SiteHeader />
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, padding: "30px" }}>
-                {filtered.map((x, i) => (
-                  <ListingCard key={i} l={x} appear={1} highlight={i === 0 && frame > open - 10} />
-                ))}
-              </div>
-            </>
-          ) : (
-            <div style={{ position: "absolute", inset: 0 }}>
-              <DetailPage l={l} rowHighlight={row} photoFocus={photoFocus} />
+      <StepPanel
+        n={3}
+        items={["Escribe tu tope de puja", "Tarifas Copart y APV", "Total estimado a pagar"]}
+        itemTimes={[tType, tRows, totalAt]}
+        extra={
+          <div style={{ ...fadeUp(pop(frame, fps, totalAt + 10), 20), marginTop: 30, padding: "16px 20px", borderRadius: 18, background: "#fff", border: `1px solid ${theme.line}`, boxShadow: theme.shadow }}>
+            <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: "0.1em", color: theme.muted }}>SABES EL TOTAL ANTES DE PUJAR</div>
+            <div style={{ fontSize: 44, fontWeight: 900, letterSpacing: "-0.04em", color: theme.text }}>
+              {`$${Math.round(total).toLocaleString("en-US")}`}
+              <span style={{ fontSize: 22, color: theme.muted, fontWeight: 700 }}> USD</span>
             </div>
-          )}
-        </BrowserFrame>
-      </div>
+          </div>
+        }
+      />
+      <Browser url={`${brand.url}/#catalogo`}>
+        <SiteHeader loggedIn />
+        <DetailModal l={listings[0]}>
+          <div style={{ transform: `translateY(${-scroll * 440}px)` }}>
+            <DetailTop l={listings[0]} focus="none" />
+            <div style={{ height: 16 }} />
+            <Calculator
+              bid={bid}
+              bidText={bidText}
+              rowsVisible={frame >= tRows ? rowsVisible : 0}
+              total={total}
+              showTotal={interpolate(frame, [totalAt, totalAt + 8], [0, 1], clamp)}
+              inputActive={frame >= tType && frame < tRows}
+            />
+          </div>
+        </DetailModal>
+      </Browser>
       <Cursor
         points={[
-          { f: 0, x: 1400, y: 760 },
-          { f: open - 6, x: BX + 200, y: CY + 200 },
-          { f: open, x: BX + 202, y: CY + 202, click: true },
-          { f: open + 30, x: BX + 1150, y: CY + 600 },
+          { f: 4, x: 1500, y: 950 },
+          { f: tType - 2, x: BX + 260, y: CY + 330 },
+          { f: tType + 4, x: BX + 262, y: CY + 332, click: true },
+          { f: tBefore - 4, x: BX + 250, y: CY + 520 },
         ]}
       />
-      <SfxAt at={open} name="click" volume={0.5} />
-      {rowsAt.map((t, i) => (
-        <SfxAt key={i} at={t} name="pop" volume={0.3} />
+      <SfxAt at={tType + 4} name="click" volume={0.45} />
+      <Typing at={tType + 6} frames={10} volume={0.22} />
+      {rows.map((_, i) => (
+        <SfxAt key={i} at={tRows + i * 4} name="pop" volume={0.22} />
       ))}
-      <div
-        style={{
-          position: "absolute",
-          left: 1130,
-          top: 640,
-          opacity: Math.min(1, bubble * 1.4),
-          transform: `translateY(${(1 - bubble) * 60}px) scale(${0.8 + 0.2 * bubble})`,
-          display: "flex",
-          alignItems: "center",
-          gap: 18,
-          padding: "20px 28px",
-          borderRadius: "28px 28px 8px 28px",
-          background: theme.success,
-          boxShadow: `0 20px 60px ${theme.success}55`,
-          fontFamily: theme.display,
-          fontWeight: 800,
-          fontSize: 32,
-          color: "#04130A",
-        }}
-      >
-        <Icon name="headset" size={46} color="#04130A" stroke={2.4} />
-        ¿Dudas? Lo analizamos contigo
-      </div>
-      <SfxAt at={helpAt} name="ding" volume={0.35} />
+      <SfxAt at={totalAt + 20} name="ding" volume={0.35} />
       <Illustrative />
     </AbsoluteFill>
   );
 };
 
-// ---------------------------------------------------------------- PASO 4
-const BTN = { x: BX + 820, y: CY + 490 };
-
+// ---------------------------------------------------------------- PASO 4 · Coloca tu puja máxima
 export const Step4: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const clickAt = phraseAt(scene, "haz clic") + 14;
-  const formAt = clickAt + 6;
-  const tName = phraseAt(scene, "nombre");
-  const tWa = phraseAt(scene, "WhatsApp");
-  const tBudget = phraseAt(scene, "presupuesto y");
-  const tWhen = phraseAt(scene, "cuándo quieres");
-  const submitAt = tWhen + 26;
-  const form = ease(frame, formAt, formAt + 14);
-  const success = pop(frame, fps, submitAt + 6, 12);
-  const l = filtered[0];
-
-  const values = [
-    { label: "Nombre", value: "María González", at: tName },
-    { label: "WhatsApp", value: "+1 (832) 555-0147", at: tWa },
-    { label: "Presupuesto", value: "$18,000", at: tBudget },
-    { label: "¿Cuándo quieres comprar?", value: "En los próximos 30 días", at: tWhen },
-  ];
+  const tTap = phraseAt(scene, "toca «Quiero ofertar»");
+  const clickAt = tTap + 16;
+  const tSet = phraseAt(scene, "establece tu tope");
+  const tCalm = phraseAt(scene, "Tranquilo");
+  const submitAt = scene.voFrames + 4;
+  const modal = ease(frame, clickAt + 2, clickAt + 14);
+  const btn = { x: BX + 24 + 22 + 420 + 16 + 347 + 16 + 125, y: CY + 16 + 16 + 50 + 146 };
 
   return (
     <AbsoluteFill>
-      <StepPanel n={4} title={`Toca «${brand.ctaButton}»`} items={["Nombre", "WhatsApp", "Presupuesto", "¿Cuándo compras?"]} itemTimes={values.map((v) => v.at)} />
-      <div style={{ position: "absolute", left: BX, top: BY, ...browserIn(frame, 0) }}>
-        <BrowserFrame url={`${brand.url}/vehiculo/48213`} width={BW} height={BH}>
-          <DetailPage l={l} rowHighlight={-1} buttonPulse={frame < clickAt ? (Math.sin(frame / 4) + 1) / 2 : 0} />
-          <div style={{ position: "absolute", inset: 0, background: `rgba(3,6,12,${0.7 * form})` }} />
-          <div
-            style={{
-              position: "absolute",
-              left: 330,
-              top: 34,
-              width: 590,
-              padding: "28px 34px",
-              borderRadius: 22,
-              background: theme.panel2,
-              border: `1px solid rgba(255,255,255,0.15)`,
-              boxShadow: "0 30px 80px rgba(0,0,0,0.6)",
-              opacity: form,
-              transform: `translateY(${(1 - form) * 80}px)`,
-            }}
-          >
-            <div style={{ fontFamily: theme.display, fontWeight: 900, fontSize: 30, color: theme.text }}>Solicita asesoría</div>
-            <div style={{ fontFamily: theme.ui, fontSize: 18, color: theme.muted, marginTop: 4, marginBottom: 14 }}>
-              {l.year} {l.make} {l.model} · Lote #48213
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {values.map((v, i) => (
-                <Field
-                  key={v.label}
-                  label={v.label}
-                  value={i === 3 ? (frame >= v.at + 6 ? v.value : "") : typed(v.value, frame, v.at, 34)}
-                  active={frame >= v.at && frame < (values[i + 1]?.at ?? submitAt)}
-                  placeholder="Selecciona…"
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                marginTop: 18,
-                height: 58,
-                borderRadius: 14,
-                background: frame >= submitAt ? theme.success : theme.accent,
-                color: "white",
-                fontFamily: theme.ui,
-                fontWeight: 800,
-                fontSize: 22,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 10,
-              }}
-            >
-              {frame >= submitAt ? (
-                <>
-                  <Icon name="check" size={26} color="white" stroke={3} /> Enviado
-                </>
-              ) : (
-                "Enviar"
-              )}
-            </div>
-          </div>
-        </BrowserFrame>
-      </div>
+      <StepPanel n={4} items={["Toca «Quiero ofertar»", "Escribe tu tope de oferta", "Sin cargos automáticos"]} itemTimes={[tTap, tSet, tCalm]} />
+      <Browser url={`${brand.url}/#catalogo`}>
+        <SiteHeader loggedIn />
+        <DetailModal l={listings[0]}>
+          <DetailTop l={listings[0]} focus="none" bidPulse={frame < clickAt ? (Math.sin(frame / 4) + 1) / 2 : 0} pressBid={frame >= clickAt && frame < clickAt + 5} />
+        </DetailModal>
+        <div style={{ position: "absolute", inset: 0, background: `rgba(15,23,42,${0.35 * modal})` }} />
+        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", opacity: modal, transform: `translateY(${(1 - modal) * 70}px)` }}>
+          <BidModal l={listings[0]} value={typed("8,500", frame, tSet + 8, 14)} active={frame >= tSet && frame < submitAt} pressed={frame >= submitAt && frame < submitAt + 6} />
+        </div>
+      </Browser>
+      <Callout at={tCalm} icon="shield" text="No se realiza ningún cargo automático" x={1080} y={BY + 40} />
       <Cursor
         points={[
-          { f: 0, x: 1300, y: 900 },
-          { f: clickAt - 8, x: BTN.x, y: BTN.y },
-          { f: clickAt, x: BTN.x + 2, y: BTN.y + 2, click: true },
-          { f: submitAt - 10, x: BX + 625, y: CY + 610 },
-          { f: submitAt, x: BX + 627, y: CY + 612, click: true },
+          { f: 4, x: 1500, y: 950 },
+          { f: clickAt - 8, x: btn.x, y: btn.y },
+          { f: clickAt, x: btn.x + 2, y: btn.y + 2, click: true },
+          { f: tSet + 2, x: BX + 600, y: CY + 390 },
+          { f: submitAt - 8, x: BX + 780, y: CY + 490 },
+          { f: submitAt, x: BX + 782, y: CY + 492, click: true },
         ]}
       />
       <SfxAt at={clickAt} name="click" volume={0.5} />
-      {values.slice(0, 3).map((v) => (
-        <Typing key={v.label} at={v.at} frames={Math.ceil((v.value.length / 34) * 30)} volume={0.2} />
-      ))}
-      <SfxAt at={tWhen + 6} name="click" volume={0.4} />
+      <Typing at={tSet + 8} frames={10} volume={0.22} />
+      <SfxAt at={tCalm} name="pop" volume={0.4} />
       <SfxAt at={submitAt} name="click" volume={0.5} />
-      <SfxAt at={submitAt + 6} name="ding" volume={0.45} />
+      <Illustrative />
+    </AbsoluteFill>
+  );
+};
+
+// ---------------------------------------------------------------- PASO 5 · Confirma con un asesor
+export const Step5: React.FC<{ scene: TimedScene }> = ({ scene }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const tChat = phraseAt(scene, "Continúas en el chat");
+  const tReview = phraseAt(scene, "revisamos contigo");
+  const tConfirm = phraseAt(scene, "la confirmamos");
+  const panel = ease(frame, 0, 16);
+  const s = (at: number) => pop(frame, fps, at, 14);
+  const status = frame < tChat ? "Tu solicitud está lista." : frame < tChat + 18 ? "Conectando con el chat de APV Motors…" : "Conversación · Tope solicitado: $8,500";
+  const confirm = pop(frame, fps, tConfirm + 6, 11);
+
+  return (
+    <AbsoluteFill>
+      <StepPanel n={5} items={["Chat de APV Motors", "Revisamos tu solicitud", "Confirmamos tu puja"]} itemTimes={[tChat, tReview, tConfirm]} />
+      <Browser url={`${brand.url}/#catalogo`}>
+        <SiteHeader loggedIn />
+        <DetailModal l={listings[0]}>
+          <DetailTop l={listings[0]} focus="none" />
+        </DetailModal>
+        <div style={{ position: "absolute", inset: 0, background: `rgba(15,23,42,${0.4 * panel})` }} />
+        <div style={{ position: "absolute", right: 40, top: 30, opacity: panel, transform: `translateX(${(1 - panel) * 120}px)` }}>
+          <AdvisorChat
+            status={status}
+            typing={frame >= tChat + 26 && frame < tReview}
+            msgs={[
+              { from: "me", text: "Hola, quiero ofertar por el 2021 TOYOTA RAV4 XLE.\nLote 47392215 · Tope solicitado: $8,500", show: s(tChat + 14) },
+              ...(frame >= tReview
+                ? [{ from: "advisor" as const, text: "¡Hola María! Soy tu asesor de APV Motors. Revisamos contigo el vehículo y las tarifas, y confirmamos tu solicitud de puja.", show: s(tReview) }]
+                : []),
+            ]}
+          />
+        </div>
+      </Browser>
       <div
         style={{
           position: "absolute",
-          left: 1060,
-          top: 40,
-          ...popIn(success),
+          left: BX + 90,
+          top: BY + 470,
+          ...popIn(confirm),
           display: "flex",
           alignItems: "center",
-          gap: 18,
-          padding: "22px 30px",
-          borderRadius: 22,
+          gap: 16,
+          padding: "18px 28px",
+          borderRadius: 20,
           background: theme.success,
-          boxShadow: `0 20px 60px ${theme.success}66`,
-          fontFamily: theme.display,
-          fontWeight: 800,
+          boxShadow: `0 20px 50px ${theme.success}66`,
+          fontFamily: theme.ui,
+          fontWeight: 900,
           fontSize: 30,
-          color: "#04130A",
+          color: "#fff",
         }}
       >
-        <IconBadge name="check" color="#04130A" size={60} />
-        ¡Listo! Un asesor te contactará
+        <Icon name="check" size={38} color="#fff" stroke={3} /> Solicitud de puja confirmada
       </div>
+      <SfxAt at={tChat + 14} name="pop" volume={0.35} />
+      <SfxAt at={tReview} name="pop" volume={0.4} />
+      <SfxAt at={tConfirm + 6} name="ding" volume={0.45} />
       <Illustrative />
     </AbsoluteFill>
   );

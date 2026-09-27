@@ -5,8 +5,8 @@ califica al prospecto y cierra indicando que **un asesor lo atenderá y lo guiar
 
 | Entregable | Herramienta | Formato | Archivo |
 |---|---|---|---|
-| VSL completo (~1:58) | Remotion | 1920×1080 · 30 fps | `out/cars-vsl.mp4` |
-| Teaser vertical (19 s) | HyperFrames | 1080×1920 · 30 fps | `out/cars-teaser-hyperframes.mp4` |
+| VSL completo (~2:09) | Remotion | 1920×1080 · 30 fps | `out/cars-vsl.mp4` |
+| Teaser vertical (21 s) | HyperFrames | 1080×1920 · 30 fps | `out/cars-teaser-hyperframes.mp4` |
 
 Estrategia, guion y recomendaciones de venta: [`docs/VSL-estrategia.md`](docs/VSL-estrategia.md).
 
@@ -30,9 +30,9 @@ Si Remotion no encuentra Chrome, añade `--browser-executable=<ruta>` (p. ej. el
 Estructura:
 - `src/data/script.json` — guion: texto de subtítulos (`caption`) y texto para la voz (`tts`, con pronunciación fonética de la URL).
 - `src/data/durations.json` — duración de cada locución (generada). El timing de todas las escenas se calcula a partir de aquí.
-- `src/theme.ts` — colores, marca, URL y textos del sitio (botón «Me interesa», titular).
-- `src/scenes/` — `Intro.tsx` (gancho, problema, solución), `Demo.tsx` (4 pasos), `Close.tsx` (valor, calificación, objeción, CTA, asesor).
-- `src/components/` — fondo animado, subtítulos palabra por palabra, navegador y cursor simulados, maqueta del sitio, autos SVG, iconos.
+- `src/theme.ts` — branding de cars.apvmotorusa.com (colores de su CSS, Inter, logo en `public/brand/`).
+- `src/scenes/` — `Intro.tsx` (gancho, problema, solución), `Demo.tsx` (los 5 pasos reales del sitio), `Close.tsx` (valor y planes, calificación, objeción, CTA, asesor).
+- `src/components/` — fondo animado, subtítulos palabra por palabra, navegador y cursor, recreación de la UI del sitio (`Site.tsx`: registro, filtros, fichas Copart, calculadora de tarifas, tope de oferta, chat con asesor), autos SVG, iconos.
 
 ### Cambiar la voz o el guion
 ```bash
@@ -55,6 +55,6 @@ npm run hf:render    # → out/cars-teaser-hyperframes.mp4
 Composición: `hyperframes/cars-teaser/index.html` (HTML + GSAP; locución generada con `hyperframes tts`).
 
 ## Nota
-La interfaz del sitio que aparece en el video es una **maqueta ilustrativa** (el sitio no era accesible
-desde el entorno donde se produjo). Ajusta textos/colores en `src/theme.ts` y `src/components/Site.tsx`
-para que coincidan exactamente con cars.apvmotorusa.com.
+La interfaz que aparece en el video es una **recreación fiel** de cars.apvmotorusa.com (mismos textos,
+colores, tipografía, logo y flujo de compra). Los vehículos, lotes y montos son ilustrativos; el cálculo
+de tarifas usa las mismas tablas que la calculadora del sitio.
