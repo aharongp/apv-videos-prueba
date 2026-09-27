@@ -1,0 +1,82 @@
+{
+  "voice": "ef_dora",
+  "speed": 1.05,
+  "padSeconds": 0.45,
+  "endHoldSeconds": 3,
+  "scenes": [
+    {
+      "id": "hook",
+      "stage": "Gancho",
+      "caption": "Lo que el dealer no te dice: muchos de los carros de su lote salieron de una subasta. Y el precio que tú pagas incluye su ganancia. Hoy vas a ver cómo tú también puedes comprar ahí.",
+      "tts": "Lo que el díler no te dice: muchos de los carros de su lote salieron de una subasta. Y el precio que tú pagas incluye su ganancia. Hoy vas a ver cómo tú también puedes comprar ahí.",
+      "holdSeconds": 0.4
+    },
+    {
+      "id": "problem",
+      "stage": "Problema",
+      "caption": "El problema: comprar en subasta por tu cuenta da miedo. Daños ocultos, títulos complicados, tarifas que no entiendes y reglas que cambian de una subasta a otra. Un error, y el buen negocio te sale caro.",
+      "tts": "El problema: comprar en subasta por tu cuenta da miedo. Daños ocultos, títulos complicados, tarifas que no entiendes, y reglas que cambian de una subasta a otra. Un error, y el buen negocio te sale caro."
+    },
+    {
+      "id": "solution",
+      "stage": "Solución",
+      "caption": "Por eso existe cars.apvmotorusa.com: vehículos de subastas de todo Estados Unidos, y un equipo experto que hace el trabajo difícil por ti.",
+      "tts": "Por eso existe cars, punto, A P V motor U S A, punto com. Vehículos de subastas de todo Estados Unidos, y un equipo experto que hace el trabajo difícil por ti."
+    },
+    {
+      "id": "step1",
+      "stage": "Paso 1",
+      "caption": "Te muestro cómo usarla en 4 pasos. Paso 1: entra a cars.apvmotorusa.com desde tu celular o tu computadora.",
+      "tts": "Te muestro cómo usarla en cuatro pasos. Paso uno: entra a cars, punto, A P V motor U S A, punto com, desde tu celular o tu computadora."
+    },
+    {
+      "id": "step2",
+      "stage": "Paso 2",
+      "caption": "Paso 2: usa los filtros. Elige marca, modelo, año y tu presupuesto. En segundos ves solo los carros que de verdad te interesan.",
+      "tts": "Paso dos: usa los filtros. Elige marca, modelo, año, y tu presupuesto. En segundos ves solo los carros que de verdad te interesan."
+    },
+    {
+      "id": "step3",
+      "stage": "Paso 3",
+      "caption": "Paso 3: abre la ficha del vehículo. Revisa fotos, millaje, tipo de título, daños reportados y fecha de subasta. ¿Algo no está claro? Lo analizamos contigo.",
+      "tts": "Paso tres: abre la ficha del vehículo. Revisa las fotos, el millaje, el tipo de título, los daños reportados, y la fecha de la subasta. ¿Algo no está claro? Lo analizamos contigo."
+    },
+    {
+      "id": "step4",
+      "stage": "Paso 4",
+      "caption": "Paso 4: haz clic en «Me interesa» y deja tus datos: nombre, WhatsApp, presupuesto y cuándo quieres comprar.",
+      "tts": "Paso cuatro: haz clic en, me interesa, y deja tus datos: tu nombre, tu guatsap, tu presupuesto, y cuándo quieres comprar.",
+      "holdSeconds": 1.4
+    },
+    {
+      "id": "value",
+      "stage": "Acompañamiento",
+      "caption": "Desde ahí no estás solo: revisamos el historial, calculamos el costo total con tarifas antes de pujar, manejamos pago y documentos, y coordinamos la entrega.",
+      "tts": "Desde ahí, no estás solo. Revisamos el historial del vehículo, calculamos el costo total con tarifas incluidas antes de pujar, manejamos el pago y los documentos, y coordinamos la entrega."
+    },
+    {
+      "id": "qualify",
+      "stage": "¿Es para ti?",
+      "caption": "Seamos honestos: esto no es para todo el mundo. Es para ti si tienes tu presupuesto listo, piensas comprar en los próximos 30 a 60 días y quieres el precio justo con alguien de confianza a tu lado. Si solo estás curioseando, este no es el momento.",
+      "tts": "Seamos honestos: esto no es para todo el mundo. Es para ti si tienes tu presupuesto listo, piensas comprar en los próximos treinta a sesenta días, y quieres pagar el precio justo con alguien de confianza a tu lado. Si solo estás curioseando, este no es el momento."
+    },
+    {
+      "id": "objection",
+      "stage": "Objeción",
+      "caption": "¿Nunca has comprado en subasta? No necesitas experiencia. Para eso está tu asesor.",
+      "tts": "¿Nunca has comprado en subasta? No necesitas experiencia. Para eso está tu asesor."
+    },
+    {
+      "id": "cta",
+      "stage": "Acción",
+      "caption": "Las subastas se mueven cada semana: el carro que te gusta hoy puede venderse mañana. Entra ahora a cars.apvmotorusa.com, elige tu vehículo y deja tus datos.",
+      "tts": "Las subastas se mueven cada semana: el carro que te gusta hoy, puede venderse mañana. Entra ahora a cars, punto, A P V motor U S A, punto com, elige tu vehículo, y deja tus datos."
+    },
+    {
+      "id": "advisor",
+      "stage": "Asesor",
+      "caption": "Un asesor de APV Motors te atenderá personalmente y te guiará paso a paso en tu compra.",
+      "tts": "Un asesor de A P V Motors te atenderá personalmente, y te guiará paso a paso en tu compra."
+    }
+  ]
+}

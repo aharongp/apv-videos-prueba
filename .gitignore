@@ -1,0 +1,7 @@
+node_modules/
+.venv/
+out/stills/
+out/*.png
+hyperframes/**/.thumbnails/
+hyperframes/**/renders/
+.DS_Store
