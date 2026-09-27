@@ -4,8 +4,8 @@
 confíe en APV Motors para comprar en subastas de Copart y **cree su cuenta ya calificado**, sabiendo
 que **lo atenderá un asesor que lo guiará en su compra**.
 
-- Formato principal: 16:9, 1920×1080, 30 fps, ~2:09 → `out/cars-vsl.mp4` (Remotion)
-- Formato corto: 9:16, 1080×1920, 21 s → `out/cars-teaser-hyperframes.mp4` (HyperFrames), para Reels/TikTok/Stories.
+- Formato principal: 16:9, 1920×1080, 30 fps, ~2:30 → `out/cars-vsl.mp4` (Remotion)
+- Formato corto: 9:16, 1080×1920, 25 s → `out/cars-teaser-hyperframes.mp4` (HyperFrames), para Reels/TikTok/Stories.
 
 ## Branding (tomado del sitio real)
 | Elemento | Valor en cars.apvmotorusa.com | Uso en el video |
@@ -43,7 +43,7 @@ micro-compromisos, calificación dentro del video, urgencia honesta (sin cifras 
 aviso «Recreación de cars.apvmotorusa.com · vehículos y montos ilustrativos».
 
 ## Guion de locución
-> Voz: Kokoro `ef_dora` (TTS local de HyperFrames). Para una versión profesional, grabar con locutor usando este texto (ver README).
+> Voz: ElevenLabs · *Pedro Alejandro | Latin Voiceover* (español latino, `eleven_multilingual_v2`). La URL se locuta como "cars punto a-pe-be motor usa punto com".
 
 1. **Gancho** — Lo que el dealer no te dice: muchos de los carros de su lote salieron de una subasta. Y el precio que tú pagas incluye su ganancia. Hoy vas a ver cómo tú también puedes comprar ahí, sin licencia de dealer.
 2. **Problema** — El problema: comprar en subasta por tu cuenta da miedo. Daños ocultos, títulos complicados, tarifas que no entiendes y reglas que cambian de una subasta a otra. Un error, y el buen negocio te sale caro.

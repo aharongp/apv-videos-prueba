@@ -1,6 +1,5 @@
 {
-  "voice": "ef_dora",
-  "speed": 1.05,
+  "voice": "elevenlabs:6SsnyXR5jQuiqQTyhK2q (Pedro Alejandro | Latin Voiceover) · eleven_multilingual_v2",
   "padSeconds": 0.45,
   "endHoldSeconds": 3,
   "scenes": [
@@ -15,59 +14,59 @@
       "id": "problem",
       "stage": "Problema",
       "caption": "El problema: comprar en subasta por tu cuenta da miedo. Daños ocultos, títulos complicados, tarifas que no entiendes y reglas que cambian de una subasta a otra. Un error, y el buen negocio te sale caro.",
-      "tts": "El problema: comprar en subasta por tu cuenta da miedo. Daños ocultos, títulos complicados, tarifas que no entiendes, y reglas que cambian de una subasta a otra. Un error, y el buen negocio te sale caro."
+      "tts": "El problema: comprar en subasta por tu cuenta da miedo. Daños ocultos, títulos complicados, tarifas que no entiendes y reglas que cambian de una subasta a otra. Un error, y el buen negocio te sale caro."
     },
     {
       "id": "solution",
       "stage": "Solución",
       "caption": "Por eso existe cars.apvmotorusa.com: vehículos de subastas de Copart en todo Estados Unidos, 100% online, y un equipo que te acompaña desde la puja hasta la documentación y el traslado.",
-      "tts": "Por eso existe cars, punto, A P V motor U S A, punto com. Vehículos de subastas de Copart en todo Estados Unidos, cien por ciento online, y un equipo que te acompaña desde la puja hasta la documentación y el traslado."
+      "tts": "Por eso existe cars punto a pe be motor usa punto com: vehículos de subastas de Copart en todo Estados Unidos, cien por ciento online, y un equipo que te acompaña desde la puja hasta la documentación y el traslado."
     },
     {
       "id": "step1",
       "stage": "Paso 1",
       "caption": "Te muestro cómo comprar en 5 pasos. Paso 1: crea tu cuenta gratis con tu nombre, correo y WhatsApp. Te llega un código para activarla.",
-      "tts": "Te muestro cómo comprar en cinco pasos. Paso uno: crea tu cuenta gratis con tu nombre, correo, y guatsap. Te llega un código para activarla."
+      "tts": "Te muestro cómo comprar en 5 pasos. Paso 1: crea tu cuenta gratis con tu nombre, correo y WhatsApp. Te llega un código para activarla."
     },
     {
       "id": "step2",
       "stage": "Paso 2",
       "caption": "Paso 2: busca tu vehículo por marca, modelo, año, lote o VIN. Abre la ficha y revisa las fotos, los daños, el odómetro y el título.",
-      "tts": "Paso dos: busca tu vehículo por marca, modelo, año, lote, o V I N. Abre la ficha, y revisa las fotos, los daños, el odómetro, y el título.",
+      "tts": "Paso 2: busca tu vehículo por marca, modelo, año, lote o VIN. Abre la ficha y revisa las fotos, los daños, el odómetro y el título.",
       "holdSeconds": 0.6
     },
     {
       "id": "step3",
       "stage": "Paso 3",
       "caption": "Paso 3: calcula tu presupuesto. Escribe tu tope de puja en la calculadora y ve el total estimado con todas las tarifas, antes de ofertar.",
-      "tts": "Paso tres: calcula tu presupuesto. Escribe tu tope de puja en la calculadora, y ve el total estimado con todas las tarifas, antes de ofertar.",
+      "tts": "Paso 3: calcula tu presupuesto. Escribe tu tope de puja en la calculadora y ve el total estimado con todas las tarifas, antes de ofertar.",
       "holdSeconds": 0.8
     },
     {
       "id": "step4",
       "stage": "Paso 4",
       "caption": "Paso 4: toca «Quiero ofertar» y establece tu tope de oferta. Tranquilo: no se realiza ningún cargo automático.",
-      "tts": "Paso cuatro: toca, quiero ofertar, y establece tu tope de oferta. Tranquilo: no se realiza ningún cargo automático.",
+      "tts": "Paso 4: toca «Quiero ofertar» y establece tu tope de oferta. Tranquilo: no se realiza ningún cargo automático.",
       "holdSeconds": 1.2
     },
     {
       "id": "step5",
       "stage": "Paso 5",
       "caption": "Paso 5: confirma con un asesor. Continúas en el chat de APV, donde revisamos contigo la solicitud y la confirmamos.",
-      "tts": "Paso cinco: confirma con un asesor. Continúas en el chat de A P V, donde revisamos contigo la solicitud, y la confirmamos.",
+      "tts": "Paso 5: confirma con un asesor. Continúas en el chat de a pe be, donde revisamos contigo la solicitud y la confirmamos.",
       "holdSeconds": 1.0
     },
     {
       "id": "value",
       "stage": "Acompañamiento",
       "caption": "Desde ahí no estás solo: te acompañamos en la puja, el pago, la documentación y el traslado. Empiezas gratis, y con APV Plus o Premium sumas descuentos y asesorías.",
-      "tts": "Desde ahí, no estás solo. Te acompañamos en la puja, el pago, la documentación, y el traslado. Empiezas gratis, y con A P V Plus o Premium, sumas descuentos y asesorías."
+      "tts": "Desde ahí no estás solo: te acompañamos en la puja, el pago, la documentación y el traslado. Empiezas gratis, y con a pe be Plus o Premium sumas descuentos y asesorías."
     },
     {
       "id": "qualify",
       "stage": "¿Es para ti?",
       "caption": "Seamos honestos: esto no es para todo el mundo. Es para ti si tienes tu presupuesto listo, piensas comprar en los próximos 30 a 60 días y quieres el precio justo con alguien de confianza a tu lado. Si solo estás curioseando, este no es el momento.",
-      "tts": "Seamos honestos: esto no es para todo el mundo. Es para ti si tienes tu presupuesto listo, piensas comprar en los próximos treinta a sesenta días, y quieres pagar el precio justo con alguien de confianza a tu lado. Si solo estás curioseando, este no es el momento."
+      "tts": "Seamos honestos: esto no es para todo el mundo. Es para ti si tienes tu presupuesto listo, piensas comprar en los próximos 30 a 60 días y quieres el precio justo con alguien de confianza a tu lado. Si solo estás curioseando, este no es el momento."
     },
     {
       "id": "objection",
@@ -79,13 +78,13 @@
       "id": "cta",
       "stage": "Acción",
       "caption": "Las subastas se mueven cada semana: el carro que te gusta hoy puede venderse mañana. Entra ahora a cars.apvmotorusa.com y crea tu cuenta gratis.",
-      "tts": "Las subastas se mueven cada semana: el carro que te gusta hoy, puede venderse mañana. Entra ahora a cars, punto, A P V motor U S A, punto com, y crea tu cuenta gratis."
+      "tts": "Las subastas se mueven cada semana: el carro que te gusta hoy puede venderse mañana. Entra ahora a cars punto a pe be motor usa punto com y crea tu cuenta gratis."
     },
     {
       "id": "advisor",
       "stage": "Asesor",
       "caption": "Un asesor de APV Motors te atenderá personalmente y te guiará paso a paso en tu compra.",
-      "tts": "Un asesor de A P V Motors te atenderá personalmente, y te guiará paso a paso en tu compra."
+      "tts": "Un asesor de a pe be Motors te atenderá personalmente y te guiará paso a paso en tu compra."
     }
   ]
 }

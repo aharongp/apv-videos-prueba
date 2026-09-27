@@ -1,5 +1,6 @@
-// Genera la locución de cada escena con el TTS local de HyperFrames (Kokoro-82M)
-// y escribe src/data/durations.json para que Remotion ajuste el timing.
+// Mide la locución de cada escena (public/audio/vo/<id>.wav) y escribe src/data/durations.json
+// para que Remotion ajuste el timing. La locución final se genera con ElevenLabs (ver README);
+// sin argumentos, este script genera una voz local de respaldo con el TTS de HyperFrames (Kokoro-82M).
 //
 // Requisitos: python con `kokoro-onnx soundfile` (ver README) y
 // HYPERFRAMES_PYTHON apuntando a ese python si no es el del sistema.
@@ -34,7 +35,7 @@ for (const scene of script.scenes) {
   const file = join(outDir, `${scene.id}.wav`);
   if (!probeOnly && (only.length === 0 || only.includes(scene.id))) {
     console.log(`→ ${scene.id}`);
-    execFileSync(hf, ["tts", scene.tts, "-v", script.voice, "-s", String(script.speed), "-o", file], {
+    execFileSync(hf, ["tts", scene.tts, "-v", "ef_dora", "-s", "1.05", "-o", file], {
       stdio: ["ignore", "ignore", "inherit"],
     });
   }

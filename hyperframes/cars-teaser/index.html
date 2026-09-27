@@ -74,64 +74,81 @@
       .bubble { display: inline-block; padding: 22px 30px; border-radius: 10px 30px 30px 30px; background: var(--soft); border: 1px solid var(--line); font-weight: 700; font-size: 38px; line-height: 1.3; }
       .url { margin-top: 60px; padding: 34px 50px; border-radius: 999px; background: linear-gradient(135deg, var(--primary), var(--primary-2)); box-shadow: 0 20px 60px rgba(220, 38, 38, 0.4); font-weight: 900; font-size: 62px; color: #fff; white-space: nowrap; letter-spacing: -0.02em; }
       .sub { margin-top: 50px; font-weight: 700; font-size: 40px; color: var(--slate); line-height: 1.3; }
+      .stamp { position: absolute; top: 20px; right: 40px; padding: 12px 26px; border: 6px solid var(--primary); color: var(--primary); border-radius: 16px; background: rgba(255, 255, 255, 0.94); font-weight: 900; font-size: 44px; letter-spacing: 3px; }
+      .stamp.big { font-size: 64px; top: 46px; right: 40px; }
+      .days { margin-top: 50px; display: flex; gap: 16px; }
+      .day { width: 150px; padding: 26px 0; border-radius: 22px; background: #eff6ff; border: 2px solid #bfdbfe; color: var(--blue); font-weight: 900; font-size: 34px; }
+      .sold { position: relative; margin-top: 50px; width: 900px; padding: 40px; border-radius: 30px; background: #fff; border: 2px solid var(--line); box-shadow: var(--shadow); text-align: left; }
+      .soldtxt { max-width: 440px; font-weight: 900; font-size: 46px; letter-spacing: -0.03em; line-height: 1.15; }
+      .soldtxt small { font-weight: 700; font-size: 38px; color: var(--muted); }
+      .url.small { margin-top: 44px; font-size: 48px; padding: 24px 40px; }
       .note { position: absolute; bottom: 70px; left: 0; right: 0; text-align: center; font-weight: 500; font-size: 24px; color: var(--muted); }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="21" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="25.2" data-width="1080" data-height="1920">
       <div class="grid"></div>
 
       <div class="logo" id="logo"><img src="assets/apv-logo-red.png" alt="APV Motors" /></div>
 
       <!-- 1. Gancho -->
-      <section id="s1" class="clip" data-start="0" data-duration="3.1" data-track-index="1">
-        <div class="kicker red" id="s1k" style="border-color: rgba(220, 38, 38, 0.3)">¿Te suena?</div>
+      <section id="s1" class="clip" data-start="0" data-duration="5.35" data-track-index="1">
+        <div class="kicker red" id="s1k" style="border-color: rgba(220, 38, 38, 0.3)">Lo que nadie te cuenta</div>
         <div class="h1" style="margin-top: 40px">
-          <span class="word s1w">¿Sigues</span> <span class="word s1w">pagando</span> <span class="word s1w">precio</span>
-          <span class="word s1w">de</span> <span class="word s1w red">dealer?</span>
+          <span class="word s1w">Lo</span> <span class="word s1w">que</span> <span class="word s1w">el</span> <span class="word s1w red">dealer</span>
+          <span class="word s1w">no</span> <span class="word s1w">te</span> <span class="word s1w">dice</span>
         </div>
-        <div class="tag" id="s1tag">$ PRECIO DEALER<div class="strike" id="s1strike"></div></div>
+        <div style="position: relative; margin-top: 50px">
+          <svg class="car" id="s1car" viewBox="0 0 400 170" style="margin-top: 0">
+            <ellipse cx="200" cy="150" rx="185" ry="10" fill="rgba(15,23,42,0.18)" />
+            <path d="M16 118 L18 70 Q20 50 40 48 L250 46 Q270 48 296 74 L352 82 Q380 88 386 102 L388 118 Z" fill="#334155" />
+            <path d="M34 74 L36 60 Q38 55 46 55 L120 55 L120 76 Z" fill="#0f172a" />
+            <path d="M128 55 L200 55 L200 76 L128 76 Z" fill="#0f172a" />
+            <path d="M208 55 L246 54 Q262 56 282 76 L208 76 Z" fill="#0f172a" />
+            <rect x="372" y="92" width="14" height="7" rx="3" fill="#fde68a" />
+            <circle cx="90" cy="120" r="30" fill="#0f172a" /><circle cx="90" cy="120" r="14" fill="#cbd5e1" />
+            <circle cx="312" cy="120" r="30" fill="#0f172a" /><circle cx="312" cy="120" r="14" fill="#cbd5e1" />
+          </svg>
+          <div class="stamp" id="s1stamp">DE SUBASTA</div>
+        </div>
       </section>
 
-      <!-- 2. Solución -->
-      <section id="s2" class="clip" data-start="3.1" data-duration="3.9" data-track-index="1">
+      <!-- 2. Precio -->
+      <section id="s2" class="clip" data-start="5.35" data-duration="2.6" data-track-index="1">
         <div class="h2">
-          <span class="word s2w">Compra</span> <span class="word s2w">en</span> <span class="word s2w red">subastas</span>
-          <span class="word s2w">de</span> <span class="word s2w">EE.</span> <span class="word s2w">UU.</span>
+          <span class="word s2w">Y</span> <span class="word s2w">tú</span> <span class="word s2w">pagas</span> <span class="word s2w red">su</span>
+          <span class="word s2w red">ganancia</span>
         </div>
+        <div class="tag" id="s2tag">$ PRECIO DEALER<div class="strike" id="s2strike"></div></div>
+      </section>
+
+      <!-- 3. Urgencia -->
+      <section id="s3" class="clip" data-start="7.95" data-duration="5.2" data-track-index="1">
+        <div class="h2">Las subastas se mueven <span class="red">cada semana</span></div>
+        <div class="days" id="days">
+          <div class="day on">LUN</div><div class="day on">MAR</div><div class="day on">MIÉ</div><div class="day on">JUE</div><div class="day on">VIE</div>
+        </div>
+        <div class="sold" id="sold">
+          <div class="soldtxt">El carro que te gusta hoy…<br /><small>…puede venderse mañana</small></div>
+          <div class="stamp big" id="soldstamp">VENDIDO</div>
+        </div>
+      </section>
+
+      <!-- 4. CTA -->
+      <section id="s4" class="clip" data-start="13.15" data-duration="5.5" data-track-index="1">
+        <div class="h1">Entra <span class="red">ahora</span></div>
+        <div class="url" id="s4url">cars.apvmotorusa.com</div>
         <div class="badges">
           <div class="badge copart" id="b1">COPART</div>
           <div class="badge" id="b2">100% online</div>
-          <div class="badge" id="b3" style="color: var(--green)">Sin licencia</div>
         </div>
-        <svg class="car" id="s2car" viewBox="0 0 400 170">
-          <ellipse cx="200" cy="150" rx="185" ry="10" fill="rgba(15,23,42,0.18)" />
-          <path d="M16 118 L18 70 Q20 50 40 48 L250 46 Q270 48 296 74 L352 82 Q380 88 386 102 L388 118 Z" fill="#dc2626" />
-          <path d="M30 100 L380 100" stroke="rgba(255,255,255,0.4)" stroke-width="2" />
-          <path d="M34 74 L36 60 Q38 55 46 55 L120 55 L120 76 Z" fill="#1e293b" />
-          <path d="M128 55 L200 55 L200 76 L128 76 Z" fill="#1e293b" />
-          <path d="M208 55 L246 54 Q262 56 282 76 L208 76 Z" fill="#1e293b" />
-          <rect x="372" y="92" width="14" height="7" rx="3" fill="#fde68a" />
-          <g><circle cx="90" cy="120" r="30" fill="#0f172a" /><circle cx="90" cy="120" r="14" fill="#cbd5e1" /></g>
-          <g><circle cx="312" cy="120" r="30" fill="#0f172a" /><circle cx="312" cy="120" r="14" fill="#cbd5e1" /></g>
-        </svg>
+        <div class="step bid" id="s4free" style="margin-top: 50px"><div class="n">✓</div>Crea tu cuenta gratis</div>
       </section>
 
-      <!-- 3. Cómo se usa (pasos reales del sitio) -->
-      <section id="s3" class="clip" data-start="7" data-duration="4.5" data-track-index="1">
-        <div class="h2">Así de <span class="red">fácil</span></div>
-        <div class="steps">
-          <div class="step" id="st1"><div class="n">1</div>Crea tu cuenta gratis</div>
-          <div class="step" id="st2"><div class="n">2</div>Elige tu vehículo</div>
-          <div class="step" id="st3"><div class="n">3</div>Calcula el total</div>
-          <div class="step bid" id="st4"><div class="n">4</div>Toca «Quiero ofertar»</div>
-        </div>
-      </section>
-
-      <!-- 4. Asesor -->
-      <section id="s4" class="clip" data-start="11.5" data-duration="2.9" data-track-index="1">
-        <div class="h2">Un <span class="green">asesor</span> te guía en toda tu compra</div>
-        <div class="advisor" id="s4card">
+      <!-- 5. Asesor -->
+      <section id="s5" class="clip" data-start="18.65" data-duration="6.55" data-track-index="1">
+        <div class="h2">Un <span class="green">asesor</span> te guía en tu compra</div>
+        <div class="advisor" id="s5card">
           <div class="head">
             <div class="avatar">
               <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -144,20 +161,14 @@
               <div class="online">● Sesión protegida</div>
             </div>
           </div>
-          <div class="body"><div class="bubble" id="s4b">¡Hola! Te acompaño paso a paso en tu compra.</div></div>
+          <div class="body"><div class="bubble" id="s5b">Te atiendo personalmente y te guío paso a paso.</div></div>
         </div>
-      </section>
-
-      <!-- 5. CTA -->
-      <section id="s5" class="clip" data-start="14.4" data-duration="6.6" data-track-index="1">
-        <div class="h1">Entra <span class="red">ya</span></div>
-        <div class="url" id="s5url">cars.apvmotorusa.com</div>
-        <div class="sub" id="s5sub">Crea tu cuenta gratis<br />y un asesor te atenderá.</div>
+        <div class="url small" id="s5url">cars.apvmotorusa.com</div>
         <div class="note">Recreación ilustrativa · Houston, TX</div>
       </section>
 
-      <audio id="vo" src="assets/vo.wav" data-start="0.3" data-duration="17.2" data-track-index="2"></audio>
-      <audio id="bgm" src="assets/music.mp3" data-start="0" data-duration="21" data-volume="0.22" data-fade-out="1.5" data-track-index="3"></audio>
+      <audio id="vo" src="assets/vo.wav" data-start="0.3" data-duration="23.6" data-track-index="2"></audio>
+      <audio id="bgm" src="assets/music.mp3" data-start="0" data-duration="25.2" data-volume="0.2" data-fade-out="1.5" data-track-index="3"></audio>
     </div>
 
     <script>
@@ -165,42 +176,40 @@
       const tl = gsap.timeline({ paused: true });
 
       // Fondo y logo
-      tl.fromTo(".grid", { y: 0 }, { y: 240, duration: 21, ease: "none" }, 0);
+      tl.fromTo(".grid", { y: 0 }, { y: 280, duration: 25.2, ease: "none" }, 0);
       tl.fromTo("#logo", { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1);
 
-      // 1. Gancho
+      // 1. Gancho (0.3 s: "Lo que el díler no te dice" · 2.0 s: "salieron de una subasta")
       tl.fromTo("#s1k", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 0);
-      tl.fromTo(".s1w", { opacity: 0, y: 80, rotation: 6 }, { opacity: 1, y: 0, rotation: 0, duration: 0.45, stagger: 0.12, ease: "back.out(1.8)" }, 0.2);
-      tl.fromTo("#s1tag", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 1.2);
-      tl.fromTo("#s1strike", { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: "power2.in" }, 2.1);
-      tl.to("#s1tag", { rotation: -4, duration: 0.2 }, 2.45);
+      tl.fromTo(".s1w", { opacity: 0, y: 80, rotation: 6 }, { opacity: 1, y: 0, rotation: 0, duration: 0.4, stagger: 0.1, ease: "back.out(1.8)" }, 0.25);
+      tl.fromTo("#s1car", { x: -1200 }, { x: 0, duration: 0.8, ease: "power3.out" }, 1.6);
+      tl.fromTo("#s1stamp", { opacity: 0, scale: 2.4, rotation: -14 }, { opacity: 1, scale: 1, rotation: -14, duration: 0.3, ease: "back.out(2)" }, 4.3);
 
-      // 2. Solución
-      tl.fromTo(".s2w", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: "back.out(1.8)" }, 3.15);
-      tl.fromTo("#b1", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 4.3);
-      tl.fromTo("#b2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 5.4);
-      tl.fromTo("#b3", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 5.9);
-      tl.fromTo("#s2car", { x: -1200 }, { x: 0, duration: 0.9, ease: "power3.out" }, 4.0);
-      tl.to("#s2car", { x: 1300, duration: 0.6, ease: "power2.in" }, 6.4);
+      // 2. Precio (5.4 s: "Y el precio que tú pagas incluye su ganancia")
+      tl.fromTo(".s2w", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.08, ease: "back.out(1.8)" }, 5.4);
+      tl.fromTo("#s2tag", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 5.8);
+      tl.fromTo("#s2strike", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power2.in" }, 6.9);
+      tl.to("#s2tag", { rotation: -4, duration: 0.2 }, 7.2);
 
-      // 3. Pasos (sincronizados con la locución)
-      tl.fromTo("#s3 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 7.0);
-      tl.fromTo("#st1", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 7.15);
-      tl.fromTo("#st2", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 8.3);
-      tl.fromTo("#st3", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 9.2);
-      tl.fromTo("#st4", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 10.1);
-      tl.to("#st4", { scale: 1.05, duration: 0.25, yoyo: true, repeat: 1 }, 10.6);
+      // 3. Urgencia (8.0 s: "Las subastas se mueven cada semana" · 10.5 s: "puede venderse mañana")
+      tl.fromTo("#s3 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 7.95);
+      tl.fromTo(".day", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, stagger: 0.1, ease: "back.out(2)" }, 8.6);
+      tl.fromTo("#sold", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.6)" }, 10.2);
+      tl.fromTo("#soldstamp", { opacity: 0, scale: 2.4, rotation: -14 }, { opacity: 1, scale: 1, rotation: -14, duration: 0.3, ease: "back.out(2)" }, 12.0);
 
-      // 4. Asesor
-      tl.fromTo("#s4 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 11.5);
-      tl.fromTo("#s4card", { opacity: 0, y: 120, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 11.8);
-      tl.fromTo("#s4b", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 12.6);
+      // 4. CTA (13.2 s: "Entra ahora a cars punto a pe be motor usa punto com" · 17.4 s: "crea tu cuenta gratis")
+      tl.fromTo("#s4 .h1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 13.15);
+      tl.fromTo("#s4url", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.8)" }, 13.6);
+      tl.to("#s4url", { scale: 1.05, duration: 0.45, yoyo: true, repeat: 5, ease: "sine.inOut" }, 14.1);
+      tl.fromTo("#b1", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 15.2);
+      tl.fromTo("#b2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 15.5);
+      tl.fromTo("#s4free", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 17.2);
 
-      // 5. CTA
-      tl.fromTo("#s5 .h1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, 14.4);
-      tl.fromTo("#s5url", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.8)" }, 14.8);
-      tl.to("#s5url", { scale: 1.05, duration: 0.5, yoyo: true, repeat: 9, ease: "sine.inOut" }, 15.4);
-      tl.fromTo("#s5sub", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 15.6);
+      // 5. Asesor (18.7 s: "Un asesor de APV Motors te atenderá personalmente y te guiará...")
+      tl.fromTo("#s5 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 18.65);
+      tl.fromTo("#s5card", { opacity: 0, y: 120, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 19.0);
+      tl.fromTo("#s5b", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 20.3);
+      tl.fromTo("#s5url", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.8)" }, 22.8);
 
       window.__timelines["main"] = tl;
       tl.seek(0);
