@@ -1,5 +1,5 @@
 {
-  "voice": "higgsfield:seed_audio · clon de «Anita» (ElevenLabs a3YanFUAyTAWlqxizi4i, es-latin-american)",
+  "voice": "higgsfield:seed_audio · clon de «Valeria – Warm & Expressive» (ElevenLabs WwdAeR5vLd7Sa27ddCLi, es-latin-american, conversational)",
   "padSeconds": 0.45,
   "endHoldSeconds": 3,
   "scenes": [
@@ -84,7 +84,7 @@
       "id": "advisor",
       "stage": "Asesor",
       "caption": "Un asesor de APV Motors te atenderá personalmente y te guiará paso a paso en tu compra.",
-      "tts": "Un asesor de a, pe, be Motors te atenderá personalmente y te guiará paso a paso en tu compra."
+      "tts": "Un asesor de a, pe, be, Motors, te atenderá personalmente, y te guiará paso a paso en tu compra."
     }
   ]
 }

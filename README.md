@@ -5,8 +5,8 @@ califica al prospecto y cierra indicando que **un asesor lo atenderá y lo guiar
 
 | Entregable | Herramienta | Formato | Archivo |
 |---|---|---|---|
-| VSL completo (~2:33) | Remotion | 1920×1080 · 30 fps | `out/cars-vsl.mp4` |
-| Teaser vertical (20 s) | HyperFrames | 1080×1920 · 30 fps | `out/cars-teaser-hyperframes.mp4` |
+| VSL completo (~2:17) | Remotion | 1920×1080 · 30 fps | `out/cars-vsl.mp4` |
+| Teaser vertical (21 s) | HyperFrames | 1080×1920 · 30 fps | `out/cars-teaser-hyperframes.mp4` |
 
 Estrategia, guion y recomendaciones de venta: [`docs/VSL-estrategia.md`](docs/VSL-estrategia.md).
 
@@ -35,11 +35,12 @@ Estructura:
 - `src/components/` — fondo animado, subtítulos palabra por palabra, navegador y cursor, recreación de la UI del sitio (`Site.tsx`: registro, filtros, fichas Copart, calculadora de tarifas, tope de oferta, chat con asesor), autos SVG, iconos.
 
 ### Voz
-La locución final es femenina, carismática y con **acento latinoamericano**: se generó con **Seed Audio**
-(ByteDance) vía Higgsfield clonando la muestra pública de la voz latina **«Anita – Rapid-Fire & Vibrant»**
-de ElevenLabs (`a3YanFUAyTAWlqxizi4i`, `es-latin-american`) como `audio_references`. El clon conserva el
-timbre (F0 ≈ 285 Hz, igual que la original) y la entonación (~13 semitonos de rango); Whisper la reconoce
-como español nativo con 0,98–0,99 de confianza (la voz anterior, Marisol, sonaba con acento inglés: 0,83).
+La locución final es femenina, cálida y **conversacional**, con **acento latinoamericano** neutro: se generó
+con **Seed Audio** (ByteDance) vía Higgsfield clonando la muestra pública de la voz **«Valeria – Warm &
+Expressive»** de ElevenLabs (`WwdAeR5vLd7Sa27ddCLi`, `es-latin-american`, categoría *conversational*) como
+`audio_references`. El clon conserva el timbre de la original (F0 ≈ 211 Hz) y su entonación (~12 semitonos de
+rango); Whisper la reconoce como español nativo (0,99). Antes se probaron Marisol (acento inglés) y «Anita –
+Rapid-Fire» (latina, pero aguda y acelerada: sonaba rústica).
 Los textos enviados están en el campo `tts` de `src/data/script.json`; la URL se escribe
 **"cars punto, a, pe, be, motor usa punto com"** (verificado con Whisper: se entiende "cars.apbmotorusa.com").
 
