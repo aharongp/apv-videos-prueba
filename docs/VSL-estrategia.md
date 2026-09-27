@@ -43,7 +43,7 @@ micro-compromisos, calificación dentro del video, urgencia honesta (sin cifras 
 aviso «Recreación de cars.apvmotorusa.com · vehículos y montos ilustrativos».
 
 ## Guion de locución
-> Voz: femenina, carismática — *Marisol* (Seed Audio vía Higgsfield). La URL se locuta como "cars punto, a-pe-be, motor usa punto com".
+> Voz: femenina, carismática, con acento **latinoamericano** — clon en Seed Audio (Higgsfield) de la voz *Anita* de ElevenLabs (es-latin-american). La URL se locuta como "cars punto, a-pe-be, motor usa punto com".
 
 1. **Gancho** — Lo que el dealer no te dice: muchos de los carros de su lote salieron de una subasta. Y el precio que tú pagas incluye su ganancia. Hoy vas a ver cómo tú también puedes comprar ahí, sin licencia de dealer.
 2. **Problema** — El problema: comprar en subasta por tu cuenta da miedo. Daños ocultos, títulos complicados, tarifas que no entiendes y reglas que cambian de una subasta a otra. Un error, y el buen negocio te sale caro.

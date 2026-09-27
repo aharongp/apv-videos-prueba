@@ -1,5 +1,5 @@
 {
-  "voice": "higgsfield:seed_audio · Marisol (75e72cd5-011b-4130-a474-e8b1ab341f04)",
+  "voice": "higgsfield:seed_audio · clon de «Anita» (ElevenLabs a3YanFUAyTAWlqxizi4i, es-latin-american)",
   "padSeconds": 0.45,
   "endHoldSeconds": 3,
   "scenes": [
@@ -60,7 +60,7 @@
       "id": "value",
       "stage": "Acompañamiento",
       "caption": "Desde ahí no estás solo: te acompañamos en la puja, el pago, la documentación y el traslado. Empiezas gratis, y con APV Plus o Premium sumas descuentos y asesorías.",
-      "tts": "Desde ahí no estás solo: te acompañamos en la puja, el pago, la documentación y el traslado. Empiezas gratis, y con a, pe, be Plus o Premium sumas descuentos y asesorías."
+      "tts": "Desde ahí, ¡no estás solo! Te acompañamos en la puja, el pago, la documentación y el traslado. Empiezas gratis, y con a, pe, be Plus o Premium sumas descuentos y asesorías."
     },
     {
       "id": "qualify",
@@ -78,7 +78,7 @@
       "id": "cta",
       "stage": "Acción",
       "caption": "Las subastas se mueven cada semana: el carro que te gusta hoy puede venderse mañana. Entra ahora a cars.apvmotorusa.com y crea tu cuenta gratis.",
-      "tts": "Las subastas se mueven cada semana: el carro que te gusta hoy puede venderse mañana. Entra ahora a cars punto, a, pe, be, motor usa punto com y crea tu cuenta gratis."
+      "tts": "Las subastas se mueven cada semana: el carro que te gusta hoy puede venderse mañana. ¡Entra ahora a cars punto, a, pe, be, motor usa punto com y crea tu cuenta gratis!"
     },
     {
       "id": "advisor",

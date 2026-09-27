@@ -94,7 +94,7 @@
       </section>
 
       <!-- 2. Solución -->
-      <section id="s2" class="clip" data-start="2.9" data-duration="4.0" data-track-index="1">
+      <section id="s2" class="clip" data-start="2.9" data-duration="3.55" data-track-index="1">
         <div class="h2">
           <span class="word s2w">Compra</span> <span class="word s2w">en</span> <span class="word s2w red">subastas</span>
           <span class="word s2w">de</span> <span class="word s2w">EE.</span> <span class="word s2w">UU.</span>
@@ -118,7 +118,7 @@
       </section>
 
       <!-- 3. Cómo se usa (pasos reales del sitio) -->
-      <section id="s3" class="clip" data-start="7" data-duration="4.5" data-track-index="1">
+      <section id="s3" class="clip" data-start="6.45" data-duration="4.35" data-track-index="1">
         <div class="h2">Así de <span class="red">fácil</span></div>
         <div class="steps">
           <div class="step" id="st1"><div class="n">1</div>Crea tu cuenta gratis</div>
@@ -129,7 +129,7 @@
       </section>
 
       <!-- 4. Asesor -->
-      <section id="s4" class="clip" data-start="11.1" data-duration="2.55" data-track-index="1">
+      <section id="s4" class="clip" data-start="10.8" data-duration="3.1" data-track-index="1">
         <div class="h2">Un <span class="green">asesor</span> te guía en toda tu compra</div>
         <div class="advisor" id="s4card">
           <div class="head">
@@ -149,14 +149,14 @@
       </section>
 
       <!-- 5. CTA -->
-      <section id="s5" class="clip" data-start="13.65" data-duration="5.95" data-track-index="1">
+      <section id="s5" class="clip" data-start="13.9" data-duration="5.7" data-track-index="1">
         <div class="h1">Entra <span class="red">ya</span></div>
         <div class="url" id="s5url">cars.apvmotorusa.com</div>
         <div class="sub" id="s5sub">Crea tu cuenta gratis<br />y un asesor te atenderá.</div>
         <div class="note">Recreación ilustrativa · Houston, TX</div>
       </section>
 
-      <audio id="vo" src="assets/vo.wav" data-start="0.3" data-duration="17.0" data-track-index="2"></audio>
+      <audio id="vo" src="assets/vo.wav" data-start="0.3" data-duration="17.1" data-track-index="2"></audio>
       <audio id="bgm" src="assets/music.mp3" data-start="0" data-duration="19.6" data-volume="0.2" data-fade-out="1.5" data-track-index="3"></audio>
     </div>
 
@@ -177,30 +177,30 @@
 
       // 2. Solución
       tl.fromTo(".s2w", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: "back.out(1.8)" }, 2.95);
-      tl.fromTo("#b1", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 5.0);
-      tl.fromTo("#b2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 5.6);
-      tl.fromTo("#b3", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 6.1);
+      tl.fromTo("#b1", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 5.1);
+      tl.fromTo("#b2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 5.5);
+      tl.fromTo("#b3", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 5.85);
       tl.fromTo("#s2car", { x: -1200 }, { x: 0, duration: 0.9, ease: "power3.out" }, 3.7);
-      tl.to("#s2car", { x: 1300, duration: 0.6, ease: "power2.in" }, 6.3);
+      tl.to("#s2car", { x: 1300, duration: 0.6, ease: "power2.in" }, 5.85);
 
       // 3. Pasos (sincronizados con la locución)
-      tl.fromTo("#s3 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 6.9);
-      tl.fromTo("#st1", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 7.0);
-      tl.fromTo("#st2", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 8.1);
-      tl.fromTo("#st3", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 8.9);
-      tl.fromTo("#st4", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 9.7);
-      tl.to("#st4", { scale: 1.05, duration: 0.25, yoyo: true, repeat: 1 }, 10.2);
+      tl.fromTo("#s3 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 6.45);
+      tl.fromTo("#st1", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 6.5);
+      tl.fromTo("#st2", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 7.65);
+      tl.fromTo("#st3", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 8.45);
+      tl.fromTo("#st4", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 9.35);
+      tl.to("#st4", { scale: 1.05, duration: 0.25, yoyo: true, repeat: 1 }, 9.9);
 
       // 4. Asesor
-      tl.fromTo("#s4 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 11.1);
-      tl.fromTo("#s4card", { opacity: 0, y: 120, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 11.35);
-      tl.fromTo("#s4b", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 12.2);
+      tl.fromTo("#s4 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 10.8);
+      tl.fromTo("#s4card", { opacity: 0, y: 120, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 11.05);
+      tl.fromTo("#s4b", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 11.9);
 
       // 5. CTA
-      tl.fromTo("#s5 .h1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, 13.7);
-      tl.fromTo("#s5url", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.8)" }, 14.2);
-      tl.to("#s5url", { scale: 1.05, duration: 0.5, yoyo: true, repeat: 7, ease: "sine.inOut" }, 14.8);
-      tl.fromTo("#s5sub", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 15.2);
+      tl.fromTo("#s5 .h1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, 13.95);
+      tl.fromTo("#s5url", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.8)" }, 14.5);
+      tl.to("#s5url", { scale: 1.05, duration: 0.5, yoyo: true, repeat: 7, ease: "sine.inOut" }, 15.05);
+      tl.fromTo("#s5sub", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 15.5);
 
       window.__timelines["main"] = tl;
       tl.seek(0);

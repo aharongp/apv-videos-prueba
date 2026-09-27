@@ -35,11 +35,13 @@ Estructura:
 - `src/components/` — fondo animado, subtítulos palabra por palabra, navegador y cursor, recreación de la UI del sitio (`Site.tsx`: registro, filtros, fichas Copart, calculadora de tarifas, tope de oferta, chat con asesor), autos SVG, iconos.
 
 ### Voz
-La locución final es femenina, en español: voz **Marisol** del modelo **Seed Audio** (ByteDance) vía
-Higgsfield (`voice_id 75e72cd5-011b-4130-a474-e8b1ab341f04`). Se eligió por ser la más expresiva de las
-voces probadas (rango de entonación de ~10 semitonos). Los textos enviados están en el campo `tts` de
-`src/data/script.json`; la URL se escribe **"cars punto, a, pe, be, motor usa punto com"** (verificado con
-Whisper: se entiende "cars.apbmotorusa.com").
+La locución final es femenina, carismática y con **acento latinoamericano**: se generó con **Seed Audio**
+(ByteDance) vía Higgsfield clonando la muestra pública de la voz latina **«Anita – Rapid-Fire & Vibrant»**
+de ElevenLabs (`a3YanFUAyTAWlqxizi4i`, `es-latin-american`) como `audio_references`. El clon conserva el
+timbre (F0 ≈ 285 Hz, igual que la original) y la entonación (~13 semitonos de rango); Whisper la reconoce
+como español nativo con 0,98–0,99 de confianza (la voz anterior, Marisol, sonaba con acento inglés: 0,83).
+Los textos enviados están en el campo `tts` de `src/data/script.json`; la URL se escribe
+**"cars punto, a, pe, be, motor usa punto com"** (verificado con Whisper: se entiende "cars.apbmotorusa.com").
 
 Para reemplazar o regenerar una escena, guarda el audio como `public/audio/vo/<id>.wav` y ejecuta:
 ```bash
@@ -58,7 +60,7 @@ npm run hf:lint
 npm run hf:preview   # estudio de HyperFrames
 npm run hf:render    # → out/cars-teaser-hyperframes.mp4
 ```
-Composición: `hyperframes/cars-teaser/index.html` (HTML + GSAP), con locución propia en la voz de Marisol.
+Composición: `hyperframes/cars-teaser/index.html` (HTML + GSAP), con locución propia en la misma voz latina.
 
 ## Nota
 La interfaz que aparece en el video es una **recreación fiel** de cars.apvmotorusa.com (mismos textos,

@@ -1,5 +1,5 @@
 // Mide la locución de cada escena (public/audio/vo/<id>.wav) y escribe src/data/durations.json
-// para que Remotion ajuste el timing. La locución final se genera con ElevenLabs (ver README);
+// para que Remotion ajuste el timing. La locución final se genera con Seed Audio (ver README);
 // sin argumentos, este script genera una voz local de respaldo con el TTS de HyperFrames (Kokoro-82M).
 //
 // Requisitos: python con `kokoro-onnx soundfile` (ver README) y
