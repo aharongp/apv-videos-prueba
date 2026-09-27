@@ -3,7 +3,7 @@
 // Uso (desde assembly/): npm run build  [-- PrimeraVez916Web ...]
 import { bundle } from "@remotion/bundler";
 import { renderMedia, selectComposition } from "@remotion/renderer";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { cpSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -20,7 +20,8 @@ mkdirSync(out, { recursive: true });
 mkdirSync(tmp, { recursive: true });
 
 const ff = (...args) => execFileSync("ffmpeg", ["-y", "-hide_banner", "-loglevel", "error", ...args], { stdio: "inherit" });
-const ffOut = (...args) => execFileSync("ffmpeg", ["-hide_banner", ...args], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+// ffmpeg escribe los análisis (loudnorm, ebur128) en stderr
+const ffErr = (...args) => spawnSync("ffmpeg", ["-hide_banner", ...args], { encoding: "utf8" }).stderr;
 
 // 1. public/ con los medios compartidos -------------------------------------------------------------
 const pub = join(asm, "public");
@@ -44,10 +45,13 @@ for (const t of targets.filter((t) => only.length === 0 || only.includes(t.id)))
   const composition = await selectComposition({ serveUrl, id: t.id });
   const raw = join(tmp, `raw-${t.file}`);
   console.log(`→ render ${t.id} (${composition.width}×${composition.height}, ${composition.durationInFrames} f)`);
-  await renderMedia({ serveUrl, composition, codec: "h264", crf: 14, audioCodec: "aac", audioBitrate: "320k", outputLocation: raw, concurrency: null });
+  // REUSE_RAW=1 reutiliza el render de Remotion ya hecho (solo rehace master y codificación)
+  if (!(process.env.REUSE_RAW && existsSync(raw))) {
+    await renderMedia({ serveUrl, composition, codec: "h264", crf: 14, audioCodec: "aac", audioBitrate: "320k", outputLocation: raw, concurrency: null });
+  }
 
   // 3. Master de audio: loudnorm en dos pasadas, lineal, -14 LUFS / -1.5 dBTP --------------------------
-  const probe = ffOut("-i", raw, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json", "-f", "null", "-").toString();
+  const probe = ffErr("-i", raw, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json", "-f", "null", "-");
   const m = JSON.parse(probe.slice(probe.lastIndexOf("{"), probe.lastIndexOf("}") + 1));
   const ln = `loudnorm=I=-14:TP=-1.5:LRA=11:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset}:linear=true`;
   const master = join(tmp, `master-${t.file}.m4a`);

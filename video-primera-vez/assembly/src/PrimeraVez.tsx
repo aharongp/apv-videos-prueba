@@ -165,14 +165,38 @@ const Cta: React.FC<{ format: Format; variant: CtaVariant }> = ({ format, varian
           fontFamily: brand.font.family,
           fontWeight: 900,
           letterSpacing: "-0.02em",
-          fontSize: format === "9x16" ? (small ? 46 : 58) : small ? 42 : 48,
+          fontSize: format === "9x16" ? (small ? 50 : 58) : small ? 42 : 48,
           lineHeight: 1.12,
           textAlign: "center",
           maxWidth: format === "9x16" ? 860 : 1100,
         }}
       >
-        {text}
+        {ctaLines(text).map((line, i) => (
+          <div key={i} style={{ whiteSpace: "nowrap" }}>
+            {line}
+          </div>
+        ))}
       </div>
     </div>
   );
+};
+
+/** CTA largo en dos líneas equilibradas (sin palabras huérfanas); corto, en una. */
+const ctaLines = (text: string) => {
+  const words = text.split(" ");
+  if (text.length <= 26) return [text];
+  let best = [text];
+  let bestScore = Infinity;
+  for (let k = 1; k < words.length; k++) {
+    const a = words.slice(0, k).join(" ");
+    const b = words.slice(k).join(" ");
+    // no terminar línea en palabra de enlace; mejor empezar la segunda con «y», «de», «en»…
+    const weak = /^(y|e|o|de|del|el|la|los|las|en|a|al|te|tu|un|una|por|para|con)$/i;
+    const score = Math.abs(a.length - b.length) + (weak.test(words[k - 1]) ? 10 : 0) - (/^(y|de|en|para|con)$/i.test(words[k]) ? 6 : 0);
+    if (score < bestScore) {
+      bestScore = score;
+      best = [a, b];
+    }
+  }
+  return best;
 };
