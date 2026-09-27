@@ -7,19 +7,23 @@
 //
 // Uso: node scripts/generate-voiceover.mjs [idEscena ...]
 //      node scripts/generate-voiceover.mjs --probe   (solo mide WAVs existentes, p. ej. de un locutor)
+//      node scripts/generate-voiceover.mjs --probe --lang en   (versión en inglés: public/audio/vo-en, *.en.json)
 import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const script = JSON.parse(readFileSync(join(root, "src/data/script.json"), "utf8"));
-const outDir = join(root, "public/audio/vo");
-const durationsPath = join(root, "src/data/durations.json");
+const langIdx = process.argv.indexOf("--lang");
+const lang = langIdx > 0 ? process.argv[langIdx + 1] : "es";
+const sfx = lang === "es" ? "" : `.${lang}`;
+const script = JSON.parse(readFileSync(join(root, `src/data/script${sfx}.json`), "utf8"));
+const outDir = join(root, lang === "es" ? "public/audio/vo" : `public/audio/vo-${lang}`);
+const durationsPath = join(root, `src/data/durations${sfx}.json`);
 mkdirSync(outDir, { recursive: true });
 
 const probeOnly = process.argv.includes("--probe");
-const only = process.argv.slice(2).filter((a) => a !== "--probe");
+const only = process.argv.slice(2).filter((a, i, all) => a !== "--probe" && a !== "--lang" && all[i - 1] !== "--lang");
 const hf = join(root, "node_modules/.bin/hyperframes");
 
 const probe = (file) =>
@@ -35,7 +39,7 @@ for (const scene of script.scenes) {
   const file = join(outDir, `${scene.id}.wav`);
   if (!probeOnly && (only.length === 0 || only.includes(scene.id))) {
     console.log(`→ ${scene.id}`);
-    execFileSync(hf, ["tts", scene.tts, "-v", "ef_dora", "-s", "1.05", "-o", file], {
+    execFileSync(hf, ["tts", scene.tts, "-v", lang === "en" ? "af_heart" : "ef_dora", "-s", "1.05", "-o", file], {
       stdio: ["ignore", "ignore", "inherit"],
     });
   }

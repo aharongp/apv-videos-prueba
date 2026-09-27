@@ -5,7 +5,8 @@ confíe en APV Motors para comprar en subastas de Copart y **cree su cuenta ya c
 que **lo atenderá un asesor que lo guiará en su compra**.
 
 - Formato principal: 16:9, 1920×1080, 30 fps, ~2:17 → `out/cars-vsl.mp4` (Remotion)
-- Formato corto: 9:16, 1080×1920, 21 s → `out/cars-teaser-hyperframes.mp4` (HyperFrames), para Reels/TikTok/Stories.
+- Formato corto: 9:16, 1080×1920, 21 s
+- Versión en inglés (EE. UU.) de ambos formatos: `out/cars-vsl-en.mp4` y `out/cars-teaser-hyperframes-en.mp4` (guion en `src/data/script.en.json`). → `out/cars-teaser-hyperframes.mp4` (HyperFrames), para Reels/TikTok/Stories.
 
 ## Branding (tomado del sitio real)
 | Elemento | Valor en cars.apvmotorusa.com | Uso en el video |

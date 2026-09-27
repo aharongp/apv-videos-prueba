@@ -4,6 +4,7 @@ import { theme } from "../theme";
 import { clamp } from "./motion";
 import { interpolate } from "remotion";
 import { spokenWeight } from "../timeline";
+import type { Lang } from "../i18n";
 
 const MAX_WORDS = 7;
 
@@ -26,10 +27,10 @@ const chunk = (text: string) => {
 };
 
 /** Subtítulos quemados (el 80% de los VSL en redes se ven sin sonido). */
-export const Captions: React.FC<{ text: string; voFrames: number }> = ({ text, voFrames }) => {
+export const Captions: React.FC<{ text: string; voFrames: number; lang: Lang }> = ({ text, voFrames, lang }) => {
   const frame = useCurrentFrame();
   const chunks = chunk(text);
-  const lengths = chunks.map((c) => spokenWeight(c.join(" ")) + 1);
+  const lengths = chunks.map((c) => spokenWeight(c.join(" "), lang) + 1);
   const total = lengths.reduce((a, b) => a + b, 0);
 
   let acc = 0;

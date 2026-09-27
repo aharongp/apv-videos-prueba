@@ -7,6 +7,7 @@ import { Icon, IconName } from "../components/Icons";
 import { Beat, SfxAt, Typing } from "../components/Shell";
 import { IconBadge, Kinetic } from "../components/Ui";
 import { clamp, ease, fadeUp, pop, popIn } from "../components/motion";
+import { useT } from "../i18n";
 import {
   AdvisorChat,
   BidModal,
@@ -17,8 +18,9 @@ import {
   feeRows,
   FilterCard,
   HeroRegister,
-  listings,
   ListingRow,
+  T,
+  useListings,
   VerifyCode,
 } from "../components/Site";
 
@@ -29,24 +31,26 @@ const BW = 1250;
 const BH = 744;
 const CY = BY + 58; // inicio del contenido bajo la barra del navegador
 
-const STEPS: { title: string; icon: IconName }[] = [
-  { title: "Crea tu cuenta gratis", icon: "user" },
-  { title: "Selecciona un vehículo", icon: "car" },
-  { title: "Calcula tu presupuesto", icon: "calculator" },
-  { title: "Coloca tu puja máxima", icon: "gavel" },
-  { title: "Confirma con un asesor", icon: "chat" },
+const steps = (t: T): { title: string; icon: IconName }[] => [
+  { title: t("Crea tu cuenta gratis", "Create your free account"), icon: "user" },
+  { title: t("Selecciona un vehículo", "Choose a vehicle"), icon: "car" },
+  { title: t("Calcula tu presupuesto", "Calculate your budget"), icon: "calculator" },
+  { title: t("Coloca tu puja máxima", "Place your max bid"), icon: "gavel" },
+  { title: t("Confirma con un asesor", "Confirm with an advisor"), icon: "chat" },
 ];
 
 const StepPanel: React.FC<{ n: number; items: string[]; itemTimes: number[]; extra?: React.ReactNode }> = ({ n, items, itemTimes, extra }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const t = useT();
+  const STEPS = steps(t);
   const p = pop(frame, fps, 0);
   return (
     <div style={{ position: "absolute", left: 80, top: BY + 6, width: 470, fontFamily: theme.ui }}>
       <div style={{ ...fadeUp(p, 60), display: "flex", alignItems: "center", gap: 18 }}>
         <IconBadge name={STEPS[n - 1].icon} size={96} />
         <div>
-          <div style={{ fontWeight: 800, fontSize: 22, color: theme.muted, letterSpacing: "0.11em" }}>PASO {n} DE 5</div>
+          <div style={{ fontWeight: 800, fontSize: 22, color: theme.muted, letterSpacing: "0.11em" }}>{t("PASO ", "STEP ")}{n}{t(" DE 5", " OF 5")}</div>
           <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
             {STEPS.map((_, i) => (
               <div key={i} style={{ width: 34, height: 6, borderRadius: 3, background: i < n ? theme.accent : theme.line }} />
@@ -75,11 +79,14 @@ const StepPanel: React.FC<{ n: number; items: string[]; itemTimes: number[]; ext
   );
 };
 
-const Illustrative: React.FC = () => (
-  <div style={{ position: "absolute", left: BX, top: BY + BH + 12, fontFamily: theme.ui, fontSize: 17, fontWeight: 600, color: theme.muted }}>
-    Recreación de cars.apvmotorusa.com · vehículos y montos ilustrativos
-  </div>
-);
+const Illustrative: React.FC = () => {
+  const t = useT();
+  return (
+    <div style={{ position: "absolute", left: BX, top: BY + BH + 12, fontFamily: theme.ui, fontSize: 17, fontWeight: 600, color: theme.muted }}>
+      {t("Recreación de cars.apvmotorusa.com · vehículos y montos ilustrativos", "Recreation of cars.apvmotorusa.com · illustrative vehicles and amounts")}
+    </div>
+  );
+};
 
 const browserIn = (frame: number, start: number) => {
   const p = ease(frame, start, start + 18);
@@ -132,18 +139,20 @@ const Callout: React.FC<{ at: number; icon: IconName; text: string; color?: stri
 export const Step1: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const b1 = phraseAt(scene, "Paso 1");
+  const t = useT();
+  const STEPS = steps(t);
+  const b1 = phraseAt(scene, t("Paso 1", "Step 1"));
   const f = {
-    name: phraseAt(scene, "tu nombre"),
-    email: phraseAt(scene, "correo"),
-    phone: phraseAt(scene, "WhatsApp"),
+    name: phraseAt(scene, t("tu nombre", "your name")),
+    email: phraseAt(scene, t("correo", "email")),
+    phone: phraseAt(scene, t("WhatsApp", "WhatsApp")),
   };
   const pass = f.phone + 16;
-  const codeAt = phraseAt(scene, "Te llega un código");
+  const codeAt = phraseAt(scene, t("Te llega un código", "You'll get a code"));
   const clickAt = codeAt - 4;
   const values = {
     name: typed("María González", frame, f.name, 40),
-    email: typed("maria@correo.com", frame, f.email, 40),
+    email: typed(t("maria@correo.com", "maria@email.com"), frame, f.email, 40),
     phone: typed("832 555 0147", frame, f.phone, 40),
     password: "•".repeat(Math.min(10, Math.max(0, Math.floor((frame - pass) / 1.2)))),
   };
@@ -156,7 +165,7 @@ export const Step1: React.FC<{ scene: TimedScene }> = ({ scene }) => {
     <AbsoluteFill>
       <Beat from={0} to={b1 + 2}>
         <div style={{ position: "absolute", inset: 0, bottom: 190, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-          <Kinetic text="Así se compra en *5* *pasos*" size={112} delay={2} />
+          <Kinetic text={t("Así se compra en *5* *pasos*", "How to buy in *5* *steps*")} size={112} delay={2} />
           <div style={{ display: "flex", gap: 34, marginTop: 64 }}>
             {STEPS.map((s, i) => {
               const p = pop(frame, fps, 12 + i * 5);
@@ -192,7 +201,7 @@ export const Step1: React.FC<{ scene: TimedScene }> = ({ scene }) => {
       </Beat>
 
       <Beat from={b1}>
-        <StepPanel n={1} items={["Nombre y correo", "Teléfono / WhatsApp", "Código de 6 dígitos"]} itemTimes={[f.name - b1, f.phone - b1, codeAt - b1]} />
+        <StepPanel n={1} items={[t("Nombre y correo", "Name and email"), t("Teléfono / WhatsApp", "Phone / WhatsApp"), t("Código de 6 dígitos", "6-digit code")]} itemTimes={[f.name - b1, f.phone - b1, codeAt - b1]} />
       </Beat>
       <Beat from={b1} fade={1}>
         <Browser url={brand.url} start={0}>
@@ -234,17 +243,19 @@ const ROWS_Y = 252; // inicio (contenido) de las filas del catálogo
 export const Step2: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const tSearch = phraseAt(scene, "busca tu vehículo");
-  const tMake = phraseAt(scene, "marca");
-  const tModel = phraseAt(scene, "modelo");
-  const tYear = phraseAt(scene, "año");
-  const tGo = phraseAt(scene, "lote o VIN");
-  const tOpen = phraseAt(scene, "Abre la ficha");
+  const t = useT();
+  const listings = useListings();
+  const tSearch = phraseAt(scene, t("busca tu vehículo", "search for your vehicle"));
+  const tMake = phraseAt(scene, t("marca", "make"));
+  const tModel = phraseAt(scene, t("modelo", "model"));
+  const tYear = phraseAt(scene, t("año", "year"));
+  const tGo = phraseAt(scene, t("lote o VIN", "lot, or VIN"));
+  const tOpen = phraseAt(scene, t("Abre la ficha", "Open the listing"));
   const focusAt: [DetailFocus, number][] = [
-    ["photos", phraseAt(scene, "las fotos")],
-    ["damage", phraseAt(scene, "los daños")],
-    ["odometer", phraseAt(scene, "el odómetro")],
-    ["title", phraseAt(scene, "el título")],
+    ["photos", phraseAt(scene, t("las fotos", "the photos"))],
+    ["damage", phraseAt(scene, t("los daños", "the damage"))],
+    ["odometer", phraseAt(scene, t("el odómetro", "the odometer"))],
+    ["title", phraseAt(scene, t("el título", "the title"))],
   ];
   const focus = focusAt.reduce<DetailFocus>((acc, [k, t]) => (frame >= t ? k : acc), "none");
   const showResults = frame >= tGo + 6;
@@ -253,7 +264,7 @@ export const Step2: React.FC<{ scene: TimedScene }> = ({ scene }) => {
 
   return (
     <AbsoluteFill>
-      <StepPanel n={2} items={["Marca, modelo o año", "Lote o VIN", "Fotos y daños", "Odómetro y título"]} itemTimes={[tMake, tGo, focusAt[0][1], focusAt[2][1]]} />
+      <StepPanel n={2} items={[t("Marca, modelo o año", "Make, model or year"), t("Lote o VIN", "Lot or VIN"), t("Fotos y daños", "Photos and damage"), t("Odómetro y título", "Odometer and title")]} itemTimes={[tMake, tGo, focusAt[0][1], focusAt[2][1]]} />
       <Browser url={`${brand.url}/#catalogo`}>
         <SiteHeader loggedIn />
         <FilterCard
@@ -315,12 +326,14 @@ export const Step2: React.FC<{ scene: TimedScene }> = ({ scene }) => {
 export const Step3: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const tCalc = phraseAt(scene, "calcula tu presupuesto");
-  const tType = phraseAt(scene, "Escribe tu tope");
-  const tRows = phraseAt(scene, "y ve el total");
-  const tBefore = phraseAt(scene, "antes de ofertar");
+  const t = useT();
+  const listings = useListings();
+  const tCalc = phraseAt(scene, t("calcula tu presupuesto", "calculate your budget"));
+  const tType = phraseAt(scene, t("Escribe tu tope", "Enter your max bid"));
+  const tRows = phraseAt(scene, t("y ve el total", "and see the estimated total"));
+  const tBefore = phraseAt(scene, t("antes de ofertar", "before you bid"));
   const bid = 8500;
-  const rows = feeRows(bid);
+  const rows = feeRows(bid, t);
   const totalValue = rows.reduce((a, [, v]) => a + v, 0);
   const rowsVisible = Math.max(0, Math.min(rows.length, Math.floor((frame - tRows) / 4) + 1));
   const totalAt = tRows + rows.length * 4;
@@ -332,11 +345,11 @@ export const Step3: React.FC<{ scene: TimedScene }> = ({ scene }) => {
     <AbsoluteFill>
       <StepPanel
         n={3}
-        items={["Escribe tu tope de puja", "Tarifas Copart y APV", "Total estimado a pagar"]}
+        items={[t("Escribe tu tope de puja", "Enter your max bid"), t("Tarifas Copart y APV", "Copart & APV fees"), t("Total estimado a pagar", "Estimated total to pay")]}
         itemTimes={[tType, tRows, totalAt]}
         extra={
           <div style={{ ...fadeUp(pop(frame, fps, totalAt + 10), 20), marginTop: 30, padding: "16px 20px", borderRadius: 18, background: "#fff", border: `1px solid ${theme.line}`, boxShadow: theme.shadow }}>
-            <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: "0.1em", color: theme.muted }}>SABES EL TOTAL ANTES DE PUJAR</div>
+            <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: "0.1em", color: theme.muted }}>{t("SABES EL TOTAL ANTES DE PUJAR", "KNOW YOUR TOTAL BEFORE YOU BID")}</div>
             <div style={{ fontSize: 44, fontWeight: 900, letterSpacing: "-0.04em", color: theme.text }}>
               {`$${Math.round(total).toLocaleString("en-US")}`}
               <span style={{ fontSize: 22, color: theme.muted, fontWeight: 700 }}> USD</span>
@@ -383,17 +396,19 @@ export const Step3: React.FC<{ scene: TimedScene }> = ({ scene }) => {
 // ---------------------------------------------------------------- PASO 4 · Coloca tu puja máxima
 export const Step4: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
-  const tTap = phraseAt(scene, "toca «Quiero ofertar»");
+  const t = useT();
+  const listings = useListings();
+  const tTap = phraseAt(scene, t("toca «Quiero ofertar»", "tap “Place my bid”"));
   const clickAt = tTap + 16;
-  const tSet = phraseAt(scene, "establece tu tope");
-  const tCalm = phraseAt(scene, "Tranquilo");
+  const tSet = phraseAt(scene, t("establece tu tope", "set your max bid"));
+  const tCalm = phraseAt(scene, t("Tranquilo", "Don't worry"));
   const submitAt = scene.voFrames + 4;
   const modal = ease(frame, clickAt + 2, clickAt + 14);
   const btn = { x: BX + 24 + 22 + 420 + 16 + 347 + 16 + 125, y: CY + 16 + 16 + 50 + 146 };
 
   return (
     <AbsoluteFill>
-      <StepPanel n={4} items={["Toca «Quiero ofertar»", "Escribe tu tope de oferta", "Sin cargos automáticos"]} itemTimes={[tTap, tSet, tCalm]} />
+      <StepPanel n={4} items={[t("Toca «Quiero ofertar»", "Tap “Place my bid”"), t("Escribe tu tope de oferta", "Enter your max bid"), t("Sin cargos automáticos", "No automatic charges")]} itemTimes={[tTap, tSet, tCalm]} />
       <Browser url={`${brand.url}/#catalogo`}>
         <SiteHeader loggedIn />
         <DetailModal l={listings[0]}>
@@ -404,7 +419,7 @@ export const Step4: React.FC<{ scene: TimedScene }> = ({ scene }) => {
           <BidModal l={listings[0]} value={typed("8,500", frame, tSet + 8, 14)} active={frame >= tSet && frame < submitAt} pressed={frame >= submitAt && frame < submitAt + 6} />
         </div>
       </Browser>
-      <Callout at={tCalm} icon="shield" text="No se realiza ningún cargo automático" x={1080} y={BY + 40} />
+      <Callout at={tCalm} icon="shield" text={t("No se realiza ningún cargo automático", "There's no automatic charge")} x={1080} y={BY + 40} />
       <Cursor
         points={[
           { f: 4, x: 1500, y: 950 },
@@ -428,17 +443,24 @@ export const Step4: React.FC<{ scene: TimedScene }> = ({ scene }) => {
 export const Step5: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const tChat = phraseAt(scene, "Continúas en el chat");
-  const tReview = phraseAt(scene, "revisamos contigo");
-  const tConfirm = phraseAt(scene, "la confirmamos");
+  const t = useT();
+  const listings = useListings();
+  const tChat = phraseAt(scene, t("Continúas en el chat", "You'll continue in the APV chat"));
+  const tReview = phraseAt(scene, t("revisamos contigo", "we review your request"));
+  const tConfirm = phraseAt(scene, t("la confirmamos", "confirm it"));
   const panel = ease(frame, 0, 16);
   const s = (at: number) => pop(frame, fps, at, 14);
-  const status = frame < tChat ? "Tu solicitud está lista." : frame < tChat + 18 ? "Conectando con el chat de APV Motors…" : "Conversación · Tope solicitado: $8,500";
+  const status =
+    frame < tChat
+      ? t("Tu solicitud está lista.", "Your request is ready.")
+      : frame < tChat + 18
+        ? t("Conectando con el chat de APV Motors…", "Connecting to the APV Motors chat…")
+        : t("Conversación · Tope solicitado: $8,500", "Conversation · Requested max: $8,500");
   const confirm = pop(frame, fps, tConfirm + 6, 11);
 
   return (
     <AbsoluteFill>
-      <StepPanel n={5} items={["Chat de APV Motors", "Revisamos tu solicitud", "Confirmamos tu puja"]} itemTimes={[tChat, tReview, tConfirm]} />
+      <StepPanel n={5} items={[t("Chat de APV Motors", "APV Motors chat"), t("Revisamos tu solicitud", "We review your request"), t("Confirmamos tu puja", "We confirm your bid")]} itemTimes={[tChat, tReview, tConfirm]} />
       <Browser url={`${brand.url}/#catalogo`}>
         <SiteHeader loggedIn />
         <DetailModal l={listings[0]}>
@@ -450,9 +472,9 @@ export const Step5: React.FC<{ scene: TimedScene }> = ({ scene }) => {
             status={status}
             typing={frame >= tChat + 26 && frame < tReview}
             msgs={[
-              { from: "me", text: "Hola, quiero ofertar por el 2021 TOYOTA RAV4 XLE.\nLote 47392215 · Tope solicitado: $8,500", show: s(tChat + 14) },
+              { from: "me", text: t("Hola, quiero ofertar por el 2021 TOYOTA RAV4 XLE.\nLote 47392215 · Tope solicitado: $8,500", "Hi, I'd like to bid on the 2021 TOYOTA RAV4 XLE.\nLot 47392215 · Requested max: $8,500"), show: s(tChat + 14) },
               ...(frame >= tReview
-                ? [{ from: "advisor" as const, text: "¡Hola María! Soy tu asesor de APV Motors. Revisamos contigo el vehículo y las tarifas, y confirmamos tu solicitud de puja.", show: s(tReview) }]
+                ? [{ from: "advisor" as const, text: t("¡Hola María! Soy tu asesor de APV Motors. Revisamos contigo el vehículo y las tarifas, y confirmamos tu solicitud de puja.", "Hi María! I'm your APV Motors advisor. Let's go over the vehicle and the fees together, and confirm your bid request."), show: s(tReview) }]
                 : []),
             ]}
           />
@@ -477,7 +499,7 @@ export const Step5: React.FC<{ scene: TimedScene }> = ({ scene }) => {
           color: "#fff",
         }}
       >
-        <Icon name="check" size={38} color="#fff" stroke={3} /> Solicitud de puja confirmada
+        <Icon name="check" size={38} color="#fff" stroke={3} />{t(" Solicitud de puja confirmada", " Bid request confirmed")}
       </div>
       <SfxAt at={tChat + 14} name="pop" volume={0.35} />
       <SfxAt at={tReview} name="pop" volume={0.4} />

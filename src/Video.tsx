@@ -2,7 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { AbsoluteFill, Audio, continueRender, delayRender, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { fontsReady, theme } from "./theme";
-import { scenes, SceneId, TimedScene, totalFrames } from "./timeline";
+import { getScenes, getTotalFrames, SceneId, TimedScene } from "./timeline";
+import { Lang, LangProvider } from "./i18n";
 import { Background } from "./components/Background";
 import { Captions } from "./components/Captions";
 import { SceneShell, SfxAt } from "./components/Shell";
@@ -38,7 +39,10 @@ const tints: Partial<Record<SceneId, string>> = {
 // Escenas donde no se muestra la marca de agua (ya aparece el logo grande).
 const noWatermark: SceneId[] = ["solution", "step1", "step2", "step3", "step4", "step5", "advisor"];
 
-export const CarsVSL: React.FC = () => {
+export const CarsVSL: React.FC<{ lang: Lang }> = ({ lang }) => {
+  const scenes = getScenes(lang);
+  const totalFrames = getTotalFrames(lang);
+  const suffix = lang === "es" ? "" : `-${lang}`;
   const [handle] = useState(() => delayRender("Cargando fuentes"));
   useEffect(() => {
     fontsReady.then(() => continueRender(handle));
@@ -50,6 +54,7 @@ export const CarsVSL: React.FC = () => {
   const endStart = last.from + last.voFrames;
 
   return (
+    <LangProvider lang={lang}>
     <AbsoluteFill style={{ background: theme.bg }}>
       <Background tint={tints[current.id] ?? theme.accent} />
 
@@ -60,8 +65,8 @@ export const CarsVSL: React.FC = () => {
             <SceneShell duration={s.duration}>
               <C scene={s} />
             </SceneShell>
-            <Audio src={staticFile(`audio/vo/${s.id}.wav`)} />
-            <Captions text={s.caption} voFrames={s.voFrames} />
+            <Audio src={staticFile(`audio/vo${suffix}/${s.id}.wav`)} />
+            <Captions text={s.caption} voFrames={s.voFrames} lang={lang} />
             {s.from > 0 && <SfxAt at={0} name="whoosh" volume={0.25} />}
           </Sequence>
         );
@@ -87,10 +92,11 @@ export const CarsVSL: React.FC = () => {
       </div>
 
       <Audio
-        src={staticFile("audio/music.mp3")}
+        src={staticFile(`audio/music${suffix}.mp3`)}
         volume={(f) => interpolate(f, [0, 30, endStart, endStart + 20, totalFrames - 20, totalFrames], [0, 0.16, 0.16, 0.4, 0.4, 0], clamp)}
       />
     </AbsoluteFill>
+    </LangProvider>
   );
 };
 

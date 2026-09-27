@@ -2,6 +2,7 @@ import React from "react";
 import { Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { brand, theme } from "../theme";
 import { clamp } from "./motion";
+import { useLang, useT } from "../i18n";
 
 /** Logo oficial (PNG de cars.apvmotorusa.com, 495×219). `height` en px. */
 export const Logo: React.FC<{ height?: number; style?: React.CSSProperties }> = ({ height = 44, style }) => (
@@ -72,41 +73,47 @@ export const BrowserFrame: React.FC<{
 };
 
 /** Barra superior real del sitio: logo, navegación, ES|EN, Iniciar sesión, Ver vehículos. */
-export const SiteHeader: React.FC<{ loggedIn?: boolean }> = ({ loggedIn = false }) => (
-  <div
-    style={{
-      height: 68,
-      display: "flex",
-      alignItems: "center",
-      gap: 24,
-      padding: "0 34px",
-      borderBottom: "1px solid rgba(219,228,238,.85)",
-      background: "rgba(255,255,255,.95)",
-      fontFamily: theme.ui,
-    }}
-  >
-    <Logo height={36} />
-    <div style={{ display: "flex", gap: 24, marginLeft: "auto", fontWeight: 700, fontSize: 16, color: theme.slate }}>
-      <span>Catálogo</span>
-      <span>Cómo comprar</span>
-      <span>Ayuda</span>
-      <span>Planes</span>
-    </div>
-    <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", borderRadius: 999, border: `1px solid ${theme.line}`, background: theme.soft, fontSize: 13, fontWeight: 800 }}>
-      <span style={{ background: theme.accent, color: "#fff", borderRadius: 999, padding: "2px 8px" }}>ES</span>
-      <span style={{ color: theme.muted }}>EN</span>
-    </div>
-    {loggedIn ? (
-      <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 14px 6px 6px", borderRadius: 999, border: `1px solid ${theme.line}`, fontWeight: 700, fontSize: 15, color: theme.text }}>
-        <span style={{ width: 30, height: 30, borderRadius: 15, background: theme.accent, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 900 }}>MG</span>
-        Mi cuenta
+export const SiteHeader: React.FC<{ loggedIn?: boolean }> = ({ loggedIn = false }) => {
+  const t = useT();
+  const lang = useLang();
+  const on: React.CSSProperties = { background: theme.accent, color: "#fff", borderRadius: 999, padding: "2px 8px" };
+  const off: React.CSSProperties = { color: theme.muted };
+  return (
+    <div
+      style={{
+        height: 68,
+        display: "flex",
+        alignItems: "center",
+        gap: 24,
+        padding: "0 34px",
+        borderBottom: "1px solid rgba(219,228,238,.85)",
+        background: "rgba(255,255,255,.95)",
+        fontFamily: theme.ui,
+      }}
+    >
+      <Logo height={36} />
+      <div style={{ display: "flex", gap: 24, marginLeft: "auto", fontWeight: 700, fontSize: 16, color: theme.slate }}>
+        <span>{t("Catálogo", "Catalog")}</span>
+        <span>{t("Cómo comprar", "How to buy")}</span>
+        <span>{t("Ayuda", "Help")}</span>
+        <span>{t("Planes", "Plans")}</span>
       </div>
-    ) : (
-      <div style={{ padding: "9px 16px", borderRadius: 11, border: `1px solid ${theme.line}`, fontWeight: 800, fontSize: 15, color: theme.text }}>Iniciar sesión</div>
-    )}
-    <div style={{ padding: "10px 16px", borderRadius: 11, background: theme.text, color: "#fff", fontWeight: 800, fontSize: 15 }}>Ver vehículos</div>
-  </div>
-);
+      <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", borderRadius: 999, border: `1px solid ${theme.line}`, background: theme.soft, fontSize: 13, fontWeight: 800 }}>
+        <span style={lang === "en" ? off : on}>ES</span>
+        <span style={lang === "en" ? on : off}>EN</span>
+      </div>
+      {loggedIn ? (
+        <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 14px 6px 6px", borderRadius: 999, border: `1px solid ${theme.line}`, fontWeight: 700, fontSize: 15, color: theme.text }}>
+          <span style={{ width: 30, height: 30, borderRadius: 15, background: theme.accent, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 900 }}>MG</span>
+          {t("Mi cuenta", "My account")}
+        </div>
+      ) : (
+        <div style={{ padding: "9px 16px", borderRadius: 11, border: `1px solid ${theme.line}`, fontWeight: 800, fontSize: 15, color: theme.text }}>{t("Iniciar sesión", "Log in")}</div>
+      )}
+      <div style={{ padding: "10px 16px", borderRadius: 11, background: theme.text, color: "#fff", fontWeight: 800, fontSize: 15 }}>{t("Ver vehículos", "View vehicles")}</div>
+    </div>
+  );
+};
 
 export type CursorPoint = { f: number; x: number; y: number; click?: boolean };
 

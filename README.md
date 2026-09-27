@@ -5,10 +5,13 @@ califica al prospecto y cierra indicando que **un asesor lo atenderá y lo guiar
 
 | Entregable | Herramienta | Formato | Archivo |
 |---|---|---|---|
-| VSL completo (~2:17) | Remotion | 1920×1080 · 30 fps | `out/cars-vsl.mp4` |
-| Teaser vertical (21 s) | HyperFrames | 1080×1920 · 30 fps | `out/cars-teaser-hyperframes.mp4` |
+| VSL completo (~2:17) · español | Remotion | 1920×1080 · 30 fps | `out/cars-vsl.mp4` |
+| Teaser vertical (21 s) · español | HyperFrames | 1080×1920 · 30 fps | `out/cars-teaser-hyperframes.mp4` |
+| VSL completo (~2:22) · inglés (EE. UU.) | Remotion | 1920×1080 · 30 fps | `out/cars-vsl-en.mp4` |
+| Teaser vertical (21 s) · inglés (EE. UU.) | HyperFrames | 1080×1920 · 30 fps | `out/cars-teaser-hyperframes-en.mp4` |
 
 Estrategia, guion y recomendaciones de venta: [`docs/VSL-estrategia.md`](docs/VSL-estrategia.md).
+Voces aprobadas y cómo reutilizarlas: [`docs/voces.md`](docs/voces.md).
 
 ## Requisitos
 - Node.js ≥ 22 y FFmpeg (`apt-get install ffmpeg`)
@@ -43,6 +46,19 @@ rango); Whisper la reconoce como español nativo (0,99). Antes se probaron Maris
 Rapid-Fire» (latina, pero aguda y acelerada: sonaba rústica).
 Los textos enviados están en el campo `tts` de `src/data/script.json`; la URL se escribe
 **"cars punto, a, pe, be, motor usa punto com"** (verificado con Whisper: se entiende "cars.apbmotorusa.com").
+
+### Versión en inglés (EE. UU.)
+El mismo proyecto genera ambos idiomas. La composición `CarsVSLEn` usa `src/data/script.en.json`,
+`src/data/durations.en.json`, `public/audio/vo-en/` y `public/audio/music-en.mp3`; los textos en pantalla
+se traducen con `useT()` (`src/i18n.tsx`: `t("español", "English")`). Voz: clon en Seed Audio de
+**«Tawny | Warm Conversational American»** de ElevenLabs (`Rv3wiuHHQq0rSS4QVaQ8`); la URL se escribe
+"cars dot, A, P, V, motor, U, S, A, dot com" (Whisper: "cars.apvmotorusa.com").
+```bash
+node scripts/generate-voiceover.mjs --probe --lang en   # duraciones → src/data/durations.en.json
+npm run music:en                                        # → public/audio/music-en.mp3
+npm run render:en                                       # → out/cars-vsl-en.mp4
+npm run hf:render:en                                    # → out/cars-teaser-hyperframes-en.mp4
+```
 
 Para reemplazar o regenerar una escena, guarda el audio como `public/audio/vo/<id>.wav` y ejecuta:
 ```bash

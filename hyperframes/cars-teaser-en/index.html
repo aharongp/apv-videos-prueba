@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; font-weight: 500; src: url("assets/inter-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 700; src: url("assets/inter-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 800; src: url("assets/inter-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 900; src: url("assets/inter-latin-900-normal.woff2") format("woff2"); }
+      /* Branding de cars.apvmotorusa.com */
+      :root {
+        --ink: #0f172a;
+        --ink-2: #1e293b;
+        --slate: #475569;
+        --muted: #64748b;
+        --line: #dbe4ee;
+        --soft: #f1f5f9;
+        --primary: #dc2626;
+        --primary-2: #b91c1c;
+        --blue: #1d4ed8;
+        --green: #15803d;
+        --green-soft: #ecfdf3;
+        --shadow: 0 18px 50px rgba(15, 23, 42, 0.09);
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #fff; }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: "Inter", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(900px 900px at 85% 5%, rgba(37, 99, 235, 0.16), transparent 60%),
+          radial-gradient(800px 800px at 5% 95%, rgba(220, 38, 38, 0.1), transparent 60%),
+          linear-gradient(180deg, #f0f7ff 0%, #ffffff 70%);
+      }
+      .grid {
+        position: absolute; left: -540px; right: -540px; bottom: -120px; height: 900px;
+        transform: perspective(700px) rotateX(64deg); transform-origin: 50% 100%;
+        background-image: linear-gradient(rgba(15, 23, 42, 0.06) 2px, transparent 2px), linear-gradient(90deg, rgba(15, 23, 42, 0.06) 2px, transparent 2px);
+        background-size: 120px 120px;
+        -webkit-mask-image: linear-gradient(to top, black 5%, transparent 85%);
+        mask-image: linear-gradient(to top, black 5%, transparent 85%);
+      }
+      .clip { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 70px 0; text-align: center; }
+      .logo { position: absolute; top: 80px; left: 0; right: 0; display: flex; justify-content: center; z-index: 5; }
+      .logo img { height: 110px; }
+      .kicker { display: inline-flex; align-items: center; gap: 12px; padding: 12px 26px; border-radius: 999px; background: #fff; font-weight: 800; font-size: 28px; letter-spacing: 0.11em; text-transform: uppercase; border: 2px solid; box-shadow: var(--shadow); }
+      .kicker::before { content: ""; width: 12px; height: 12px; border-radius: 6px; background: currentColor; }
+      .h1 { font-weight: 900; font-size: 116px; line-height: 1.02; letter-spacing: -0.04em; }
+      .h2 { font-weight: 900; font-size: 90px; line-height: 1.04; letter-spacing: -0.04em; }
+      .red { color: var(--primary); } .green { color: var(--green); } .blue { color: var(--blue); }
+      .word { display: inline-block; }
+      .tag { margin-top: 70px; padding: 30px 50px; border-radius: 26px; background: #fff; border: 2px solid var(--line); box-shadow: var(--shadow); font-weight: 900; font-size: 78px; white-space: nowrap; position: relative; color: var(--slate); letter-spacing: -0.03em; }
+      .tag .strike { position: absolute; left: 20px; right: 20px; top: 50%; height: 14px; border-radius: 7px; background: var(--primary); transform-origin: left center; }
+      .badges { margin-top: 60px; display: flex; gap: 22px; }
+      .badge { padding: 18px 28px; border-radius: 20px; background: #fff; border: 2px solid var(--line); box-shadow: var(--shadow); font-weight: 800; font-size: 38px; }
+      .badge.copart { color: var(--blue); background: #eff6ff; border-color: #bfdbfe; }
+      .car { width: 880px; margin-top: 60px; }
+      .steps { margin-top: 56px; display: flex; flex-direction: column; gap: 24px; width: 900px; }
+      .step { display: flex; align-items: center; gap: 28px; padding: 26px 32px; border-radius: 26px; background: #fff; border: 2px solid var(--line); box-shadow: var(--shadow); font-weight: 800; font-size: 46px; text-align: left; letter-spacing: -0.02em; }
+      .step .n { width: 84px; height: 84px; flex-shrink: 0; border-radius: 42px; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 44px; box-shadow: 0 10px 24px rgba(220, 38, 38, 0.3); }
+      .step.bid { border-color: var(--primary); }
+      .advisor { margin-top: 56px; width: 900px; border-radius: 34px; background: #fff; box-shadow: 0 30px 80px rgba(15, 23, 42, 0.18); text-align: left; overflow: hidden; }
+      .advisor .head { display: flex; align-items: center; gap: 24px; padding: 30px 36px; background: var(--ink); color: #fff; }
+      .advisor .eyebrow { font-size: 22px; font-weight: 900; letter-spacing: 0.11em; color: #fca5a5; }
+      .advisor .avatar { width: 96px; height: 96px; border-radius: 48px; background: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+      .advisor .name { font-weight: 900; font-size: 44px; margin-top: 4px; }
+      .advisor .online { color: #86efac; font-size: 28px; font-weight: 700; margin-top: 4px; }
+      .advisor .body { padding: 30px 36px 36px; }
+      .bubble { display: inline-block; padding: 22px 30px; border-radius: 10px 30px 30px 30px; background: var(--soft); border: 1px solid var(--line); font-weight: 700; font-size: 38px; line-height: 1.3; }
+      .url { margin-top: 60px; padding: 34px 50px; border-radius: 999px; background: linear-gradient(135deg, var(--primary), var(--primary-2)); box-shadow: 0 20px 60px rgba(220, 38, 38, 0.4); font-weight: 900; font-size: 62px; color: #fff; white-space: nowrap; letter-spacing: -0.02em; }
+      .sub { margin-top: 50px; font-weight: 700; font-size: 40px; color: var(--slate); line-height: 1.3; }
+      .note { position: absolute; bottom: 70px; left: 0; right: 0; text-align: center; font-weight: 500; font-size: 24px; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="21" data-width="1080" data-height="1920">
+      <div class="grid"></div>
+
+      <div class="logo" id="logo"><img src="assets/apv-logo-red.png" alt="APV Motors" /></div>
+
+      <!-- 1. Gancho -->
+      <section id="s1" class="clip" data-start="0" data-duration="2.5" data-track-index="1">
+        <div class="kicker red" id="s1k" style="border-color: rgba(220, 38, 38, 0.3)">Sound familiar?</div>
+        <div class="h1" style="margin-top: 40px">
+          <span class="word s1w">Still</span> <span class="word s1w">paying</span> <span class="word s1w red">dealer</span>
+          <span class="word s1w red">prices?</span>
+        </div>
+        <div class="tag" id="s1tag">$ DEALER PRICE<div class="strike" id="s1strike"></div></div>
+      </section>
+
+      <!-- 2. Solución -->
+      <section id="s2" class="clip" data-start="2.5" data-duration="4.3" data-track-index="1">
+        <div class="h2">
+          <span class="word s2w">Buy</span> <span class="word s2w">at</span> <span class="word s2w">U.S.</span>
+          <span class="word s2w red">auctions</span>
+        </div>
+        <div class="badges">
+          <div class="badge copart" id="b1">COPART</div>
+          <div class="badge" id="b2">100% online</div>
+          <div class="badge" id="b3" style="color: var(--green)">No license</div>
+        </div>
+        <svg class="car" id="s2car" viewBox="0 0 400 170">
+          <ellipse cx="200" cy="150" rx="185" ry="10" fill="rgba(15,23,42,0.18)" />
+          <path d="M16 118 L18 70 Q20 50 40 48 L250 46 Q270 48 296 74 L352 82 Q380 88 386 102 L388 118 Z" fill="#dc2626" />
+          <path d="M30 100 L380 100" stroke="rgba(255,255,255,0.4)" stroke-width="2" />
+          <path d="M34 74 L36 60 Q38 55 46 55 L120 55 L120 76 Z" fill="#1e293b" />
+          <path d="M128 55 L200 55 L200 76 L128 76 Z" fill="#1e293b" />
+          <path d="M208 55 L246 54 Q262 56 282 76 L208 76 Z" fill="#1e293b" />
+          <rect x="372" y="92" width="14" height="7" rx="3" fill="#fde68a" />
+          <g><circle cx="90" cy="120" r="30" fill="#0f172a" /><circle cx="90" cy="120" r="14" fill="#cbd5e1" /></g>
+          <g><circle cx="312" cy="120" r="30" fill="#0f172a" /><circle cx="312" cy="120" r="14" fill="#cbd5e1" /></g>
+        </svg>
+      </section>
+
+      <!-- 3. Cómo se usa (pasos reales del sitio) -->
+      <section id="s3" class="clip" data-start="6.8" data-duration="4.95" data-track-index="1">
+        <div class="h2">It's <span class="red">that easy</span></div>
+        <div class="steps">
+          <div class="step" id="st1"><div class="n">1</div>Create your free account</div>
+          <div class="step" id="st2"><div class="n">2</div>Pick your vehicle</div>
+          <div class="step" id="st3"><div class="n">3</div>Calculate the total</div>
+          <div class="step bid" id="st4"><div class="n">4</div>Tap “Place my bid”</div>
+        </div>
+      </section>
+
+      <!-- 4. Asesor -->
+      <section id="s4" class="clip" data-start="11.75" data-duration="3.15" data-track-index="1">
+        <div class="h2">An <span class="green">advisor</span> guides your entire purchase</div>
+        <div class="advisor" id="s4card">
+          <div class="head">
+            <div class="avatar">
+              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 14v-2a8 8 0 0116 0v2" /><rect x="2" y="13" width="5" height="7" rx="2" /><rect x="17" y="13" width="5" height="7" rx="2" /><path d="M20 20c0 1.5-2 2-5 2h-2" />
+              </svg>
+            </div>
+            <div>
+              <div class="eyebrow">BID ASSISTANCE</div>
+              <div class="name">Continue with an advisor</div>
+              <div class="online">● Secure session</div>
+            </div>
+          </div>
+          <div class="body"><div class="bubble" id="s4b">Hi! I'll guide you step by step through your purchase.</div></div>
+        </div>
+      </section>
+
+      <!-- 5. CTA -->
+      <section id="s5" class="clip" data-start="14.9" data-duration="6.1" data-track-index="1">
+        <div class="h1">Visit <span class="red">today</span></div>
+        <div class="url" id="s5url">cars.apvmotorusa.com</div>
+        <div class="sub" id="s5sub">Create your free account<br />and an advisor will assist you.</div>
+        <div class="note">Illustrative recreation · Houston, TX</div>
+      </section>
+
+      <audio id="vo" src="assets/vo.wav" data-start="0.3" data-duration="18.8" data-track-index="2"></audio>
+      <audio id="bgm" src="assets/music.mp3" data-start="0" data-duration="21" data-volume="0.2" data-fade-out="1.5" data-track-index="3"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Fondo y logo
+      tl.fromTo(".grid", { y: 0 }, { y: 220, duration: 21, ease: "none" }, 0);
+      tl.fromTo("#logo", { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1);
+
+      // 1. Hook
+      tl.fromTo("#s1k", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 0);
+      tl.fromTo(".s1w", { opacity: 0, y: 80, rotation: 6 }, { opacity: 1, y: 0, rotation: 0, duration: 0.45, stagger: 0.12, ease: "back.out(1.8)" }, 0.2);
+      tl.fromTo("#s1tag", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 1.1);
+      tl.fromTo("#s1strike", { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: "power2.in" }, 1.8);
+      tl.to("#s1tag", { rotation: -4, duration: 0.2 }, 2.1);
+
+      // 2. Solution
+      tl.fromTo(".s2w", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: "back.out(1.8)" }, 2.55);
+      tl.fromTo("#b1", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 4.2);
+      tl.fromTo("#b2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 5.1);
+      tl.fromTo("#b3", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 5.6);
+      tl.fromTo("#s2car", { x: -1200 }, { x: 0, duration: 0.9, ease: "power3.out" }, 3.3);
+      tl.to("#s2car", { x: 1300, duration: 0.6, ease: "power2.in" }, 6.2);
+
+      // 3. Steps (synced to the voiceover)
+      tl.fromTo("#s3 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 6.8);
+      tl.fromTo("#st1", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 6.85);
+      tl.fromTo("#st2", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 8.1);
+      tl.fromTo("#st3", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 9.1);
+      tl.fromTo("#st4", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)" }, 10.4);
+      tl.to("#st4", { scale: 1.05, duration: 0.25, yoyo: true, repeat: 1 }, 11.0);
+
+      // 4. Advisor
+      tl.fromTo("#s4 .h2", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 11.75);
+      tl.fromTo("#s4card", { opacity: 0, y: 120, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 12.0);
+      tl.fromTo("#s4b", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 12.95);
+
+      // 5. CTA
+      tl.fromTo("#s5 .h1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, 14.95);
+      tl.fromTo("#s5url", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.8)" }, 15.1);
+      tl.to("#s5url", { scale: 1.05, duration: 0.5, yoyo: true, repeat: 7, ease: "sine.inOut" }, 15.7);
+      tl.fromTo("#s5sub", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 16.3);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

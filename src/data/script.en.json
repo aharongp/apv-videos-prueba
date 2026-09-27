@@ -1,0 +1,90 @@
+{
+  "voice": "higgsfield:seed_audio · clon de «Tawny | Warm Conversational American» (ElevenLabs Rv3wiuHHQq0rSS4QVaQ8, en-american, conversational)",
+  "padSeconds": 0.45,
+  "endHoldSeconds": 3,
+  "scenes": [
+    {
+      "id": "hook",
+      "stage": "Hook",
+      "caption": "Here's what the dealer won't tell you: a lot of the cars on their lot came from an auction. And the price you pay includes their profit. Today you'll see how you can buy there too, no dealer license needed.",
+      "tts": "Here's what the dealer won't tell you: a lot of the cars on their lot came from an auction. And the price you pay includes their profit. Today you'll see how you can buy there too, no dealer license needed.",
+      "holdSeconds": 0.4
+    },
+    {
+      "id": "problem",
+      "stage": "Problem",
+      "caption": "The problem: buying at auction on your own is scary. Hidden damage, complicated titles, fees you don't understand, and rules that change from one auction to the next. One mistake, and a great deal gets expensive.",
+      "tts": "The problem: buying at auction on your own is scary. Hidden damage, complicated titles, fees you don't understand, and rules that change from one auction to the next. One mistake, and a great deal gets expensive."
+    },
+    {
+      "id": "solution",
+      "stage": "Solution",
+      "caption": "That's why cars.apvmotorusa.com exists: vehicles from Copart auctions all across the U.S., 100% online, and a team that supports you from the bid all the way to paperwork and shipping.",
+      "tts": "That's why cars dot, A, P, V, motor, U, S, A, dot com exists: vehicles from Copart auctions all across the U.S., one hundred percent online, and a team that supports you from the bid all the way to paperwork and shipping."
+    },
+    {
+      "id": "step1",
+      "stage": "Step 1",
+      "caption": "I'll show you how to buy in 5 steps. Step 1: create your free account with your name, email, and WhatsApp. You'll get a code to activate it.",
+      "tts": "I'll show you how to buy in five steps. Step one: create your free account with your name, email, and WhatsApp. You'll get a code to activate it."
+    },
+    {
+      "id": "step2",
+      "stage": "Step 2",
+      "caption": "Step 2: search for your vehicle by make, model, year, lot, or VIN. Open the listing and check the photos, the damage, the odometer, and the title.",
+      "tts": "Step two: search for your vehicle by make, model, year, lot, or V.I.N. Open the listing and check the photos, the damage, the odometer, and the title.",
+      "holdSeconds": 0.6
+    },
+    {
+      "id": "step3",
+      "stage": "Step 3",
+      "caption": "Step 3: calculate your budget. Enter your max bid in the calculator and see the estimated total with all the fees, before you bid.",
+      "tts": "Step three: calculate your budget. Enter your max bid in the calculator and see the estimated total with all the fees, before you bid.",
+      "holdSeconds": 0.8
+    },
+    {
+      "id": "step4",
+      "stage": "Step 4",
+      "caption": "Step 4: tap “Place my bid” and set your max bid. Don't worry: there's no automatic charge.",
+      "tts": "Step four: tap “Place my bid” and set your max bid. Don't worry: there's no automatic charge.",
+      "holdSeconds": 1.2
+    },
+    {
+      "id": "step5",
+      "stage": "Step 5",
+      "caption": "Step 5: confirm with an advisor. You'll continue in the APV chat, where we review your request with you and confirm it.",
+      "tts": "Step five: confirm with an advisor. You'll continue in the A, P, V chat, where we review your request with you and confirm it.",
+      "holdSeconds": 1.0
+    },
+    {
+      "id": "value",
+      "stage": "Support",
+      "caption": "From there, you're not alone: we're with you for the bid, the payment, the paperwork, and the shipping. You start for free, and with APV Plus or Premium you get discounts and expert advice.",
+      "tts": "From there, you're not alone! We're with you for the bid, the payment, the paperwork, and the shipping. You start for free, and with A, P, V Plus or Premium you get discounts and expert advice."
+    },
+    {
+      "id": "qualify",
+      "stage": "Is it for you?",
+      "caption": "Let's be honest: this isn't for everyone. It's for you if you have your budget ready, plan to buy in the next 30 to 60 days, and want a fair price with someone you trust by your side. If you're just browsing, now isn't the time.",
+      "tts": "Let's be honest: this isn't for everyone. It's for you if you have your budget ready, plan to buy in the next thirty to sixty days, and want a fair price with someone you trust by your side. If you're just browsing, now isn't the time."
+    },
+    {
+      "id": "objection",
+      "stage": "Objection",
+      "caption": "Never bought at an auction? You don't need any experience. That's what your advisor is for.",
+      "tts": "Never bought at an auction? You don't need any experience. That's what your advisor is for."
+    },
+    {
+      "id": "cta",
+      "stage": "Action",
+      "caption": "Auctions move every week: the car you like today could be sold tomorrow. Go to cars.apvmotorusa.com now and create your free account.",
+      "tts": "Auctions move every week: the car you like today could be sold tomorrow. Go to cars dot, A, P, V, motor, U, S, A, dot com now, and create your free account!"
+    },
+    {
+      "id": "advisor",
+      "stage": "Advisor",
+      "caption": "An APV Motors advisor will assist you personally and guide you step by step through your purchase.",
+      "tts": "An A, P, V Motors advisor will assist you personally, and guide you step by step through your purchase."
+    }
+  ]
+}

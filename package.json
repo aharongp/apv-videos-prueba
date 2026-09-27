@@ -6,13 +6,17 @@
   "scripts": {
     "studio": "remotion studio src/index.ts",
     "render": "remotion render src/index.ts CarsVSL out/cars-vsl.mp4 && bash scripts/master-audio.sh out/cars-vsl.mp4",
+    "render:en": "remotion render src/index.ts CarsVSLEn out/cars-vsl-en.mp4 && bash scripts/master-audio.sh out/cars-vsl-en.mp4",
     "still": "remotion still src/index.ts CarsVSL out/thumbnail.png --frame=60",
     "typecheck": "tsc --noEmit",
     "hf:preview": "cd hyperframes/cars-teaser && hyperframes preview",
     "hf:lint": "hyperframes lint hyperframes/cars-teaser",
+    "hf:lint:en": "hyperframes lint hyperframes/cars-teaser-en",
     "hf:render": "cd hyperframes/cars-teaser && hyperframes render -o ../../out/cars-teaser-hyperframes.mp4 && cd ../.. && bash scripts/master-audio.sh out/cars-teaser-hyperframes.mp4",
+    "hf:render:en": "cd hyperframes/cars-teaser-en && hyperframes render -o ../../out/cars-teaser-hyperframes-en.mp4 && cd ../.. && bash scripts/master-audio.sh out/cars-teaser-hyperframes-en.mp4",
     "voiceover": "node scripts/generate-voiceover.mjs",
-    "music": "python3 scripts/generate-music.py"
+    "music": "python3 scripts/generate-music.py",
+    "music:en": "python3 scripts/generate-music.py --lang en"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.529",

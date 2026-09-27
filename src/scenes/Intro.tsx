@@ -8,6 +8,7 @@ import { Beat, SfxAt, Typing } from "../components/Shell";
 import { Card, IconBadge, Kicker, Kinetic } from "../components/Ui";
 import { clamp, ease, pop, popIn } from "../components/motion";
 import { Logo, typed } from "../components/Browser";
+import { useT } from "../i18n";
 
 const center: React.CSSProperties = {
   position: "absolute",
@@ -23,9 +24,10 @@ const center: React.CSSProperties = {
 export const Hook: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const b1 = phraseAt(scene, "muchos de los carros");
-  const b2 = phraseAt(scene, "Y el precio");
-  const b3 = phraseAt(scene, "Hoy vas a ver");
+  const t = useT();
+  const b1 = phraseAt(scene, t("muchos de los carros", "a lot of the cars"));
+  const b2 = phraseAt(scene, t("Y el precio", "And the price"));
+  const b3 = phraseAt(scene, t("Hoy vas a ver", "Today you'll see"));
 
   const cars: { kind: "sedan" | "suv" | "pickup"; color: string }[] = [
     { kind: "suv", color: "#334155" },
@@ -37,16 +39,16 @@ export const Hook: React.FC<{ scene: TimedScene }> = ({ scene }) => {
     <AbsoluteFill>
       <Beat from={0} to={b1 + 4}>
         <div style={center}>
-          <Kicker>Lo que nadie te cuenta</Kicker>
+          <Kicker>{t("Lo que nadie te cuenta", "What nobody tells you")}</Kicker>
           <div style={{ height: 40 }} />
-          <Kinetic text="Lo que el *DEALER* no te dice" size={118} stagger={4} />
+          <Kinetic text={t("Lo que el *DEALER* no te dice", "What the *DEALER* won't tell you")} size={118} stagger={4} />
           <div style={{ marginTop: 36, width: interpolate(frame, [10, 40], [0, 700], clamp), height: 8, borderRadius: 4, background: theme.accent }} />
         </div>
       </Beat>
 
       <Beat from={b1} to={b2 + 4}>
         <div style={{ ...center, justifyContent: "flex-start", paddingTop: 150 }}>
-          <Kinetic text="Muchos de sus carros salieron de una *subasta*" size={78} stagger={2} />
+          <Kinetic text={t("Muchos de sus carros salieron de una *subasta*", "Many of their cars came from an *auction*")} size={78} stagger={2} />
           <div style={{ display: "flex", gap: 40, marginTop: 90 }}>
             {cars.map((c, i) => {
               const p = pop(frame, fps, b1 + 6 + i * 7);
@@ -91,7 +93,7 @@ export const Hook: React.FC<{ scene: TimedScene }> = ({ scene }) => {
                       background: "rgba(255,255,255,0.94)",
                     }}
                   >
-                    <Icon name="gavel" size={32} color={theme.accent2} stroke={2.5} /> DE SUBASTA
+                    <Icon name="gavel" size={32} color={theme.accent2} stroke={2.5} />{t(" DE SUBASTA", " FROM AUCTION")}
                   </div>
                 </div>
               );
@@ -112,9 +114,9 @@ export const Hook: React.FC<{ scene: TimedScene }> = ({ scene }) => {
           <div style={{ ...popIn(pop(frame, fps, b3)), marginBottom: 40 }}>
             <IconBadge name="gavel" color={theme.accent} size={140} />
           </div>
-          <Kinetic text="¿Y si compras *donde* *compra* *el* *dealer?*" size={104} delay={6} highlight={theme.accent} />
-          <div style={{ ...popIn(pop(frame, fps, phraseAt(scene, "sin licencia"))), marginTop: 40 }}>
-            <Kicker color={theme.success}>Sin licencia de dealer</Kicker>
+          <Kinetic text={t("¿Y si compras *donde* *compra* *el* *dealer?*", "What if you bought *where* *the* *dealer* *buys?*")} size={104} delay={6} highlight={theme.accent} />
+          <div style={{ ...popIn(pop(frame, fps, phraseAt(scene, t("sin licencia", "no dealer license")))), marginTop: 40 }}>
+            <Kicker color={theme.success}>{t("Sin licencia de dealer", "No dealer license needed")}</Kicker>
           </div>
         </div>
         <SfxAt at={0} name="whoosh" volume={0.3} />
@@ -125,6 +127,7 @@ export const Hook: React.FC<{ scene: TimedScene }> = ({ scene }) => {
 
 const PriceStack: React.FC = () => {
   const frame = useCurrentFrame();
+  const t = useT();
   const start = 0;
   const base = ease(frame, start + 6, start + 26);
   const margin = ease(frame, start + 26, start + 50);
@@ -132,7 +135,7 @@ const PriceStack: React.FC = () => {
   return (
     <div style={{ ...center, flexDirection: "row", gap: 110 }}>
       <div style={{ width: 640 }}>
-        <Kinetic text="Y el precio que *tú* *pagas* incluye su ganancia" size={76} align="left" delay={start} stagger={2} />
+        <Kinetic text={t("Y el precio que *tú* *pagas* incluye su ganancia", "And the price *you* *pay* includes their profit")} size={76} align="left" delay={start} stagger={2} />
       </div>
       <div style={{ position: "relative", height: H, width: 560, display: "flex", alignItems: "flex-end", gap: 30 }}>
         <div style={{ width: 240, display: "flex", flexDirection: "column", justifyContent: "flex-end", height: H }}>
@@ -152,7 +155,7 @@ const PriceStack: React.FC = () => {
               textAlign: "center",
             }}
           >
-            Ganancia + costos del dealer
+            {t("Ganancia + costos del dealer", "Dealer profit + costs")}
           </div>
           <div
             style={{
@@ -169,13 +172,13 @@ const PriceStack: React.FC = () => {
               overflow: "hidden",
             }}
           >
-            Precio de subasta
+            {t("Precio de subasta", "Auction price")}
           </div>
         </div>
         <div style={{ opacity: margin, fontFamily: theme.display, fontWeight: 800, fontSize: 34, color: theme.accent2, display: "flex", alignItems: "center", gap: 18, height: H * 0.94, borderLeft: `4px solid ${theme.accent2}`, paddingLeft: 22 }}>
-          Lo que
+          {t("Lo que", "What")}
           <br />
-          tú pagas
+          {t("tú pagas", "you pay")}
         </div>
       </div>
       <SfxAt at={start + 26} name="pop" volume={0.35} />
@@ -187,13 +190,14 @@ const PriceStack: React.FC = () => {
 export const Problem: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const b1 = phraseAt(scene, "Daños ocultos");
-  const b2 = phraseAt(scene, "Un error");
+  const t = useT();
+  const b1 = phraseAt(scene, t("Daños ocultos", "Hidden damage"));
+  const b2 = phraseAt(scene, t("Un error", "One mistake"));
   const items = [
-    { at: b1, icon: "alert" as const, title: "Daños ocultos", sub: "Lo que las fotos no muestran" },
-    { at: phraseAt(scene, "títulos complicados"), icon: "doc" as const, title: "Títulos complicados", sub: "Clean · Salvage · Rebuilt" },
-    { at: phraseAt(scene, "tarifas que no entiendes"), icon: "dollar" as const, title: "Tarifas que no entiendes", sub: "Buyer fee · Gate fee · ¿?" },
-    { at: phraseAt(scene, "reglas que cambian"), icon: "shuffle" as const, title: "Reglas que cambian", sub: "Cada subasta es distinta" },
+    { at: b1, icon: "alert" as const, title: t("Daños ocultos", "Hidden damage"), sub: t("Lo que las fotos no muestran", "What the photos don't show") },
+    { at: phraseAt(scene, t("títulos complicados", "complicated titles")), icon: "doc" as const, title: t("Títulos complicados", "Complicated titles"), sub: "Clean · Salvage · Rebuilt" },
+    { at: phraseAt(scene, t("tarifas que no entiendes", "fees you don't understand")), icon: "dollar" as const, title: t("Tarifas que no entiendes", "Fees you don't understand"), sub: t("Buyer fee · Gate fee · ¿?", "Buyer fee · Gate fee · ???") },
+    { at: phraseAt(scene, t("reglas que cambian", "rules that change")), icon: "shuffle" as const, title: t("Reglas que cambian", "Rules that change"), sub: t("Cada subasta es distinta", "Every auction is different") },
   ];
   const flip = pop(frame, fps, b2 + 22, 10);
 
@@ -201,9 +205,9 @@ export const Problem: React.FC<{ scene: TimedScene }> = ({ scene }) => {
     <AbsoluteFill>
       <Beat from={0} to={b1 + 2}>
         <div style={center}>
-          <Kicker>El problema</Kicker>
+          <Kicker>{t("El problema", "The problem")}</Kicker>
           <div style={{ height: 36 }} />
-          <Kinetic text="Comprar en subasta *por* *tu* *cuenta* da miedo" size={112} delay={6} />
+          <Kinetic text={t("Comprar en subasta *por* *tu* *cuenta* da miedo", "Buying at auction *on* *your* *own* is scary")} size={112} delay={6} />
         </div>
       </Beat>
 
@@ -233,7 +237,7 @@ export const Problem: React.FC<{ scene: TimedScene }> = ({ scene }) => {
 
       <Beat from={b2}>
         <div style={{ ...center, flexDirection: "row", gap: 90 }}>
-          <Kinetic text="Un error y el buen negocio te sale *caro*" size={96} align="left" style={{ width: 760 }} />
+          <Kinetic text={t("Un error y el buen negocio te sale *caro*", "One mistake and a great deal gets *expensive*")} size={96} align="left" style={{ width: 760 }} />
           <div style={{ perspective: 1200 }}>
             <div
               style={{
@@ -244,9 +248,9 @@ export const Problem: React.FC<{ scene: TimedScene }> = ({ scene }) => {
                 transform: `rotateY(${flip * 180}deg)`,
               }}
             >
-              <PriceTag color={theme.success} label="BUEN NEGOCIO" icon="tag" />
+              <PriceTag color={theme.success} label={t("BUEN NEGOCIO", "GREAT DEAL")} icon="tag" />
               <div style={{ position: "absolute", inset: 0, transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}>
-                <PriceTag color={theme.accent} label="TE SALE CARO" icon="alert" />
+                <PriceTag color={theme.accent} label={t("TE SALE CARO", "COSTS YOU MORE")} icon="alert" />
               </div>
             </div>
           </div>
@@ -286,8 +290,9 @@ const PriceTag: React.FC<{ color: string; label: string; icon: "tag" | "alert" }
 export const Solution: React.FC<{ scene: TimedScene }> = ({ scene }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const b1 = phraseAt(scene, "vehículos de subastas");
-  const b2 = phraseAt(scene, "y un equipo");
+  const t = useT();
+  const b1 = phraseAt(scene, t("vehículos de subastas", "vehicles from Copart auctions"));
+  const b2 = phraseAt(scene, t("y un equipo", "and a team"));
   const logoP = pop(frame, fps, 4);
   const urlStart = 18;
   const moveUp = ease(frame, b1 - 6, b1 + 12);
@@ -338,8 +343,8 @@ export const Solution: React.FC<{ scene: TimedScene }> = ({ scene }) => {
             <Card style={{ width: 620, padding: 36, display: "flex", gap: 28, alignItems: "center" }}>
               <IconBadge name="globe" color={theme.link} size={110} />
               <div>
-                <div style={{ fontFamily: theme.display, fontWeight: 800, fontSize: 40, color: theme.text }}>Subastas de Copart</div>
-                <div style={{ fontFamily: theme.ui, fontSize: 26, color: theme.muted, marginTop: 8 }}>En todo EE. UU. · 100% online</div>
+                <div style={{ fontFamily: theme.display, fontWeight: 800, fontSize: 40, color: theme.text }}>{t("Subastas de Copart", "Copart auctions")}</div>
+                <div style={{ fontFamily: theme.ui, fontSize: 26, color: theme.muted, marginTop: 8 }}>{t("En todo EE. UU. · 100% online", "All across the U.S. · 100% online")}</div>
               </div>
             </Card>
           </div>
@@ -348,8 +353,8 @@ export const Solution: React.FC<{ scene: TimedScene }> = ({ scene }) => {
             <Card glow={theme.success} style={{ width: 620, padding: 36, display: "flex", gap: 28, alignItems: "center" }}>
               <IconBadge name="shield" color={theme.success} size={110} />
               <div>
-                <div style={{ fontFamily: theme.display, fontWeight: 800, fontSize: 40, color: theme.text }}>Te acompañamos</div>
-                <div style={{ fontFamily: theme.ui, fontSize: 26, color: theme.muted, marginTop: 8 }}>De la puja a la documentación y el traslado</div>
+                <div style={{ fontFamily: theme.display, fontWeight: 800, fontSize: 40, color: theme.text }}>{t("Te acompañamos", "We're with you")}</div>
+                <div style={{ fontFamily: theme.ui, fontSize: 26, color: theme.muted, marginTop: 8 }}>{t("De la puja a la documentación y el traslado", "From the bid to paperwork and shipping")}</div>
               </div>
             </Card>
           </div>

@@ -8,6 +8,7 @@ La música sigue la estructura del VSL leyendo src/data/durations.json:
 Uso: python scripts/generate-music.py   (requiere numpy, scipy y soundfile)
 """
 import json
+import sys
 import subprocess
 from pathlib import Path
 
@@ -21,8 +22,12 @@ FPS = 30
 BPM = 100
 BEAT = 60 / BPM
 
-script = json.loads((ROOT / "src/data/script.json").read_text())
-durations = json.loads((ROOT / "src/data/durations.json").read_text())
+# Idioma: python scripts/generate-music.py [--lang en]  (por defecto, español)
+LANG = sys.argv[sys.argv.index("--lang") + 1] if "--lang" in sys.argv else "es"
+SUFFIX = "" if LANG == "es" else f".{LANG}"
+MUSIC = "music.mp3" if LANG == "es" else f"music-{LANG}.mp3"
+script = json.loads((ROOT / f"src/data/script{SUFFIX}.json").read_text())
+durations = json.loads((ROOT / f"src/data/durations{SUFFIX}.json").read_text())
 pad = script["padSeconds"]
 
 # Mismo redondeo a frames que src/timeline.ts para que los cambios caigan en el corte.
@@ -162,7 +167,7 @@ out = ROOT / "public/audio"
 out.mkdir(parents=True, exist_ok=True)
 wav = out / "music.wav"
 sf.write(wav, mix.astype(np.float32), SR, subtype="PCM_16")
-subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav), "-b:a", "192k", str(out / "music.mp3")], check=True)
+subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav), "-b:a", "192k", str(out / MUSIC)], check=True)
 wav.unlink()
 
 # ---------- SFX ----------
@@ -210,4 +215,4 @@ L = int(0.035 * SR)
 tt = np.arange(L) / SR
 write("key", rng.standard_normal(L) * np.exp(-tt * 250))
 
-print(f"music.mp3 {LENGTH:.1f}s, drums from {drums_from:.1f}s, total video {total:.1f}s")
+print(f"{MUSIC} {LENGTH:.1f}s, drums from {drums_from:.1f}s, total video {total:.1f}s")
