@@ -5,8 +5,8 @@ califica al prospecto y cierra indicando que **un asesor lo atenderá y lo guiar
 
 | Entregable | Herramienta | Formato | Archivo |
 |---|---|---|---|
-| VSL completo (~2:30) | Remotion | 1920×1080 · 30 fps | `out/cars-vsl.mp4` |
-| Teaser vertical (25 s) | HyperFrames | 1080×1920 · 30 fps | `out/cars-teaser-hyperframes.mp4` |
+| VSL completo (~2:33) | Remotion | 1920×1080 · 30 fps | `out/cars-vsl.mp4` |
+| Teaser vertical (20 s) | HyperFrames | 1080×1920 · 30 fps | `out/cars-teaser-hyperframes.mp4` |
 
 Estrategia, guion y recomendaciones de venta: [`docs/VSL-estrategia.md`](docs/VSL-estrategia.md).
 
@@ -34,21 +34,22 @@ Estructura:
 - `src/scenes/` — `Intro.tsx` (gancho, problema, solución), `Demo.tsx` (los 5 pasos reales del sitio), `Close.tsx` (valor y planes, calificación, objeción, CTA, asesor).
 - `src/components/` — fondo animado, subtítulos palabra por palabra, navegador y cursor, recreación de la UI del sitio (`Site.tsx`: registro, filtros, fichas Copart, calculadora de tarifas, tope de oferta, chat con asesor), autos SVG, iconos.
 
-### Voz (ElevenLabs)
-La locución final usa **ElevenLabs**: voz *Pedro Alejandro | Latin Voiceover* (`6SsnyXR5jQuiqQTyhK2q`,
-español latino) con el modelo `eleven_multilingual_v2`. Los textos que se envían están en el campo `tts`
-de `src/data/script.json`; la URL se escribe fonéticamente como **"cars punto a pe be motor usa punto com"**
-(verificado con transcripción: la voz dice "cars.apbmotorusa.com").
+### Voz
+La locución final es femenina, en español: voz **Marisol** del modelo **Seed Audio** (ByteDance) vía
+Higgsfield (`voice_id 75e72cd5-011b-4130-a474-e8b1ab341f04`). Se eligió por ser la más expresiva de las
+voces probadas (rango de entonación de ~10 semitonos). Los textos enviados están en el campo `tts` de
+`src/data/script.json`; la URL se escribe **"cars punto, a, pe, be, motor usa punto com"** (verificado con
+Whisper: se entiende "cars.apbmotorusa.com").
 
-Para regenerar una escena: genera el audio en ElevenLabs con ese texto, guárdalo como
-`public/audio/vo/<id>.wav` y ejecuta:
+Para reemplazar o regenerar una escena, guarda el audio como `public/audio/vo/<id>.wav` y ejecuta:
 ```bash
-bash scripts/normalize-vo.sh                       # nivela las voces a -16 LUFS (¡imprescindible!)
-node scripts/generate-voiceover.mjs --probe        # mide duraciones → src/data/durations.json
-.venv/bin/python scripts/generate-music.py         # música y SFX ajustados a las nuevas duraciones
+.venv/bin/python scripts/compress-pauses.py public/audio/vo/*.wav   # acorta pausas largas entre frases
+bash scripts/normalize-vo.sh                                         # nivela las voces a -16 LUFS (¡imprescindible!)
+node scripts/generate-voiceover.mjs --probe                          # mide duraciones → src/data/durations.json
+.venv/bin/python scripts/generate-music.py                           # música y SFX ajustados a las nuevas duraciones
 npm run render
 ```
-(Sin ElevenLabs, `node scripts/generate-voiceover.mjs` genera una voz local de respaldo con Kokoro vía
+(Sin servicio externo, `node scripts/generate-voiceover.mjs` genera una voz local de respaldo con Kokoro vía
 `hyperframes tts`; requiere `pip install kokoro-onnx soundfile` y `HYPERFRAMES_PYTHON`.)
 
 ## HyperFrames (teaser vertical)
@@ -57,7 +58,7 @@ npm run hf:lint
 npm run hf:preview   # estudio de HyperFrames
 npm run hf:render    # → out/cars-teaser-hyperframes.mp4
 ```
-Composición: `hyperframes/cars-teaser/index.html` (HTML + GSAP). Su locución se armó con fragmentos de las locuciones de ElevenLabs del VSL (gancho, urgencia, URL y asesor).
+Composición: `hyperframes/cars-teaser/index.html` (HTML + GSAP), con locución propia en la voz de Marisol.
 
 ## Nota
 La interfaz que aparece en el video es una **recreación fiel** de cars.apvmotorusa.com (mismos textos,
